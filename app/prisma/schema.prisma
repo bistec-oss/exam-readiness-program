@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  CANDIDATE
+}
+
+enum QuestionType {
+  MCQ
+  TRUE_FALSE
+}
+
+model User {
+  id            String        @id @default(cuid())
+  email         String        @unique
+  passwordHash  String
+  name          String
+  role          Role          @default(CANDIDATE)
+  xp            Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  attempts      Attempt[]
+  mockAttempts  MockAttempt[]
+}
+
+model Exam {
+  id              String         @id @default(cuid())
+  name            String
+  description     String
+  passingScore    Int
+  durationMinutes Int            @default(90)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  challengeSets   ChallengeSet[]
+  questions       Question[]
+  mockAttempts    MockAttempt[]
+}
+
+model ChallengeSet {
+  id        String     @id @default(cuid())
+  title     String
+  topic     String
+  xpReward  Int        @default(50)
+  examId    String
+  exam      Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
+  questions Question[]
+  attempts  Attempt[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Question {
+  id              String        @id @default(cuid())
+  text            String
+  preamble        String?
+  type            QuestionType  @default(MCQ)
+  options         Json
+  correctOptionId String
+  explanation     String
+  challengeSetId  String?
+  challengeSet    ChallengeSet? @relation(fields: [challengeSetId], references: [id], onDelete: SetNull)
+  examId          String
+  exam            Exam          @relation(fields: [examId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Attempt {
+  id             String       @id @default(cuid())
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challengeSetId String
+  challengeSet   ChallengeSet @relation(fields: [challengeSetId], references: [id], onDelete: Cascade)
+  answers        Json
+  score          Int
+  total          Int
+  xpEarned       Int
+  idempotencyKey String?      @unique
+  completedAt    DateTime     @default(now())
+}
+
+model MockAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examId      String
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  answers     Json
+  score       Int
+  total       Int
+  timeUsed    Int
+  startedAt   DateTime
+  completedAt DateTime @default(now())
+}
