@@ -1,0 +1,23 @@
+[Unit]
+Description=exam-ready Next.js app (podman quadlet)
+After=exam-ready-db.service
+Wants=exam-ready-db.service
+
+[Container]
+Image=localhost/exam-ready-app:latest
+PublishPort=127.0.0.1:3015:3000
+Network=exam-ready.network
+EnvironmentFile=%h/srv/exam-readiness/exam-ready.env
+PodmanArgs=--name exam-ready-app
+HealthCmd=wget -qO- http://127.0.0.1:3000/login || exit 1
+HealthInterval=30s
+HealthTimeout=10s
+HealthStartPeriod=30s
+HealthRetries=3
+
+[Service]
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

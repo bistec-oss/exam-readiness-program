@@ -86,96 +86,103 @@ The app is now accessible at `https://exam.yourdomain.com` (via Cloudflare Tunne
 
 ---
 
-## System Deploy — practice.tecbizsolutions.com (no Docker)
+## System Deploy — practice.tecbizsolutions.com (podman + system Caddy + cloudflared)
 
-Use this when system Caddy and cloudflared are already installed on the server.
-App runs on port **3847** as a systemd service.
+The app is deployed as two podman quadlets (`exam-ready-app`, `exam-ready-db`),
+fronted by the existing host **Caddy** (loopback `:8080`) and **cloudflared**
+(existing wildcard `*.tecbizsolutions.com`). No new Docker services on the host,
+no in-host TLS, no per-app caddy config files.
 
-### Architecture
+Architecture:
 
 ```
-Internet → cloudflared tunnel → Caddy (:80) → localhost:3847 (Next.js)
+Internet → cloudflared (*.tecbizsolutions.com wildcard)
+  → caddy :8080 (Host: practice.tecbizsolutions.com → 127.0.0.1:3010)
+    → podman quadlet exam-ready-app (Next.js standalone, port 3000 inside)
+      → DATABASE_URL=postgresql://examready:***@db:5432/examready
+    → podman quadlet exam-ready-db (postgres:16-alpine, volume examready_pgdata)
 ```
 
-### 1. Clone the repo
+### Prerequisites (one-time on the host)
+
+- podman (rootless) on PATH
+- The existing Caddyfile at `/home/openclaw/srv/caddy/Caddyfile` (this server's central config; `setup-podman.sh` edits it)
+- cloudflared running with the existing tunnel (no change needed — the `*.tecbizsolutions.com` wildcard already routes practice.* to caddy :8080)
+- ~1 GB of disk for the postgres volume + image cache
+
+### One-time setup
 
 ```bash
-git clone git@github.com:bistec-oss/exam-readiness-program.git /opt/exam-ready
+# 1. Clone the repo to the prod path
+git clone --branch main --single-branch \
+  https://github.com/bistec-oss/exam-readiness-program.git \
+  ~/srv/exam-readiness
+
+# 2. Run setup-podman.sh (idempotent, re-runnable)
+cd ~/srv/exam-readiness
+bash scripts/setup-podman.sh
 ```
 
-### 2. One-time server setup (run as root)
+`setup-podman.sh`:
+- Generates `~/srv/exam-readiness/exam-ready.env` (mode 0600) with a fresh DB password and session secret
+- Installs the four quadlet units to `~/.config/containers/systemd/`
+- Inserts a `@practice host practice.tecbizsolutions.com` block into the central Caddyfile (skips if marker present)
+- Validates the Caddyfile, restarts caddy
+- Starts `exam-ready-db` and waits for `pg_isready`
+- Builds the `exam-ready-app` image from `app/Dockerfile` and starts the container
+- Runs `prisma migrate deploy`
+- First-run-only: runs `prisma db seed` (gated by `EXAMREADY_SEEDED=1` in the env file)
+
+### Re-deploy after pushing to main
+
+Manual:
+```bash
+cd ~/srv/exam-readiness
+bash scripts/deploy-podman.sh
+```
+
+Automated: an hourly `exam-ready auto-rebuild` cron watches the dev
+checkout for new commits on `origin/main` and rebuilds the prod
+clone. Silent on no changes.
+
+### Backup & restore
 
 ```bash
-cd /opt/exam-ready
-bash scripts/setup-server.sh
+# Manual backup (daily cron also runs this at 02:30 UTC, 14-day retention)
+bash scripts/backup-examready-db.sh
+
+# Restore
+gunzip -c ~/srv/exam-readiness/backups/examready-<ts>.dump.gz \
+  | podman exec -i exam-ready-db pg_restore -U examready -d examready --clean --if-exists
 ```
 
-This creates:
-- PostgreSQL user + database `examready`
-- System user `exam-ready`
-- Systemd service `exam-ready.service`
-- Caddy site block at `/etc/caddy/conf.d/practice.tecbizsolutions.com.conf`
-- Env file template at `/etc/exam-ready.env`
-
-### 3. Configure environment
+### Verifying the deploy
 
 ```bash
-sudo nano /etc/exam-ready.env
-# Set DATABASE_URL password and confirm SESSION_SECRET
+# Both quadlets active
+systemctl --user is-active exam-ready-db exam-ready-app
+
+# App reachable on loopback
+curl -sS -o /dev/null -w "%{http_code}\n" --max-time 5 http://127.0.0.1:3010/login
+
+# Caddy routes by Host header
+curl -sS -o /dev/null -w "%{http_code}\n" -H "Host: practice.tecbizsolutions.com" \
+  --max-time 5 http://127.0.0.1:8080/login
+
+# End-to-end (slower, real TLS through cloudflared)
+curl -sSL -o /dev/null -w "%{http_code} \u2192 %{url_effective}\n" \
+  --max-time 15 https://practice.tecbizsolutions.com/login
 ```
 
-### 4. Configure cloudflared tunnel
+A `307` is expected (the app's middleware redirects unauthenticated
+requests to `/login`). A `000` at any step is a real outage.
 
-In your existing tunnel, add a Public Hostname:
-- **Hostname:** `practice.tecbizsolutions.com`
-- **Service:** `http://localhost:80` (Caddy)
+### Seeded credentials (first-run only)
 
-### 5. Deploy and seed
+- Admin: `admin@bistecglobal.com` / `admin123!`
+- Candidate: `candidate@bistecglobal.com` / `candidate123!`
 
-```bash
-bash scripts/deploy.sh          # pull → install → migrate → build → restart
-cd /opt/exam-ready/app && npm run db:seed   # first time only
-```
-
-**Yes, there is a DB seed.** It creates:
-- The Claude Architect exam with 3 challenge sets and 20+ questions
-- Demo accounts: `admin@bistecglobal.com` / `admin123!` and `candidate@bistecglobal.com` / `candidate123!`
-
-### Re-deploy
-
-```bash
-cd /opt/exam-ready && bash scripts/deploy.sh
-```
-
-### Logs
-
-```bash
-journalctl -u exam-ready -f
-```
-
----
-
-## Running E2E Tests
-
-```bash
-cd app
-npm run build && npm run start &   # or use existing server
-npx playwright test
-```
-
----
-
-## Project Structure
-
-```
-.
-├── app/                  Next.js application
-│   ├── app/              App Router pages and API routes
-│   ├── components/       Shared React components
-│   ├── lib/              Server utilities (session, prisma, offlineQueue)
-│   ├── prisma/           Schema and seed
-│   └── e2e/              Playwright tests
-├── docker-compose.yml
-├── Caddyfile
-└── .env.example
-```
+See [`docs/deploy.md`](docs/deploy.md) for the longer operator notes
+and the troubleshooting matrix (the operator skill
+`~/.hermes/skills/devops/exam-ready-operator/SKILL.md` on the host is
+the source of truth for ops).

@@ -1,0 +1,5 @@
+[Unit]
+Description=exam-ready postgres data volume
+
+[Volume]
+VolumeName=examready_pgdata
