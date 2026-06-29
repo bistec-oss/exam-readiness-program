@@ -18,7 +18,12 @@ export default async function AdminQuestionsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold text-gray-800 mb-6">Questions</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-extrabold text-gray-800">Questions</h1>
+        <Link href="/admin/questions/import" className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl text-sm transition-colors">
+          Bulk Import CSV
+        </Link>
+      </div>
 
       <div className="bg-white rounded-2xl border-2 border-gray-100 shadow mb-8 overflow-hidden">
         <table className="w-full text-sm">

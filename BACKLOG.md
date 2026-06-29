@@ -80,16 +80,16 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 
 ## Post-MVP Backlog
 
-| Feature | Notes |
-|---------|-------|
-| CSV bulk question import | Admin uploads CSV; server parses + upserts |
-| PDF score report export | Candidate downloads readiness summary |
-| Team/cohort manager view | "8/10 team members ≥ 80% ready" dashboard |
-| Additional exam catalogs | AWS SAA, Azure AZ-900, Scrum PSM-I |
-| Leaderboard | Opt-in XP ranking within cohort |
-| Email notifications | Weekly readiness summary email |
-| CI/CD pipeline | GitHub Actions → Docker Hub → self-hosted deploy |
-| User management (admin) | Invite, suspend, role-change |
+| Feature | Status | Notes |
+|---------|--------|-------|
+| CSV bulk question import | ✅ Done | Admin uploads CSV; server parses + upserts |
+| PDF score report export | ✅ Done | Candidate downloads readiness summary |
+| Team/cohort manager view | | "8/10 team members ≥ 80% ready" dashboard |
+| Additional exam catalogs | | AWS SAA, Azure AZ-900, Scrum PSM-I |
+| Leaderboard | | Opt-in XP ranking within cohort |
+| Email notifications | | Weekly readiness summary email |
+| CI/CD pipeline | | GitHub Actions → Docker Hub → self-hosted deploy |
+| User management (admin) | | Invite, suspend, role-change |
 
 ---
 

@@ -167,6 +167,20 @@ export default async function DashboardPage() {
           )}
         </div>
 
+        {/* Download report */}
+        <a
+          href="/api/report/pdf"
+          download
+          className="flex items-center gap-3 bg-white rounded-3xl border-4 border-green-200 hover:border-green-400 shadow-lg p-5 transition-all"
+          data-testid="download-report-btn"
+        >
+          <div className="text-3xl">📄</div>
+          <div>
+            <h2 className="font-bold text-green-700">Download Score Report</h2>
+            <p className="text-xs text-gray-500 mt-0.5">Download PDF score report</p>
+          </div>
+        </a>
+
         {/* Challenge history */}
         {attempts.length > 0 && (
           <div className="bg-white rounded-3xl border-4 border-violet-100 shadow-lg p-5">
