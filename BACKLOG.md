@@ -86,8 +86,8 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 | ✅ PDF score report export | Candidate downloads readiness summary PDF via `GET /api/progress/report` (dependency-free generator) |
 | ✅ Team/cohort manager view | "8/10 team members ≥ 80% ready" dashboard |
 | ✅ Additional exam catalogs | AWS SAA, Azure AZ-900, Scrum PSM-I |
-| Leaderboard | Opt-in XP ranking within cohort |
-| Email notifications | Weekly readiness summary email |
+| ✅ Leaderboard | Opt-in XP ranking within cohort. `/leaderboard` page + `GET /api/leaderboard` (cohort-scoped, opted-in only), opt-in toggle via `PATCH /api/me/preferences` |
+| ✅ Email notifications | Weekly readiness summary email. Admin `POST /api/notifications/weekly` generates per-user summaries (persisted to `EmailLog`), candidate inbox at `/settings` + `GET /api/notifications`, opt-out via `PATCH /api/me/preferences` |
 | CI/CD pipeline | GitHub Actions → Docker Hub → self-hosted deploy |
 | User management (admin) | Invite, suspend, role-change |
 

@@ -24,11 +24,24 @@ model User {
   name          String
   role          Role           @default(CANDIDATE)
   xp            Int            @default(0)
+  leaderboardOptIn Boolean     @default(false)
+  weeklyEmailOptIn Boolean     @default(true)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   attempts      Attempt[]
   mockAttempts  MockAttempt[]
   cohortMembers CohortMember[]
+  emailLogs     EmailLog[]
+}
+
+model EmailLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  subject   String
+  body      String
+  createdAt DateTime @default(now())
 }
 
 model Cohort {

@@ -41,6 +41,8 @@ export type UserMinAggregateOutputType = {
   name: string | null
   role: $Enums.Role | null
   xp: number | null
+  leaderboardOptIn: boolean | null
+  weeklyEmailOptIn: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +54,8 @@ export type UserMaxAggregateOutputType = {
   name: string | null
   role: $Enums.Role | null
   xp: number | null
+  leaderboardOptIn: boolean | null
+  weeklyEmailOptIn: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,6 +67,8 @@ export type UserCountAggregateOutputType = {
   name: number
   role: number
   xp: number
+  leaderboardOptIn: number
+  weeklyEmailOptIn: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -84,6 +90,8 @@ export type UserMinAggregateInputType = {
   name?: true
   role?: true
   xp?: true
+  leaderboardOptIn?: true
+  weeklyEmailOptIn?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -95,6 +103,8 @@ export type UserMaxAggregateInputType = {
   name?: true
   role?: true
   xp?: true
+  leaderboardOptIn?: true
+  weeklyEmailOptIn?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,6 +116,8 @@ export type UserCountAggregateInputType = {
   name?: true
   role?: true
   xp?: true
+  leaderboardOptIn?: true
+  weeklyEmailOptIn?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -204,6 +216,8 @@ export type UserGroupByOutputType = {
   name: string
   role: $Enums.Role
   xp: number
+  leaderboardOptIn: boolean
+  weeklyEmailOptIn: boolean
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -238,11 +252,14 @@ export type UserWhereInput = {
   name?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   xp?: Prisma.IntFilter<"User"> | number
+  leaderboardOptIn?: Prisma.BoolFilter<"User"> | boolean
+  weeklyEmailOptIn?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   attempts?: Prisma.AttemptListRelationFilter
   mockAttempts?: Prisma.MockAttemptListRelationFilter
   cohortMembers?: Prisma.CohortMemberListRelationFilter
+  emailLogs?: Prisma.EmailLogListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -252,11 +269,14 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
   xp?: Prisma.SortOrder
+  leaderboardOptIn?: Prisma.SortOrder
+  weeklyEmailOptIn?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   attempts?: Prisma.AttemptOrderByRelationAggregateInput
   mockAttempts?: Prisma.MockAttemptOrderByRelationAggregateInput
   cohortMembers?: Prisma.CohortMemberOrderByRelationAggregateInput
+  emailLogs?: Prisma.EmailLogOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -269,11 +289,14 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   xp?: Prisma.IntFilter<"User"> | number
+  leaderboardOptIn?: Prisma.BoolFilter<"User"> | boolean
+  weeklyEmailOptIn?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   attempts?: Prisma.AttemptListRelationFilter
   mockAttempts?: Prisma.MockAttemptListRelationFilter
   cohortMembers?: Prisma.CohortMemberListRelationFilter
+  emailLogs?: Prisma.EmailLogListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -283,6 +306,8 @@ export type UserOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
   xp?: Prisma.SortOrder
+  leaderboardOptIn?: Prisma.SortOrder
+  weeklyEmailOptIn?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -302,6 +327,8 @@ export type UserScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   xp?: Prisma.IntWithAggregatesFilter<"User"> | number
+  leaderboardOptIn?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  weeklyEmailOptIn?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -313,11 +340,14 @@ export type UserCreateInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptCreateNestedManyWithoutUserInput
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutUserInput
   cohortMembers?: Prisma.CohortMemberCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -327,11 +357,14 @@ export type UserUncheckedCreateInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptUncheckedCreateNestedManyWithoutUserInput
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutUserInput
   cohortMembers?: Prisma.CohortMemberUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -341,11 +374,14 @@ export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUpdateManyWithoutUserNestedInput
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutUserNestedInput
   cohortMembers?: Prisma.CohortMemberUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -355,11 +391,14 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUncheckedUpdateManyWithoutUserNestedInput
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutUserNestedInput
   cohortMembers?: Prisma.CohortMemberUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -369,6 +408,8 @@ export type UserCreateManyInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -380,6 +421,8 @@ export type UserUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -391,6 +434,8 @@ export type UserUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -402,6 +447,8 @@ export type UserCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
   xp?: Prisma.SortOrder
+  leaderboardOptIn?: Prisma.SortOrder
+  weeklyEmailOptIn?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -417,6 +464,8 @@ export type UserMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
   xp?: Prisma.SortOrder
+  leaderboardOptIn?: Prisma.SortOrder
+  weeklyEmailOptIn?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -428,6 +477,8 @@ export type UserMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
   xp?: Prisma.SortOrder
+  leaderboardOptIn?: Prisma.SortOrder
+  weeklyEmailOptIn?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -457,8 +508,26 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type UserCreateNestedOneWithoutEmailLogsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailLogsInput, Prisma.UserUncheckedCreateWithoutEmailLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutEmailLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutEmailLogsInput, Prisma.UserUncheckedCreateWithoutEmailLogsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEmailLogsInput
+  upsert?: Prisma.UserUpsertWithoutEmailLogsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutEmailLogsInput, Prisma.UserUpdateWithoutEmailLogsInput>, Prisma.UserUncheckedUpdateWithoutEmailLogsInput>
 }
 
 export type UserCreateNestedOneWithoutCohortMembersInput = {
@@ -503,6 +572,86 @@ export type UserUpdateOneRequiredWithoutMockAttemptsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMockAttemptsInput, Prisma.UserUpdateWithoutMockAttemptsInput>, Prisma.UserUncheckedUpdateWithoutMockAttemptsInput>
 }
 
+export type UserCreateWithoutEmailLogsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  role?: $Enums.Role
+  xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attempts?: Prisma.AttemptCreateNestedManyWithoutUserInput
+  mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutEmailLogsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  role?: $Enums.Role
+  xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attempts?: Prisma.AttemptUncheckedCreateNestedManyWithoutUserInput
+  mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutEmailLogsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailLogsInput, Prisma.UserUncheckedCreateWithoutEmailLogsInput>
+}
+
+export type UserUpsertWithoutEmailLogsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutEmailLogsInput, Prisma.UserUncheckedUpdateWithoutEmailLogsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutEmailLogsInput, Prisma.UserUncheckedCreateWithoutEmailLogsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutEmailLogsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutEmailLogsInput, Prisma.UserUncheckedUpdateWithoutEmailLogsInput>
+}
+
+export type UserUpdateWithoutEmailLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attempts?: Prisma.AttemptUpdateManyWithoutUserNestedInput
+  mockAttempts?: Prisma.MockAttemptUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutEmailLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attempts?: Prisma.AttemptUncheckedUpdateManyWithoutUserNestedInput
+  mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutCohortMembersInput = {
   id?: string
   email: string
@@ -510,10 +659,13 @@ export type UserCreateWithoutCohortMembersInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptCreateNestedManyWithoutUserInput
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCohortMembersInput = {
@@ -523,10 +675,13 @@ export type UserUncheckedCreateWithoutCohortMembersInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptUncheckedCreateNestedManyWithoutUserInput
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCohortMembersInput = {
@@ -552,10 +707,13 @@ export type UserUpdateWithoutCohortMembersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUpdateManyWithoutUserNestedInput
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCohortMembersInput = {
@@ -565,10 +723,13 @@ export type UserUncheckedUpdateWithoutCohortMembersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUncheckedUpdateManyWithoutUserNestedInput
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAttemptsInput = {
@@ -578,10 +739,13 @@ export type UserCreateWithoutAttemptsInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutUserInput
   cohortMembers?: Prisma.CohortMemberCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAttemptsInput = {
@@ -591,10 +755,13 @@ export type UserUncheckedCreateWithoutAttemptsInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutUserInput
   cohortMembers?: Prisma.CohortMemberUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAttemptsInput = {
@@ -620,10 +787,13 @@ export type UserUpdateWithoutAttemptsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutUserNestedInput
   cohortMembers?: Prisma.CohortMemberUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAttemptsInput = {
@@ -633,10 +803,13 @@ export type UserUncheckedUpdateWithoutAttemptsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutUserNestedInput
   cohortMembers?: Prisma.CohortMemberUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMockAttemptsInput = {
@@ -646,10 +819,13 @@ export type UserCreateWithoutMockAttemptsInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptCreateNestedManyWithoutUserInput
   cohortMembers?: Prisma.CohortMemberCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMockAttemptsInput = {
@@ -659,10 +835,13 @@ export type UserUncheckedCreateWithoutMockAttemptsInput = {
   name: string
   role?: $Enums.Role
   xp?: number
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptUncheckedCreateNestedManyWithoutUserInput
   cohortMembers?: Prisma.CohortMemberUncheckedCreateNestedManyWithoutUserInput
+  emailLogs?: Prisma.EmailLogUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMockAttemptsInput = {
@@ -688,10 +867,13 @@ export type UserUpdateWithoutMockAttemptsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUpdateManyWithoutUserNestedInput
   cohortMembers?: Prisma.CohortMemberUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMockAttemptsInput = {
@@ -701,10 +883,13 @@ export type UserUncheckedUpdateWithoutMockAttemptsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   xp?: Prisma.IntFieldUpdateOperationsInput | number
+  leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUncheckedUpdateManyWithoutUserNestedInput
   cohortMembers?: Prisma.CohortMemberUncheckedUpdateManyWithoutUserNestedInput
+  emailLogs?: Prisma.EmailLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -716,12 +901,14 @@ export type UserCountOutputType = {
   attempts: number
   mockAttempts: number
   cohortMembers: number
+  emailLogs: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attempts?: boolean | UserCountOutputTypeCountAttemptsArgs
   mockAttempts?: boolean | UserCountOutputTypeCountMockAttemptsArgs
   cohortMembers?: boolean | UserCountOutputTypeCountCohortMembersArgs
+  emailLogs?: boolean | UserCountOutputTypeCountEmailLogsArgs
 }
 
 /**
@@ -755,6 +942,13 @@ export type UserCountOutputTypeCountCohortMembersArgs<ExtArgs extends runtime.Ty
   where?: Prisma.CohortMemberWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEmailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailLogWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -763,11 +957,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   role?: boolean
   xp?: boolean
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   attempts?: boolean | Prisma.User$attemptsArgs<ExtArgs>
   mockAttempts?: boolean | Prisma.User$mockAttemptsArgs<ExtArgs>
   cohortMembers?: boolean | Prisma.User$cohortMembersArgs<ExtArgs>
+  emailLogs?: boolean | Prisma.User$emailLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -778,6 +975,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   role?: boolean
   xp?: boolean
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -789,6 +988,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   role?: boolean
   xp?: boolean
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -800,15 +1001,18 @@ export type UserSelectScalar = {
   name?: boolean
   role?: boolean
   xp?: boolean
+  leaderboardOptIn?: boolean
+  weeklyEmailOptIn?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "role" | "xp" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "role" | "xp" | "leaderboardOptIn" | "weeklyEmailOptIn" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attempts?: boolean | Prisma.User$attemptsArgs<ExtArgs>
   mockAttempts?: boolean | Prisma.User$mockAttemptsArgs<ExtArgs>
   cohortMembers?: boolean | Prisma.User$cohortMembersArgs<ExtArgs>
+  emailLogs?: boolean | Prisma.User$emailLogsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -820,6 +1024,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     attempts: Prisma.$AttemptPayload<ExtArgs>[]
     mockAttempts: Prisma.$MockAttemptPayload<ExtArgs>[]
     cohortMembers: Prisma.$CohortMemberPayload<ExtArgs>[]
+    emailLogs: Prisma.$EmailLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -828,6 +1033,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     role: $Enums.Role
     xp: number
+    leaderboardOptIn: boolean
+    weeklyEmailOptIn: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -1227,6 +1434,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   attempts<T extends Prisma.User$attemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mockAttempts<T extends Prisma.User$mockAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mockAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MockAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cohortMembers<T extends Prisma.User$cohortMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cohortMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CohortMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  emailLogs<T extends Prisma.User$emailLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$emailLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1262,6 +1470,8 @@ export interface UserFieldRefs {
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly xp: Prisma.FieldRef<"User", 'Int'>
+  readonly leaderboardOptIn: Prisma.FieldRef<"User", 'Boolean'>
+  readonly weeklyEmailOptIn: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -1726,6 +1936,30 @@ export type User$cohortMembersArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.CohortMemberScalarFieldEnum | Prisma.CohortMemberScalarFieldEnum[]
+}
+
+/**
+ * User.emailLogs
+ */
+export type User$emailLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailLog
+   */
+  select?: Prisma.EmailLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmailLog
+   */
+  omit?: Prisma.EmailLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailLogInclude<ExtArgs> | null
+  where?: Prisma.EmailLogWhereInput
+  orderBy?: Prisma.EmailLogOrderByWithRelationInput | Prisma.EmailLogOrderByWithRelationInput[]
+  cursor?: Prisma.EmailLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailLogScalarFieldEnum | Prisma.EmailLogScalarFieldEnum[]
 }
 
 /**
