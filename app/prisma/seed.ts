@@ -375,6 +375,716 @@ async function main() {
     },
   });
 
+  // ── Additional Exam Catalogs ───────────────────────────────────────────────
+  console.log("Seeding additional exam catalogs...");
+
+  const additionalExams = [
+    {
+      id: "aws-saa-c03",
+      name: "AWS Solutions Architect — Associate",
+      description: "Validate your ability to design secure, resilient, high-performing, and cost-optimised architectures on AWS. Covers EC2, S3, RDS, VPC, IAM, and core AWS services.",
+      passingScore: 72,
+      durationMinutes: 130,
+      challengeSets: [
+        {
+          id: "cs-aws-compute",
+          title: "Compute & Networking",
+          topic: "AWS Compute",
+          xpReward: 60,
+          questions: [
+            {
+              id: "q-aws-c1",
+              text: "A company needs to host a web application that can automatically scale to handle variable traffic. The application must remain available even if an entire Availability Zone fails. Which architecture best meets these requirements?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Single EC2 instance with Auto Scaling in one AZ" },
+                { id: "b", text: "EC2 Auto Scaling group across multiple AZs behind an Application Load Balancer" },
+                { id: "c", text: "Multiple EC2 instances in one AZ with Elastic IP" },
+                { id: "d", text: "ECS cluster in a single AZ with horizontal scaling" },
+              ],
+              correctOptionId: "b",
+              explanation: "An Auto Scaling group spanning multiple AZs behind an ALB provides both elasticity and high availability. If one AZ fails, traffic routes automatically to healthy instances in other AZs. A single-AZ deployment cannot survive an AZ failure.",
+            },
+            {
+              id: "q-aws-c2",
+              text: "Which EC2 purchasing option provides the greatest cost savings for a steady-state workload that runs continuously for 3 years?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "On-Demand Instances" },
+                { id: "b", text: "Spot Instances" },
+                { id: "c", text: "Reserved Instances (3-year, all-upfront)" },
+                { id: "d", text: "Dedicated Hosts" },
+              ],
+              correctOptionId: "c",
+              explanation: "Reserved Instances with 3-year all-upfront payment offer up to 72% discount vs On-Demand for predictable, steady-state workloads. Spot Instances are cheaper per hour but can be interrupted, making them unsuitable for continuously running workloads.",
+            },
+            {
+              id: "q-aws-c3",
+              text: "A VPC has public and private subnets. Instances in the private subnet need to download software updates from the internet without being directly reachable from the internet. What should you use?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Internet Gateway attached to the private subnet" },
+                { id: "b", text: "NAT Gateway in the public subnet with a route from private subnet to NAT Gateway" },
+                { id: "c", text: "VPN Gateway for all outbound traffic" },
+                { id: "d", text: "Elastic IP addresses on private instances" },
+              ],
+              correctOptionId: "b",
+              explanation: "A NAT Gateway in the public subnet allows outbound internet traffic from private subnet instances while blocking inbound connections. The private subnet route table points to the NAT Gateway for 0.0.0.0/0 traffic.",
+            },
+            {
+              id: "q-aws-c4",
+              text: "True or False: Security Groups in AWS are stateful — if you allow inbound traffic on port 443, return traffic is automatically allowed without a separate outbound rule.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "true",
+              explanation: "Security Groups are stateful. When you allow inbound traffic, the response traffic is automatically permitted regardless of outbound rules. This differs from Network ACLs (NACLs), which are stateless and require explicit rules for both directions.",
+            },
+            {
+              id: "q-aws-c5",
+              text: "An application requires sub-millisecond latency between EC2 instances processing financial transactions. Which placement strategy should you use?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Spread Placement Group" },
+                { id: "b", text: "Partition Placement Group" },
+                { id: "c", text: "Cluster Placement Group" },
+                { id: "d", text: "Default placement with enhanced networking" },
+              ],
+              correctOptionId: "c",
+              explanation: "Cluster Placement Groups pack instances close together within a single AZ on high-bandwidth, low-latency hardware. They deliver the lowest network latency (sub-millisecond) and highest throughput for tightly-coupled HPC or financial workloads.",
+            },
+          ],
+        },
+        {
+          id: "cs-aws-storage",
+          title: "Storage & Databases",
+          topic: "AWS Storage",
+          xpReward: 60,
+          questions: [
+            {
+              id: "q-aws-s1",
+              text: "A company stores 5 TB of infrequently accessed data that must be retrieved within 12 hours when needed. Which S3 storage class minimizes cost?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "S3 Standard" },
+                { id: "b", text: "S3 Standard-IA" },
+                { id: "c", text: "S3 Glacier Flexible Retrieval" },
+                { id: "d", text: "S3 Glacier Deep Archive" },
+              ],
+              correctOptionId: "c",
+              explanation: "S3 Glacier Flexible Retrieval offers retrievals within 1-12 hours at very low storage cost (~$0.004/GB/month). S3 Standard-IA is more expensive for storage. Deep Archive takes up to 48 hours for retrieval. Glacier Flexible Retrieval fits the 12-hour requirement at minimum cost.",
+            },
+            {
+              id: "q-aws-s2",
+              text: "A multi-region e-commerce application needs a relational database with automatic failover, read replicas across regions, and 99.99% availability SLA. Which AWS service best fits?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "RDS MySQL with Multi-AZ deployment" },
+                { id: "b", text: "Amazon Aurora Global Database" },
+                { id: "c", text: "DynamoDB with global tables" },
+                { id: "d", text: "ElastiCache with Redis replication" },
+              ],
+              correctOptionId: "b",
+              explanation: "Aurora Global Database spans multiple AWS regions with sub-second replication, automatic regional failover, and maintains SQL compatibility. RDS Multi-AZ only covers a single region. DynamoDB is NoSQL. ElastiCache is a cache, not a primary relational database.",
+            },
+            {
+              id: "q-aws-s3",
+              text: "True or False: Amazon S3 objects are stored redundantly across a minimum of 3 Availability Zones within a region (for Standard storage class).",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "true",
+              explanation: "S3 Standard stores data redundantly across a minimum of 3 AZs, providing 99.999999999% (11 nines) durability and 99.99% availability. This is built into the service — users don't need to configure cross-AZ replication for Standard storage.",
+            },
+            {
+              id: "q-aws-s4",
+              text: "An application processes 1 million DynamoDB read requests per second with eventual consistency. How does DynamoDB handle this scale?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Requires manual sharding configuration by the architect" },
+                { id: "b", text: "Scales automatically via partition management — no configuration needed" },
+                { id: "c", text: "Requires provisioned capacity mode with manual capacity planning" },
+                { id: "d", text: "Only achievable with DynamoDB Accelerator (DAX) in front" },
+              ],
+              correctOptionId: "b",
+              explanation: "DynamoDB in on-demand mode automatically scales to handle virtually unlimited traffic without manual intervention. DynamoDB manages partition splits and data distribution transparently. Provisioned mode requires capacity planning but isn't required for auto-scaling.",
+            },
+            {
+              id: "q-aws-s5",
+              text: "A company needs to migrate a 20 TB on-premises MySQL database to AWS with minimal downtime. The database continues serving traffic during migration. Which AWS service supports this?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "AWS Snowball Edge" },
+                { id: "b", text: "AWS Database Migration Service (DMS) with ongoing replication" },
+                { id: "c", text: "mysqldump + S3 import" },
+                { id: "d", text: "AWS DataSync" },
+              ],
+              correctOptionId: "b",
+              explanation: "AWS DMS performs ongoing change data capture (CDC) replication, migrating existing data and continuously applying changes to keep source and target in sync. This enables cutover with minimal downtime. Snowball is for large-scale offline data transfer. mysqldump causes downtime. DataSync is for file storage.",
+            },
+          ],
+        },
+        {
+          id: "cs-aws-security",
+          title: "Security & IAM",
+          topic: "AWS Security",
+          xpReward: 70,
+          questions: [
+            {
+              id: "q-aws-iam1",
+              text: "Which IAM principle should guide permission design in AWS?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Grant permissions to groups, not individuals, and use broad roles for simplicity" },
+                { id: "b", text: "Least privilege — grant only the minimum permissions required for the task" },
+                { id: "c", text: "Deny-by-default for IAM users; allow everything for IAM roles" },
+                { id: "d", text: "Administrators should have AdministratorAccess for operational efficiency" },
+              ],
+              correctOptionId: "b",
+              explanation: "The principle of least privilege means granting only the permissions needed to perform a specific task. This minimizes the blast radius of compromised credentials. AWS recommends using IAM roles with specific permission policies rather than broad access.",
+            },
+            {
+              id: "q-aws-iam2",
+              text: "An EC2 instance needs to read from an S3 bucket. What is the most secure way to provide credentials?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Store AWS access keys in environment variables on the EC2 instance" },
+                { id: "b", text: "Hardcode credentials in the application configuration file" },
+                { id: "c", text: "Attach an IAM role to the EC2 instance with S3 read permissions" },
+                { id: "d", text: "Use the root account credentials with MFA" },
+              ],
+              correctOptionId: "c",
+              explanation: "IAM roles attached to EC2 instances provide temporary, automatically-rotated credentials via the instance metadata service (IMDS). No secrets are stored on disk. Hardcoding or using environment variables for static credentials creates security risks if the instance is compromised.",
+            },
+            {
+              id: "q-aws-iam3",
+              text: "True or False: AWS CloudTrail records API calls made in your AWS account and can be used for security auditing and compliance.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "true",
+              explanation: "AWS CloudTrail logs all API calls (who, what, when, from where) across your AWS account. It is the primary tool for security auditing, compliance investigation, and detecting unauthorized actions. Logs can be stored in S3 and analyzed with Athena or CloudWatch Logs Insights.",
+            },
+            {
+              id: "q-aws-iam4",
+              text: "A web application stores sensitive customer data in S3. The data must be encrypted at rest. Which approach requires the least operational overhead?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Encrypt data client-side before uploading to S3" },
+                { id: "b", text: "Enable S3 Server-Side Encryption with AWS managed keys (SSE-S3)" },
+                { id: "c", text: "Use a custom KMS key with manual rotation every 90 days" },
+                { id: "d", text: "Implement application-level AES-256 encryption" },
+              ],
+              correctOptionId: "b",
+              explanation: "SSE-S3 encrypts all objects automatically using AES-256 with AWS-managed keys. It requires no key management, no application changes, and adds no operational overhead. It can be enforced via bucket policy. Client-side and application-level encryption require code changes and key management.",
+            },
+            {
+              id: "q-aws-iam5",
+              text: "Which AWS service provides a Web Application Firewall (WAF) to protect against SQL injection and XSS attacks at the edge?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "AWS Shield" },
+                { id: "b", text: "AWS WAF" },
+                { id: "c", text: "Amazon GuardDuty" },
+                { id: "d", text: "AWS Security Hub" },
+              ],
+              correctOptionId: "b",
+              explanation: "AWS WAF (Web Application Firewall) filters HTTP/HTTPS traffic using rules to block SQL injection, XSS, and other OWASP Top 10 attacks. It integrates with CloudFront, ALB, and API Gateway. Shield provides DDoS protection. GuardDuty detects threats via log analysis. Security Hub aggregates findings.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "azure-az900",
+      name: "Azure AZ-900: Microsoft Azure Fundamentals",
+      description: "Foundational knowledge of cloud concepts and Microsoft Azure services. Covers core Azure services, pricing, governance, and security for cloud beginners.",
+      passingScore: 70,
+      durationMinutes: 65,
+      challengeSets: [
+        {
+          id: "cs-azure-concepts",
+          title: "Cloud Concepts",
+          topic: "Cloud Fundamentals",
+          xpReward: 50,
+          questions: [
+            {
+              id: "q-az-cc1",
+              text: "What is the primary benefit of cloud computing's 'pay-as-you-go' model?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "You pay a fixed monthly fee regardless of usage" },
+                { id: "b", text: "You only pay for resources you consume, converting CapEx to OpEx" },
+                { id: "c", text: "You receive a 100% discount on all services" },
+                { id: "d", text: "You avoid all infrastructure management responsibilities" },
+              ],
+              correctOptionId: "b",
+              explanation: "Pay-as-you-go converts capital expenditure (upfront hardware purchase) to operational expenditure (usage-based billing). This eliminates over-provisioning waste and aligns costs with actual consumption, improving financial flexibility.",
+            },
+            {
+              id: "q-az-cc2",
+              text: "Which cloud deployment model gives an organization complete control over infrastructure while still using cloud technology?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Public cloud" },
+                { id: "b", text: "Hybrid cloud" },
+                { id: "c", text: "Private cloud" },
+                { id: "d", text: "Community cloud" },
+              ],
+              correctOptionId: "c",
+              explanation: "A private cloud is dedicated to a single organization, hosted either on-premises or in a dedicated data center. It provides maximum control and customization but requires the organization to manage the infrastructure. Public cloud shares resources across customers.",
+            },
+            {
+              id: "q-az-cc3",
+              text: "True or False: In the IaaS model, the cloud provider manages the operating system, middleware, and application runtime.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "false",
+              explanation: "In IaaS (Infrastructure as a Service), the cloud provider manages physical servers, networking, and storage (hypervisor layer). The customer is responsible for OS installation, patches, middleware, runtime, and applications. PaaS handles OS and runtime; SaaS handles everything.",
+            },
+            {
+              id: "q-az-cc4",
+              text: "What does 'scalability' mean in cloud computing?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "The ability to recover from disasters automatically" },
+                { id: "b", text: "The ability to increase or decrease resources to match demand" },
+                { id: "c", text: "The ability to run workloads in multiple geographic regions" },
+                { id: "d", text: "The ability to use serverless functions" },
+              ],
+              correctOptionId: "b",
+              explanation: "Scalability is the ability to adjust resource capacity up (scaling out/up) or down (scaling in/down) to match workload demand. Vertical scaling adds more power to existing resources; horizontal scaling adds more instances. This is a core cloud benefit over fixed on-premises capacity.",
+            },
+            {
+              id: "q-az-cc5",
+              text: "Which Azure feature guarantees a certain level of service availability expressed as a percentage (e.g. 99.9%)?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Azure SLA (Service Level Agreement)" },
+                { id: "b", text: "Azure Policy" },
+                { id: "c", text: "Azure Blueprints" },
+                { id: "d", text: "Azure Cost Management" },
+              ],
+              correctOptionId: "a",
+              explanation: "Azure SLAs define the guaranteed uptime and connectivity for each service. For example, Azure VMs have a 99.9% SLA for single instances with Premium SSD. If Azure fails to meet the SLA, customers receive service credits as compensation.",
+            },
+          ],
+        },
+        {
+          id: "cs-azure-services",
+          title: "Core Azure Services",
+          topic: "Azure Services",
+          xpReward: 60,
+          questions: [
+            {
+              id: "q-az-s1",
+              text: "Which Azure service provides serverless compute, allowing code to run without provisioning or managing servers?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Azure Virtual Machines" },
+                { id: "b", text: "Azure Functions" },
+                { id: "c", text: "Azure App Service" },
+                { id: "d", text: "Azure Container Instances" },
+              ],
+              correctOptionId: "b",
+              explanation: "Azure Functions is a serverless compute service that executes code in response to triggers (HTTP, timer, queue, etc.) without requiring server provisioning. You pay only for execution time. VMs require server management. App Service manages hosting but isn't serverless.",
+            },
+            {
+              id: "q-az-s2",
+              text: "What is the purpose of Azure Resource Groups?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "To group Azure regions for billing purposes" },
+                { id: "b", text: "To logically organize Azure resources that share the same lifecycle" },
+                { id: "c", text: "To define network boundaries between services" },
+                { id: "d", text: "To set quotas and limits on resource creation" },
+              ],
+              correctOptionId: "b",
+              explanation: "Resource Groups are logical containers for Azure resources. Resources in a group typically share the same lifecycle — deployed, managed, and deleted together. They also enable unified access control (RBAC), billing tracking, and tagging for all resources within the group.",
+            },
+            {
+              id: "q-az-s3",
+              text: "A company needs a managed relational database on Azure with automatic backups, patching, and high availability. Which service should they use?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "SQL Server on Azure Virtual Machine" },
+                { id: "b", text: "Azure SQL Database" },
+                { id: "c", text: "Azure Table Storage" },
+                { id: "d", text: "Azure Cosmos DB" },
+              ],
+              correctOptionId: "b",
+              explanation: "Azure SQL Database is a fully managed PaaS relational database that handles backups, patching, monitoring, and high availability automatically. SQL Server on VM is IaaS — you manage the OS and SQL Server. Table Storage and Cosmos DB are NoSQL services.",
+            },
+            {
+              id: "q-az-s4",
+              text: "True or False: Azure Active Directory (Azure AD / Entra ID) is primarily a domain controller replacement that requires on-premises infrastructure.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "false",
+              explanation: "Azure AD (now Microsoft Entra ID) is a cloud-based identity and access management service. It is NOT a traditional Active Directory replacement — it uses REST APIs (OAuth 2.0, OIDC) rather than Kerberos/LDAP protocols. It requires no on-premises infrastructure and manages SaaS app access.",
+            },
+            {
+              id: "q-az-s5",
+              text: "Which Azure service provides content delivery with edge locations worldwide, reducing latency for static assets?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Azure Traffic Manager" },
+                { id: "b", text: "Azure CDN (Content Delivery Network)" },
+                { id: "c", text: "Azure Application Gateway" },
+                { id: "d", text: "Azure Front Door" },
+              ],
+              correctOptionId: "b",
+              explanation: "Azure CDN caches static content (images, CSS, JS, videos) at edge locations (Points of Presence) close to users, reducing latency and origin server load. Traffic Manager routes DNS traffic; Application Gateway is a layer-7 load balancer; Front Door combines CDN + global load balancing.",
+            },
+          ],
+        },
+        {
+          id: "cs-azure-governance",
+          title: "Pricing, Governance & Compliance",
+          topic: "Azure Governance",
+          xpReward: 50,
+          questions: [
+            {
+              id: "q-az-g1",
+              text: "Which Azure tool helps you estimate the monthly cost of an Azure solution before deploying it?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Azure Advisor" },
+                { id: "b", text: "Azure Pricing Calculator" },
+                { id: "c", text: "Azure Cost Management" },
+                { id: "d", text: "Azure Monitor" },
+              ],
+              correctOptionId: "b",
+              explanation: "The Azure Pricing Calculator lets you configure hypothetical Azure solutions and estimate monthly costs before deployment. Azure Cost Management tracks and analyzes actual spending after resources are deployed. Advisor provides recommendations. Monitor tracks performance.",
+            },
+            {
+              id: "q-az-g2",
+              text: "What is the purpose of Azure Policy?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "To define user access permissions for Azure resources" },
+                { id: "b", text: "To enforce organizational rules and assess compliance across Azure resources" },
+                { id: "c", text: "To create backup policies for Azure VMs" },
+                { id: "d", text: "To manage software update schedules" },
+              ],
+              correctOptionId: "b",
+              explanation: "Azure Policy creates rules (policies) that enforce or audit resource configurations. For example, 'All storage accounts must use HTTPS only' or 'VMs must be deployed in specific regions.' Policies assess compliance and can prevent or remediate non-compliant resources.",
+            },
+            {
+              id: "q-az-g3",
+              text: "True or False: The Azure Free tier provides $200 credit for the first 30 days plus select services free for 12 months.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "true",
+              explanation: "Azure's free account includes $200 credit to explore any Azure service for the first 30 days, plus 55+ services free for 12 months (e.g., B1s VMs, 5 GB Blob Storage, Azure SQL Database). Some services remain permanently free (Azure Functions 1M executions/month).",
+            },
+            {
+              id: "q-az-g4",
+              text: "What is the Azure Trust Center used for?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Managing Azure subscriptions and billing accounts" },
+                { id: "b", text: "Information about Microsoft's security, privacy, and compliance commitments" },
+                { id: "c", text: "Monitoring Azure service health and outages" },
+                { id: "d", text: "Creating and managing Azure Active Directory tenants" },
+              ],
+              correctOptionId: "b",
+              explanation: "The Azure Trust Center (now part of Microsoft Trust Center) provides documentation on Microsoft's security practices, privacy commitments, compliance certifications (ISO 27001, SOC 2, GDPR, HIPAA), and data handling policies. It's used by compliance teams evaluating Azure.",
+            },
+            {
+              id: "q-az-g5",
+              text: "A company wants to prevent any Azure subscription from creating resources outside the EU regions. Which Azure feature enforces this?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Azure Blueprints" },
+                { id: "b", text: "Azure Policy with 'Allowed locations' definition" },
+                { id: "c", text: "Azure RBAC with geographic restrictions" },
+                { id: "d", text: "Azure Management Groups with region locks" },
+              ],
+              correctOptionId: "b",
+              explanation: "Azure Policy's built-in 'Allowed locations' policy definition restricts which Azure regions resources can be deployed to. Assigning this policy to a subscription prevents creation of resources in non-approved regions. RBAC controls who can do what, not where.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: "scrum-psm-i",
+      name: "Scrum PSM-I: Professional Scrum Master I",
+      description: "Demonstrate your understanding of Scrum theory, practices, and principles as defined in the Scrum Guide. Covers Sprint events, roles, artifacts, and empirical process control.",
+      passingScore: 85,
+      durationMinutes: 60,
+      challengeSets: [
+        {
+          id: "cs-scrum-theory",
+          title: "Scrum Theory & Values",
+          topic: "Scrum Fundamentals",
+          xpReward: 50,
+          questions: [
+            {
+              id: "q-scrum-t1",
+              text: "Scrum is founded on three pillars of empirical process control. What are they?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Planning, Execution, Review" },
+                { id: "b", text: "Transparency, Inspection, Adaptation" },
+                { id: "c", text: "Commitment, Focus, Openness" },
+                { id: "d", text: "Velocity, Capacity, Throughput" },
+              ],
+              correctOptionId: "b",
+              explanation: "The three pillars of empiricism in Scrum are Transparency (making work and progress visible), Inspection (regularly checking progress toward goals), and Adaptation (adjusting when deviation is detected). These pillars enable empirical process control for complex work.",
+            },
+            {
+              id: "q-scrum-t2",
+              text: "Which of the following is NOT one of the five Scrum values?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Courage" },
+                { id: "b", text: "Efficiency" },
+                { id: "c", text: "Focus" },
+                { id: "d", text: "Openness" },
+              ],
+              correctOptionId: "b",
+              explanation: "The five Scrum values are Commitment, Courage, Focus, Openness, and Respect. 'Efficiency' is not a Scrum value. The values support trust and empiricism within the Scrum Team and guide decision-making throughout the Sprint.",
+            },
+            {
+              id: "q-scrum-t3",
+              text: "True or False: A Sprint can be extended if the Developers determine they need more time to meet the Sprint Goal.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "false",
+              explanation: "Sprints have a fixed duration of one month or less and are never extended. If work cannot be completed, the Sprint Goal is still pursued with what was completed. The Sprint may be cancelled only by the Product Owner if the Sprint Goal becomes obsolete. Sprints have a consistent cadence.",
+            },
+            {
+              id: "q-scrum-t4",
+              text: "What is the maximum length of a Sprint in Scrum?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "2 weeks" },
+                { id: "b", text: "4 weeks (1 month)" },
+                { id: "c", text: "6 weeks" },
+                { id: "d", text: "There is no maximum — the team decides" },
+              ],
+              correctOptionId: "b",
+              explanation: "The Scrum Guide specifies Sprints are one month or less. Shorter Sprints generate more learning cycles and limit risk. Sprints longer than one month lose the benefits of frequent inspection and adaptation. The team should choose the shortest Sprint that delivers value consistently.",
+            },
+            {
+              id: "q-scrum-t5",
+              text: "Who is responsible for cancelling a Sprint?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "The Scrum Master" },
+                { id: "b", text: "The Developers" },
+                { id: "c", text: "The Product Owner" },
+                { id: "d", text: "The stakeholders by majority vote" },
+              ],
+              correctOptionId: "c",
+              explanation: "Only the Product Owner has the authority to cancel a Sprint, and only if the Sprint Goal becomes obsolete. This might happen due to a major business change making the goal irrelevant. Cancellation is rare and traumatic for the team. The Scrum Master or Developers cannot cancel a Sprint.",
+            },
+          ],
+        },
+        {
+          id: "cs-scrum-events",
+          title: "Scrum Events & Artifacts",
+          topic: "Scrum Practices",
+          xpReward: 60,
+          questions: [
+            {
+              id: "q-scrum-e1",
+              text: "What is the maximum timebox for Sprint Planning for a one-month Sprint?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "2 hours" },
+                { id: "b", text: "4 hours" },
+                { id: "c", text: "8 hours" },
+                { id: "d", text: "16 hours" },
+              ],
+              correctOptionId: "c",
+              explanation: "Sprint Planning is timeboxed to a maximum of 8 hours for a one-month Sprint. For shorter Sprints, the event is usually shorter proportionally (e.g., 4 hours for a 2-week Sprint). The Scrum Team collectively plans the Sprint Goal, selected Product Backlog items, and how to deliver the Increment.",
+            },
+            {
+              id: "q-scrum-e2",
+              text: "The Daily Scrum is timeboxed to 15 minutes. Who is it primarily for?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "The Product Owner to get a status update" },
+                { id: "b", text: "The Scrum Master to remove impediments" },
+                { id: "c", text: "The Developers to inspect progress toward the Sprint Goal and adapt their plan" },
+                { id: "d", text: "All stakeholders to review progress" },
+              ],
+              correctOptionId: "c",
+              explanation: "The Daily Scrum is a 15-minute event for the Developers to inspect progress toward the Sprint Goal and adapt the Sprint Backlog as needed. The Scrum Master and Product Owner may attend but are not required. It is not a status meeting for management — it's for the Developers to plan their day.",
+            },
+            {
+              id: "q-scrum-e3",
+              text: "True or False: The Sprint Retrospective occurs before the Sprint Review.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "false",
+              explanation: "The correct order of Sprint events is: Sprint Planning → (Daily Scrums during Sprint) → Sprint Review → Sprint Retrospective. The Sprint Review (what was built) comes before the Retrospective (how the team worked). The Retrospective is the last event before the next Sprint begins.",
+            },
+            {
+              id: "q-scrum-e4",
+              text: "What is the Definition of Done (DoD)?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "A checklist of acceptance criteria for each Product Backlog item" },
+                { id: "b", text: "A formal quality standard that creates transparency about what work is complete" },
+                { id: "c", text: "The Product Owner's approval of a feature before release" },
+                { id: "d", text: "The list of items selected for the current Sprint" },
+              ],
+              correctOptionId: "b",
+              explanation: "The Definition of Done is a formal description of what it means for an Increment to meet quality standards. It creates a shared understanding of 'done' for the entire Scrum Team. When a Product Backlog item meets the DoD, the Increment is born. DoD is different from per-item acceptance criteria.",
+            },
+            {
+              id: "q-scrum-e5",
+              text: "Who is accountable for the Product Backlog?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "The Scrum Master" },
+                { id: "b", text: "The Developers" },
+                { id: "c", text: "The Product Owner" },
+                { id: "d", text: "The entire Scrum Team jointly" },
+              ],
+              correctOptionId: "c",
+              explanation: "The Product Owner is solely accountable for managing the Product Backlog, including its content, availability, and ordering. While Developers may help refine items, the Product Owner has final authority over what is in the backlog and the ordering of items to maximize value.",
+            },
+          ],
+        },
+        {
+          id: "cs-scrum-master-role",
+          title: "Scrum Master Accountabilities",
+          topic: "Scrum Master",
+          xpReward: 70,
+          questions: [
+            {
+              id: "q-scrum-sm1",
+              text: "A new Scrum team has a manager who assigns tasks to Developers daily, bypassing the Sprint Backlog process. What should the Scrum Master do?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Accept this — management authority overrides Scrum" },
+                { id: "b", text: "Coach the manager on Scrum and how this disrupts the team's self-management" },
+                { id: "c", text: "Inform the Developers to ignore the manager" },
+                { id: "d", text: "Remove the manager from all Scrum events" },
+              ],
+              correctOptionId: "b",
+              explanation: "The Scrum Master serves the organization by coaching leaders to understand Scrum. Direct task assignment violates self-management — Developers should pull work from the Sprint Backlog themselves. The Scrum Master should coach the manager without creating conflict, helping them understand how their actions affect empiricism.",
+            },
+            {
+              id: "q-scrum-sm2",
+              text: "True or False: The Scrum Master manages the Scrum Team and makes technical decisions.",
+              type: "TRUE_FALSE" as const,
+              options: [
+                { id: "true", text: "True" },
+                { id: "false", text: "False" },
+              ],
+              correctOptionId: "false",
+              explanation: "The Scrum Master is not a manager — they are a servant-leader who coaches the team on Scrum, facilitates events, removes impediments, and helps the organization adopt Scrum. Technical decisions are made by the Developers. The Scrum Master has no authority over team members.",
+            },
+            {
+              id: "q-scrum-sm3",
+              text: "During the Sprint Retrospective, the team identifies a recurring impediment that prevents them from completing quality work. What is the Scrum Master's primary responsibility?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Document the impediment and submit it to management in writing" },
+                { id: "b", text: "Help the team create actionable improvement items and ensure they are addressed" },
+                { id: "c", text: "Escalate the issue directly to the executive team" },
+                { id: "d", text: "Determine the root cause independently and implement the fix" },
+              ],
+              correctOptionId: "b",
+              explanation: "The Scrum Master helps the Scrum Team identify and implement improvements. During the Retrospective, this means facilitating actionable improvement planning and ensuring at least one improvement item is addressed in the next Sprint. The Scrum Master removes organizational impediments that the team cannot resolve themselves.",
+            },
+            {
+              id: "q-scrum-sm4",
+              text: "A Product Owner is frequently unavailable for Sprint Planning and Backlog refinement. How should the Scrum Master respond?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "Have the Developers proceed without the Product Owner" },
+                { id: "b", text: "Coach the Product Owner on their accountability and the impact of absence on the team" },
+                { id: "c", text: "Cancel all Scrum events until the PO is available" },
+                { id: "d", text: "Take over Product Owner responsibilities temporarily" },
+              ],
+              correctOptionId: "b",
+              explanation: "The Scrum Master serves the Product Owner by coaching them on effective backlog management and ensuring they understand their accountability. PO availability is critical for Sprint Planning and refinement — the Scrum Master should help the organization understand this and create conditions for the PO to be engaged.",
+            },
+            {
+              id: "q-scrum-sm5",
+              text: "What does 'self-managing' mean for a Scrum Team?",
+              type: "MCQ" as const,
+              options: [
+                { id: "a", text: "The team has no Product Owner or Scrum Master" },
+                { id: "b", text: "The team internally decides who does what, when, and how" },
+                { id: "c", text: "Each Developer works independently without team coordination" },
+                { id: "d", text: "The team selects its own Sprint duration" },
+              ],
+              correctOptionId: "b",
+              explanation: "Self-managing means the Scrum Team (specifically the Developers) choose how best to accomplish their work — deciding who picks up which tasks, how to approach technical problems, and how to organize their day. This contrasts with being managed externally. The team is given a goal (Sprint Goal) and decides how to achieve it.",
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  for (const examData of additionalExams) {
+    const { challengeSets: examChallengeSets, ...examInfo } = examData;
+
+    const addlExam = await prisma.exam.upsert({
+      where: { id: examInfo.id },
+      update: {},
+      create: examInfo,
+    });
+
+    console.log(`  Created exam: ${addlExam.name}`);
+
+    for (const cs of examChallengeSets) {
+      const { questions, ...csData } = cs;
+
+      const challengeSet = await prisma.challengeSet.upsert({
+        where: { id: csData.id },
+        update: {},
+        create: { ...csData, examId: addlExam.id },
+      });
+
+      console.log(`    Created challenge set: ${challengeSet.title}`);
+
+      for (const q of questions) {
+        await prisma.question.upsert({
+          where: { id: q.id },
+          update: {},
+          create: {
+            ...q,
+            challengeSetId: challengeSet.id,
+            examId: addlExam.id,
+          },
+        });
+      }
+
+      console.log(`      Seeded ${questions.length} questions`);
+    }
+  }
+
   console.log("Seed complete.");
   console.log(
     "  Admin: admin@bistecglobal.com / admin123!"

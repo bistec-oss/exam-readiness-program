@@ -242,6 +242,7 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   attempts?: Prisma.AttemptListRelationFilter
   mockAttempts?: Prisma.MockAttemptListRelationFilter
+  cohortMembers?: Prisma.CohortMemberListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -255,6 +256,7 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   attempts?: Prisma.AttemptOrderByRelationAggregateInput
   mockAttempts?: Prisma.MockAttemptOrderByRelationAggregateInput
+  cohortMembers?: Prisma.CohortMemberOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -271,6 +273,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   attempts?: Prisma.AttemptListRelationFilter
   mockAttempts?: Prisma.MockAttemptListRelationFilter
+  cohortMembers?: Prisma.CohortMemberListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -314,6 +317,7 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   attempts?: Prisma.AttemptCreateNestedManyWithoutUserInput
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -327,6 +331,7 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   attempts?: Prisma.AttemptUncheckedCreateNestedManyWithoutUserInput
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -340,6 +345,7 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUpdateManyWithoutUserNestedInput
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -353,6 +359,7 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUncheckedUpdateManyWithoutUserNestedInput
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -454,6 +461,20 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type UserCreateNestedOneWithoutCohortMembersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCohortMembersInput, Prisma.UserUncheckedCreateWithoutCohortMembersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCohortMembersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCohortMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCohortMembersInput, Prisma.UserUncheckedCreateWithoutCohortMembersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCohortMembersInput
+  upsert?: Prisma.UserUpsertWithoutCohortMembersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCohortMembersInput, Prisma.UserUpdateWithoutCohortMembersInput>, Prisma.UserUncheckedUpdateWithoutCohortMembersInput>
+}
+
 export type UserCreateNestedOneWithoutAttemptsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAttemptsInput, Prisma.UserUncheckedCreateWithoutAttemptsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttemptsInput
@@ -482,6 +503,74 @@ export type UserUpdateOneRequiredWithoutMockAttemptsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMockAttemptsInput, Prisma.UserUpdateWithoutMockAttemptsInput>, Prisma.UserUncheckedUpdateWithoutMockAttemptsInput>
 }
 
+export type UserCreateWithoutCohortMembersInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  role?: $Enums.Role
+  xp?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attempts?: Prisma.AttemptCreateNestedManyWithoutUserInput
+  mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCohortMembersInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  role?: $Enums.Role
+  xp?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attempts?: Prisma.AttemptUncheckedCreateNestedManyWithoutUserInput
+  mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCohortMembersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCohortMembersInput, Prisma.UserUncheckedCreateWithoutCohortMembersInput>
+}
+
+export type UserUpsertWithoutCohortMembersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCohortMembersInput, Prisma.UserUncheckedUpdateWithoutCohortMembersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCohortMembersInput, Prisma.UserUncheckedCreateWithoutCohortMembersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCohortMembersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCohortMembersInput, Prisma.UserUncheckedUpdateWithoutCohortMembersInput>
+}
+
+export type UserUpdateWithoutCohortMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attempts?: Prisma.AttemptUpdateManyWithoutUserNestedInput
+  mockAttempts?: Prisma.MockAttemptUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCohortMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attempts?: Prisma.AttemptUncheckedUpdateManyWithoutUserNestedInput
+  mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutUserNestedInput
+}
+
 export type UserCreateWithoutAttemptsInput = {
   id?: string
   email: string
@@ -492,6 +581,7 @@ export type UserCreateWithoutAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAttemptsInput = {
@@ -504,6 +594,7 @@ export type UserUncheckedCreateWithoutAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAttemptsInput = {
@@ -532,6 +623,7 @@ export type UserUpdateWithoutAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAttemptsInput = {
@@ -544,6 +636,7 @@ export type UserUncheckedUpdateWithoutAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMockAttemptsInput = {
@@ -556,6 +649,7 @@ export type UserCreateWithoutMockAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMockAttemptsInput = {
@@ -568,6 +662,7 @@ export type UserUncheckedCreateWithoutMockAttemptsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   attempts?: Prisma.AttemptUncheckedCreateNestedManyWithoutUserInput
+  cohortMembers?: Prisma.CohortMemberUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMockAttemptsInput = {
@@ -596,6 +691,7 @@ export type UserUpdateWithoutMockAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMockAttemptsInput = {
@@ -608,6 +704,7 @@ export type UserUncheckedUpdateWithoutMockAttemptsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attempts?: Prisma.AttemptUncheckedUpdateManyWithoutUserNestedInput
+  cohortMembers?: Prisma.CohortMemberUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -618,11 +715,13 @@ export type UserUncheckedUpdateWithoutMockAttemptsInput = {
 export type UserCountOutputType = {
   attempts: number
   mockAttempts: number
+  cohortMembers: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attempts?: boolean | UserCountOutputTypeCountAttemptsArgs
   mockAttempts?: boolean | UserCountOutputTypeCountMockAttemptsArgs
+  cohortMembers?: boolean | UserCountOutputTypeCountCohortMembersArgs
 }
 
 /**
@@ -649,6 +748,13 @@ export type UserCountOutputTypeCountMockAttemptsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.MockAttemptWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCohortMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CohortMemberWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -661,6 +767,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   attempts?: boolean | Prisma.User$attemptsArgs<ExtArgs>
   mockAttempts?: boolean | Prisma.User$mockAttemptsArgs<ExtArgs>
+  cohortMembers?: boolean | Prisma.User$cohortMembersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -701,6 +808,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attempts?: boolean | Prisma.User$attemptsArgs<ExtArgs>
   mockAttempts?: boolean | Prisma.User$mockAttemptsArgs<ExtArgs>
+  cohortMembers?: boolean | Prisma.User$cohortMembersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -711,6 +819,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     attempts: Prisma.$AttemptPayload<ExtArgs>[]
     mockAttempts: Prisma.$MockAttemptPayload<ExtArgs>[]
+    cohortMembers: Prisma.$CohortMemberPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1117,6 +1226,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   attempts<T extends Prisma.User$attemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mockAttempts<T extends Prisma.User$mockAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mockAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MockAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cohortMembers<T extends Prisma.User$cohortMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cohortMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CohortMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1592,6 +1702,30 @@ export type User$mockAttemptsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.MockAttemptScalarFieldEnum | Prisma.MockAttemptScalarFieldEnum[]
+}
+
+/**
+ * User.cohortMembers
+ */
+export type User$cohortMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CohortMember
+   */
+  select?: Prisma.CohortMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CohortMember
+   */
+  omit?: Prisma.CohortMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CohortMemberInclude<ExtArgs> | null
+  where?: Prisma.CohortMemberWhereInput
+  orderBy?: Prisma.CohortMemberOrderByWithRelationInput | Prisma.CohortMemberOrderByWithRelationInput[]
+  cursor?: Prisma.CohortMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CohortMemberScalarFieldEnum | Prisma.CohortMemberScalarFieldEnum[]
 }
 
 /**

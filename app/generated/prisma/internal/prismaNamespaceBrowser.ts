@@ -52,6 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Cohort: 'Cohort',
+  CohortMember: 'CohortMember',
   Exam: 'Exam',
   ChallengeSet: 'ChallengeSet',
   Question: 'Question',
@@ -87,6 +89,27 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const CohortScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CohortScalarFieldEnum = (typeof CohortScalarFieldEnum)[keyof typeof CohortScalarFieldEnum]
+
+
+export const CohortMemberScalarFieldEnum = {
+  id: 'id',
+  cohortId: 'cohortId',
+  userId: 'userId',
+  joinedAt: 'joinedAt'
+} as const
+
+export type CohortMemberScalarFieldEnum = (typeof CohortMemberScalarFieldEnum)[keyof typeof CohortMemberScalarFieldEnum]
 
 
 export const ExamScalarFieldEnum = {

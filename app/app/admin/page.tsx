@@ -2,11 +2,12 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
 export default async function AdminOverviewPage() {
-  const [examCount, challengeCount, questionCount, userCount] = await Promise.all([
+  const [examCount, challengeCount, questionCount, userCount, cohortCount] = await Promise.all([
     prisma.exam.count(),
     prisma.challengeSet.count(),
     prisma.question.count(),
     prisma.user.count(),
+    prisma.cohort.count(),
   ]);
 
   const stats = [
@@ -14,6 +15,7 @@ export default async function AdminOverviewPage() {
     { label: "Challenge Sets", count: challengeCount, href: "/admin/challenges", emoji: "🎯" },
     { label: "Questions", count: questionCount, href: "/admin/questions", emoji: "❓" },
     { label: "Users", count: userCount, href: "/admin", emoji: "👥" },
+    { label: "Cohorts", count: cohortCount, href: "/admin/cohorts", emoji: "👨‍👩‍👧‍👦" },
   ];
 
   return (
