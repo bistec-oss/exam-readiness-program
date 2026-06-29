@@ -52,12 +52,21 @@ test.describe("07 - PWA Offline Support", () => {
   });
 
   test("service worker is registered", async ({ page }) => {
-    await page.goto("/");
-    const hasSW = await page.evaluate(async () => {
-      if (!("serviceWorker" in navigator)) return false;
-      const regs = await navigator.serviceWorker.getRegistrations();
-      return regs.length > 0;
-    });
+    await page.goto("/", { waitUntil: "load" });
+    // next-pwa registers the SW asynchronously after window load, so poll
+    // until a registration appears rather than reading it on the same tick.
+    const hasSW = await page
+      .waitForFunction(
+        async () => {
+          if (!("serviceWorker" in navigator)) return false;
+          const regs = await navigator.serviceWorker.getRegistrations();
+          return regs.length > 0;
+        },
+        undefined,
+        { timeout: 15000 },
+      )
+      .then(() => true)
+      .catch(() => false);
     expect(hasSW).toBe(true);
   });
 
