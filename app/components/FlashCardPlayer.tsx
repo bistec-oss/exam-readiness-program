@@ -90,6 +90,17 @@ export function FlashCardPlayer({
     setSubmitting(false);
   };
 
+  const handleReset = () => {
+    setCurrentIndex(0);
+    setSelectedOption(null);
+    setShowFeedback(false);
+    setAnswers({});
+    setCompleted(false);
+    setFinalScore(0);
+    setXpEarned(0);
+    setSubmitting(false);
+  };
+
   if (completed) {
     const pct = Math.round((finalScore / total) * 100);
     return (
@@ -118,12 +129,12 @@ export function FlashCardPlayer({
             >
               Back
             </Link>
-            <Link
-              href={`/challenges/${challengeSet.id}/play`}
-              className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl transition-colors text-sm text-center"
+            <button
+              onClick={handleReset}
+              className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl transition-colors text-sm"
             >
               Try Again
-            </Link>
+            </button>
           </div>
         </div>
       </div>
