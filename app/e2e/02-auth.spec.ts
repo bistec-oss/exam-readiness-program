@@ -31,6 +31,14 @@ test.describe("02 - Auth & Role-Based Access", () => {
     await expect(page.getByText(/invalid email or password/i)).toBeVisible();
   });
 
+  test("login trims surrounding whitespace on email", async ({ page }) => {
+    await page.goto("/login");
+    await page.fill('input[name="email"]', `   ${CANDIDATE.email}   `);
+    await page.fill('input[name="password"]', CANDIDATE.password);
+    await page.click('button[type="submit"]');
+    await expect(page).toHaveURL(/\/dashboard/);
+  });
+
   test("new user can register and is redirected to dashboard", async ({ page }) => {
     const uniqueEmail = `test-${Date.now()}@example.com`;
     await page.goto("/register");

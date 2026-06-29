@@ -7,13 +7,13 @@ import { createSession, deleteSession } from "@/lib/session";
 import { z } from "zod";
 
 const LoginSchema = z.object({
-  email: z.email({ error: "Valid email required." }),
+  email: z.string().trim().pipe(z.email({ error: "Valid email required." })),
   password: z.string().min(1, { error: "Password required." }),
 });
 
 const RegisterSchema = z.object({
-  name: z.string().min(2, { error: "Name must be at least 2 characters." }),
-  email: z.email({ error: "Valid email required." }),
+  name: z.string().trim().min(2, { error: "Name must be at least 2 characters." }),
+  email: z.string().trim().pipe(z.email({ error: "Valid email required." })),
   password: z
     .string()
     .min(8, { error: "Password must be at least 8 characters." }),
