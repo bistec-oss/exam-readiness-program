@@ -9,6 +9,9 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/EmailLog'
+export type * from './models/Cohort'
+export type * from './models/CohortMember'
 export type * from './models/Exam'
 export type * from './models/ChallengeSet'
 export type * from './models/Question'

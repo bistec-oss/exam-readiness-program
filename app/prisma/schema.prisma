@@ -18,16 +18,50 @@ enum QuestionType {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  email         String        @unique
+  id            String         @id @default(cuid())
+  email         String         @unique
   passwordHash  String
   name          String
-  role          Role          @default(CANDIDATE)
-  xp            Int           @default(0)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  role          Role           @default(CANDIDATE)
+  xp            Int            @default(0)
+  leaderboardOptIn Boolean     @default(false)
+  weeklyEmailOptIn Boolean     @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   attempts      Attempt[]
   mockAttempts  MockAttempt[]
+  cohortMembers CohortMember[]
+  emailLogs     EmailLog[]
+}
+
+model EmailLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  subject   String
+  body      String
+  createdAt DateTime @default(now())
+}
+
+model Cohort {
+  id        String         @id @default(cuid())
+  name      String
+  code      String         @unique
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  members   CohortMember[]
+}
+
+model CohortMember {
+  id        String   @id @default(cuid())
+  cohortId  String
+  cohort    Cohort   @relation(fields: [cohortId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt  DateTime @default(now())
+
+  @@unique([cohortId, userId])
 }
 
 model Exam {

@@ -47,6 +47,21 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model EmailLog
+ * 
+ */
+export type EmailLog = Prisma.EmailLogModel
+/**
+ * Model Cohort
+ * 
+ */
+export type Cohort = Prisma.CohortModel
+/**
+ * Model CohortMember
+ * 
+ */
+export type CohortMember = Prisma.CohortMemberModel
+/**
  * Model Exam
  * 
  */

@@ -32,6 +32,7 @@ export default async function ExamsPage() {
               <Link
                 key={exam.id}
                 href={`/exams/${exam.id}`}
+                data-testid="exam-card"
                 className="bg-white rounded-3xl border-4 border-violet-200 hover:border-violet-400 shadow-lg p-6 block transition-all hover:shadow-xl"
               >
                 <h2 className="text-xl font-bold text-violet-700">{exam.name}</h2>

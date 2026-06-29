@@ -52,6 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  EmailLog: 'EmailLog',
+  Cohort: 'Cohort',
+  CohortMember: 'CohortMember',
   Exam: 'Exam',
   ChallengeSet: 'ChallengeSet',
   Question: 'Question',
@@ -82,11 +85,46 @@ export const UserScalarFieldEnum = {
   name: 'name',
   role: 'role',
   xp: 'xp',
+  leaderboardOptIn: 'leaderboardOptIn',
+  weeklyEmailOptIn: 'weeklyEmailOptIn',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const EmailLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  subject: 'subject',
+  body: 'body',
+  createdAt: 'createdAt'
+} as const
+
+export type EmailLogScalarFieldEnum = (typeof EmailLogScalarFieldEnum)[keyof typeof EmailLogScalarFieldEnum]
+
+
+export const CohortScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  code: 'code',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CohortScalarFieldEnum = (typeof CohortScalarFieldEnum)[keyof typeof CohortScalarFieldEnum]
+
+
+export const CohortMemberScalarFieldEnum = {
+  id: 'id',
+  cohortId: 'cohortId',
+  userId: 'userId',
+  joinedAt: 'joinedAt'
+} as const
+
+export type CohortMemberScalarFieldEnum = (typeof CohortMemberScalarFieldEnum)[keyof typeof CohortMemberScalarFieldEnum]
 
 
 export const ExamScalarFieldEnum = {
