@@ -20,6 +20,7 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 | 06 | [Admin Panel](.specclaw/changes/06-admin-panel/proposal.md) | 🟠 P1 | ✅ Done | 01, 02 |
 | 07 | [PWA Offline Support](.specclaw/changes/07-pwa-offline/proposal.md) | 🟠 P1 | ✅ Done | 03 |
 | 08 | [Docker + Caddy + Cloudflare Tunnel](.specclaw/changes/08-deployment/proposal.md) | 🟠 P1 | ✅ Done | 01 |
+| 09 | [System Deploy - podman + existing host caddy/cloudflared](.specclaw/changes/09-system-deploy-practice-site/proposal.md) | 🟠 P1 | ✅ Done | 01 |
 
 ---
 
