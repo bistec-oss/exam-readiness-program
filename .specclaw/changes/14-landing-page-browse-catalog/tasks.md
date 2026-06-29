@@ -149,13 +149,13 @@ test.describe("Landing page — public exam catalog", () => {
     expect(names.length).toBeGreaterThan(0);
   });
 
-  test("/ shows Sign in CTA for anonymous", async ({ page }) => {
+  test("/ shows Sign in + Register CTAs for anonymous", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("link", { name: /^Sign in$/ }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: /^Register$/ }).first()).toBeVisible();
   });
 
-  test("logged-in user sees dashboard link instead of Sign in", async ({ page }) => {
+  test("logged-in user sees Dashboard link instead of Sign in", async ({ page }) => {
     // Pre-seed: app/prisma/seed.ts creates candidate@bistecglobal.com / candidate123!
     await page.goto("/login");
     await page.getByLabel("Email").fill("candidate@bistecglobal.com");
