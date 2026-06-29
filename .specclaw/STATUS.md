@@ -1,7 +1,7 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-06-29 03:28 UTC
+**Last Updated:** 2026-06-29 06:01 UTC
 
 ## Active Changes
 
@@ -19,6 +19,7 @@
 - 📋 **06-admin-panel** — proposal ready, awaiting planning
 - 📋 **07-pwa-offline** — proposal ready, awaiting planning
 - 📋 **08-deployment** — proposal ready, awaiting planning
+- 📋 **09-system-deploy-practice-site** — proposal ready, awaiting planning
 
 ## Recently Completed
 

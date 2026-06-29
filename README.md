@@ -86,6 +86,75 @@ The app is now accessible at `https://exam.yourdomain.com` (via Cloudflare Tunne
 
 ---
 
+## System Deploy — practice.tecbizsolutions.com (no Docker)
+
+Use this when system Caddy and cloudflared are already installed on the server.
+App runs on port **3847** as a systemd service.
+
+### Architecture
+
+```
+Internet → cloudflared tunnel → Caddy (:80) → localhost:3847 (Next.js)
+```
+
+### 1. Clone the repo
+
+```bash
+git clone git@github.com:bistec-oss/exam-readiness-program.git /opt/exam-ready
+```
+
+### 2. One-time server setup (run as root)
+
+```bash
+cd /opt/exam-ready
+bash scripts/setup-server.sh
+```
+
+This creates:
+- PostgreSQL user + database `examready`
+- System user `exam-ready`
+- Systemd service `exam-ready.service`
+- Caddy site block at `/etc/caddy/conf.d/practice.tecbizsolutions.com.conf`
+- Env file template at `/etc/exam-ready.env`
+
+### 3. Configure environment
+
+```bash
+sudo nano /etc/exam-ready.env
+# Set DATABASE_URL password and confirm SESSION_SECRET
+```
+
+### 4. Configure cloudflared tunnel
+
+In your existing tunnel, add a Public Hostname:
+- **Hostname:** `practice.tecbizsolutions.com`
+- **Service:** `http://localhost:80` (Caddy)
+
+### 5. Deploy and seed
+
+```bash
+bash scripts/deploy.sh          # pull → install → migrate → build → restart
+cd /opt/exam-ready/app && npm run db:seed   # first time only
+```
+
+**Yes, there is a DB seed.** It creates:
+- The Claude Architect exam with 3 challenge sets and 20+ questions
+- Demo accounts: `admin@bistecglobal.com` / `admin123!` and `candidate@bistecglobal.com` / `candidate123!`
+
+### Re-deploy
+
+```bash
+cd /opt/exam-ready && bash scripts/deploy.sh
+```
+
+### Logs
+
+```bash
+journalctl -u exam-ready -f
+```
+
+---
+
 ## Running E2E Tests
 
 ```bash
