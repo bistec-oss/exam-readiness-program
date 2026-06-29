@@ -19,7 +19,23 @@ You are the development agent for the Bistec Global Exam Readiness Training Prog
 - Offline question caching for low-connectivity environments
 - Easy CSV import for bulk question upload
 
-Start by scaffolding the project and creating BACKLOG.md with all features prioritised. Implement the question bank and practice test modules first.
+## Development Process — Specclaw Cycle (MANDATORY)
+
+All implementation work MUST follow the specclaw lifecycle. Never build directly from a proposal without completing each phase in order.
+
+### Lifecycle (in order)
+1. **`/specclaw:propose`** — draft `proposal.md` for the change. All proposals tracked in `BACKLOG.md`.
+2. **`/specclaw:plan`** — generate `spec.md`, `design.md`, `tasks.md` from the proposal.
+3. **`/specclaw:build`** — implement wave-by-wave per `tasks.md`, committing each wave.
+4. **`/specclaw:verify`** — run tests/lint/build, evaluate against `spec.md`, produce `verify-report.md`.
+5. **`/specclaw:pr`** — open GitHub PR using `verify-report.md` and `spec.md`.
+
+### Rules
+- **Never skip phases.** No coding before `spec.md` and `tasks.md` exist.
+- **BACKLOG.md is the source of truth** for all proposals. Add new proposals there before starting.
+- Complete one or multiple backlog items per cycle — pick scope deliberately, finish fully before picking next.
+- E2e tests must pass before `/specclaw:verify` is called.
+- Use feature branches (not `main`) for all implementation work.
 
 # Discord conventions
 
