@@ -96,8 +96,8 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 | ✅ Additional exam catalogs | AWS SAA, Azure AZ-900, Scrum PSM-I |
 | ✅ Leaderboard | Opt-in XP ranking within cohort. `/leaderboard` page + `GET /api/leaderboard` (cohort-scoped, opted-in only), opt-in toggle via `PATCH /api/me/preferences` |
 | ✅ Email notifications | Weekly readiness summary email. Admin `POST /api/notifications/weekly` generates per-user summaries (persisted to `EmailLog`), candidate inbox at `/settings` + `GET /api/notifications`, opt-out via `PATCH /api/me/preferences` |
-| CI/CD pipeline | GitHub Actions → Docker Hub → self-hosted deploy |
-| User management (admin) | Invite, suspend, role-change |
+| ✅ CI/CD pipeline | GitHub Actions (`.github/workflows/ci-cd.yml`): lint+build+e2e → build & push image to Docker Hub → SSH deploy to self-hosted host. Gated jobs, deploy on main push only |
+| ✅ User management (admin) | `/admin/users` page + `/api/admin/users` (list/invite) + `PATCH /api/admin/users/[id]` (role-change, suspend/reactivate). Invite returns temp password; suspended users blocked at login; self-lockout guard |
 
 ---
 

@@ -1,24 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { registerOnlineSync } from "@/lib/syncAttempts";
 
-export default function OfflineIndicator() {
-  const [online, setOnline] = useState(true);
+function subscribeOnline(callback: () => void) {
+  window.addEventListener("online", callback);
+  window.addEventListener("offline", callback);
+  return () => {
+    window.removeEventListener("online", callback);
+    window.removeEventListener("offline", callback);
+  };
+}
 
-  useEffect(() => {
-    setOnline(navigator.onLine);
-    const handleOnline = () => setOnline(true);
-    const handleOffline = () => setOnline(false);
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-    const unregisterSync = registerOnlineSync();
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-      unregisterSync();
-    };
-  }, []);
+export default function OfflineIndicator() {
+  // useSyncExternalStore reads browser online state without a setState-in-effect,
+  // and returns true during SSR so first paint matches the server.
+  const online = useSyncExternalStore(
+    subscribeOnline,
+    () => navigator.onLine,
+    () => true,
+  );
+
+  useEffect(() => registerOnlineSync(), []);
 
   if (online) return null;
 

@@ -40,6 +40,7 @@ export type UserMinAggregateOutputType = {
   passwordHash: string | null
   name: string | null
   role: $Enums.Role | null
+  status: $Enums.UserStatus | null
   xp: number | null
   leaderboardOptIn: boolean | null
   weeklyEmailOptIn: boolean | null
@@ -53,6 +54,7 @@ export type UserMaxAggregateOutputType = {
   passwordHash: string | null
   name: string | null
   role: $Enums.Role | null
+  status: $Enums.UserStatus | null
   xp: number | null
   leaderboardOptIn: boolean | null
   weeklyEmailOptIn: boolean | null
@@ -66,6 +68,7 @@ export type UserCountAggregateOutputType = {
   passwordHash: number
   name: number
   role: number
+  status: number
   xp: number
   leaderboardOptIn: number
   weeklyEmailOptIn: number
@@ -89,6 +92,7 @@ export type UserMinAggregateInputType = {
   passwordHash?: true
   name?: true
   role?: true
+  status?: true
   xp?: true
   leaderboardOptIn?: true
   weeklyEmailOptIn?: true
@@ -102,6 +106,7 @@ export type UserMaxAggregateInputType = {
   passwordHash?: true
   name?: true
   role?: true
+  status?: true
   xp?: true
   leaderboardOptIn?: true
   weeklyEmailOptIn?: true
@@ -115,6 +120,7 @@ export type UserCountAggregateInputType = {
   passwordHash?: true
   name?: true
   role?: true
+  status?: true
   xp?: true
   leaderboardOptIn?: true
   weeklyEmailOptIn?: true
@@ -215,6 +221,7 @@ export type UserGroupByOutputType = {
   passwordHash: string
   name: string
   role: $Enums.Role
+  status: $Enums.UserStatus
   xp: number
   leaderboardOptIn: boolean
   weeklyEmailOptIn: boolean
@@ -251,6 +258,7 @@ export type UserWhereInput = {
   passwordHash?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   xp?: Prisma.IntFilter<"User"> | number
   leaderboardOptIn?: Prisma.BoolFilter<"User"> | boolean
   weeklyEmailOptIn?: Prisma.BoolFilter<"User"> | boolean
@@ -268,6 +276,7 @@ export type UserOrderByWithRelationInput = {
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   leaderboardOptIn?: Prisma.SortOrder
   weeklyEmailOptIn?: Prisma.SortOrder
@@ -288,6 +297,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordHash?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   xp?: Prisma.IntFilter<"User"> | number
   leaderboardOptIn?: Prisma.BoolFilter<"User"> | boolean
   weeklyEmailOptIn?: Prisma.BoolFilter<"User"> | boolean
@@ -305,6 +315,7 @@ export type UserOrderByWithAggregationInput = {
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   leaderboardOptIn?: Prisma.SortOrder
   weeklyEmailOptIn?: Prisma.SortOrder
@@ -326,6 +337,7 @@ export type UserScalarWhereWithAggregatesInput = {
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+  status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
   xp?: Prisma.IntWithAggregatesFilter<"User"> | number
   leaderboardOptIn?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   weeklyEmailOptIn?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
@@ -339,6 +351,7 @@ export type UserCreateInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -356,6 +369,7 @@ export type UserUncheckedCreateInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -373,6 +387,7 @@ export type UserUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -390,6 +405,7 @@ export type UserUncheckedUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -407,6 +423,7 @@ export type UserCreateManyInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -420,6 +437,7 @@ export type UserUpdateManyMutationInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -433,6 +451,7 @@ export type UserUncheckedUpdateManyInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -446,6 +465,7 @@ export type UserCountOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   leaderboardOptIn?: Prisma.SortOrder
   weeklyEmailOptIn?: Prisma.SortOrder
@@ -463,6 +483,7 @@ export type UserMaxOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   leaderboardOptIn?: Prisma.SortOrder
   weeklyEmailOptIn?: Prisma.SortOrder
@@ -476,6 +497,7 @@ export type UserMinOrderByAggregateInput = {
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   leaderboardOptIn?: Prisma.SortOrder
   weeklyEmailOptIn?: Prisma.SortOrder
@@ -498,6 +520,10 @@ export type StringFieldUpdateOperationsInput = {
 
 export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
+}
+
+export type EnumUserStatusFieldUpdateOperationsInput = {
+  set?: $Enums.UserStatus
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -578,6 +604,7 @@ export type UserCreateWithoutEmailLogsInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -594,6 +621,7 @@ export type UserUncheckedCreateWithoutEmailLogsInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -626,6 +654,7 @@ export type UserUpdateWithoutEmailLogsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -642,6 +671,7 @@ export type UserUncheckedUpdateWithoutEmailLogsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -658,6 +688,7 @@ export type UserCreateWithoutCohortMembersInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -674,6 +705,7 @@ export type UserUncheckedCreateWithoutCohortMembersInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -706,6 +738,7 @@ export type UserUpdateWithoutCohortMembersInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -722,6 +755,7 @@ export type UserUncheckedUpdateWithoutCohortMembersInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -738,6 +772,7 @@ export type UserCreateWithoutAttemptsInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -754,6 +789,7 @@ export type UserUncheckedCreateWithoutAttemptsInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -786,6 +822,7 @@ export type UserUpdateWithoutAttemptsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -802,6 +839,7 @@ export type UserUncheckedUpdateWithoutAttemptsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -818,6 +856,7 @@ export type UserCreateWithoutMockAttemptsInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -834,6 +873,7 @@ export type UserUncheckedCreateWithoutMockAttemptsInput = {
   passwordHash: string
   name: string
   role?: $Enums.Role
+  status?: $Enums.UserStatus
   xp?: number
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -866,6 +906,7 @@ export type UserUpdateWithoutMockAttemptsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -882,6 +923,7 @@ export type UserUncheckedUpdateWithoutMockAttemptsInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   leaderboardOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
   weeklyEmailOptIn?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -956,6 +998,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordHash?: boolean
   name?: boolean
   role?: boolean
+  status?: boolean
   xp?: boolean
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -974,6 +1017,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   passwordHash?: boolean
   name?: boolean
   role?: boolean
+  status?: boolean
   xp?: boolean
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -987,6 +1031,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   passwordHash?: boolean
   name?: boolean
   role?: boolean
+  status?: boolean
   xp?: boolean
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -1000,6 +1045,7 @@ export type UserSelectScalar = {
   passwordHash?: boolean
   name?: boolean
   role?: boolean
+  status?: boolean
   xp?: boolean
   leaderboardOptIn?: boolean
   weeklyEmailOptIn?: boolean
@@ -1007,7 +1053,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "role" | "xp" | "leaderboardOptIn" | "weeklyEmailOptIn" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "role" | "status" | "xp" | "leaderboardOptIn" | "weeklyEmailOptIn" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attempts?: boolean | Prisma.User$attemptsArgs<ExtArgs>
   mockAttempts?: boolean | Prisma.User$mockAttemptsArgs<ExtArgs>
@@ -1032,6 +1078,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passwordHash: string
     name: string
     role: $Enums.Role
+    status: $Enums.UserStatus
     xp: number
     leaderboardOptIn: boolean
     weeklyEmailOptIn: boolean
@@ -1469,6 +1516,7 @@ export interface UserFieldRefs {
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly role: Prisma.FieldRef<"User", 'Role'>
+  readonly status: Prisma.FieldRef<"User", 'UserStatus'>
   readonly xp: Prisma.FieldRef<"User", 'Int'>
   readonly leaderboardOptIn: Prisma.FieldRef<"User", 'Boolean'>
   readonly weeklyEmailOptIn: Prisma.FieldRef<"User", 'Boolean'>
