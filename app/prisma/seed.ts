@@ -781,6 +781,607 @@ async function main() {
         },
       ],
     },
+    // ── Practice Set B: additional synthetic questions per domain ──────────────
+    {
+      id: "cca-d1b-agentic-orchestration",
+      title: "Domain 1 · Agentic Architecture & Orchestration — Practice Set B",
+      topic: "Agentic Orchestration",
+      xpReward: 80,
+      questions: [
+        {
+          id: "cca-d1b-q1",
+          text: "Different MCP tools return timestamps in incompatible formats (Unix epoch, ISO 8601, numeric status codes), confusing the agent's reasoning. Which Agent SDK mechanism best normalizes these before the model sees them?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "A PostToolUse hook that transforms tool results into a consistent format before the model processes them" },
+            { id: "b", text: "A longer system prompt instructing the model to mentally convert formats" },
+            { id: "c", text: "Raising max_tokens so the model has room to reason about formats" },
+            { id: "d", text: "Asking each tool's owner to standardize, with no code change on your side" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "PostToolUse hooks intercept tool results for transformation before the model processes them — ideal for normalizing heterogeneous formats (Unix vs ISO 8601 vs numeric codes). Prompt instructions (B) are probabilistic, token limits (C) are irrelevant, and (D) isn't always possible.",
+        },
+        {
+          id: "cca-d1b-q2",
+          text: "Policy says refunds above $500 require human approval. Relying on the system prompt, the agent still occasionally issues larger refunds. What gives a deterministic guarantee?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "A tool-call interception hook that blocks process_refund above $500 and redirects to human escalation" },
+            { id: "b", text: "A stronger system-prompt warning in bold text" },
+            { id: "c", text: "Few-shot examples of correctly declining large refunds" },
+            { id: "d", text: "Lowering temperature so the model follows the policy more reliably" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "When business rules require guaranteed compliance, use hooks over prompt-based enforcement. A tool-call interception hook can deterministically block policy-violating actions (refunds > $500) and redirect. Prompt warnings, few-shot, and temperature are all probabilistic.",
+        },
+        {
+          id: "cca-d1b-q3",
+          text: "Your support agent escalates a case to a human who has no access to the conversation transcript. What should the agent compile to make the handoff effective?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "A link to the raw model logs" },
+            { id: "b", text: "A structured handoff summary: customer ID, root-cause analysis, refund amount, and recommended action" },
+            { id: "c", text: "Just the customer's last message" },
+            { id: "d", text: "A confidence score for the escalation decision" },
+          ],
+          correctOptionId: "b",
+          explanation:
+            "Mid-process escalation needs a structured handoff (customer ID, root cause, refund amount, recommended action) because the human agent lacks the conversation transcript. Raw logs, a single message, or a confidence score don't convey the actionable case state.",
+        },
+        {
+          id: "cca-d1b-q4",
+          text: "You want to compare two refactoring approaches that both start from the same completed codebase analysis, without re-running the analysis. Which session mechanism fits?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "fork_session to create independent branches from the shared analysis baseline" },
+            { id: "b", text: "--resume on the same named session for both approaches sequentially" },
+            { id: "c", text: "Start two fresh sessions and re-run the analysis in each" },
+            { id: "d", text: "Use /compact to split the session in two" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "fork_session creates independent branches from a shared baseline, ideal for exploring divergent approaches (e.g., two refactoring strategies) without redoing the analysis. Resuming the same session (B) entangles the branches, fresh sessions (C) waste the analysis, and /compact (D) only reduces context.",
+        },
+        {
+          id: "cca-d1b-q5",
+          text: "A research coordinator always routes every query through its full pipeline (search → analyze → synthesize → report) even for simple lookups, wasting time. What's the better coordinator design?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Have the coordinator analyze query requirements and dynamically select which subagents to invoke" },
+            { id: "b", text: "Hard-code the four-stage pipeline but run the stages in parallel" },
+            { id: "c", text: "Give every subagent all tools so any one can answer simple queries alone" },
+            { id: "d", text: "Skip the coordinator and let subagents call each other directly" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "A good coordinator decomposes the task and dynamically selects which subagents to invoke based on query complexity, rather than always routing through the full pipeline. Parallelizing a fixed pipeline (B) still over-processes, over-provisioning tools (C) invites misuse, and removing the coordinator (D) loses observability and controlled flow.",
+        },
+        {
+          id: "cca-d1b-q6",
+          text: "For an automated code review, you want predictable, repeatable coverage of multiple aspects. For an open-ended 'add comprehensive tests to a legacy codebase' task, the right subtasks aren't known up front. How should you choose a decomposition strategy?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use prompt chaining (fixed sequential passes) for the predictable review; use dynamic, adaptive decomposition for the open-ended testing task" },
+            { id: "b", text: "Use dynamic decomposition for both, since it is always more thorough" },
+            { id: "c", text: "Use a single mega-prompt for both to keep everything in one context" },
+            { id: "d", text: "Use fixed prompt chaining for both for consistency" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Match decomposition to the workflow: prompt chaining (fixed sequential steps) suits predictable, multi-aspect reviews; dynamic adaptive decomposition suits open-ended investigation where subtasks emerge from discoveries. Neither pattern fits both cases (B, D), and a single mega-prompt (C) dilutes attention.",
+        },
+        {
+          id: "cca-d1b-q7",
+          text: "After a synthesis pass, the coordinator notices the report has gaps in certain subtopics. What is the recommended orchestration response?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Run an iterative refinement loop: re-delegate targeted queries to search/analysis subagents, then re-invoke synthesis until coverage is sufficient" },
+            { id: "b", text: "Ship the report as-is and note it may be incomplete" },
+            { id: "c", text: "Restart the whole pipeline from scratch with the same query" },
+            { id: "d", text: "Increase max_tokens on the synthesis agent and rerun once" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "The coordinator should evaluate synthesis output for gaps and iteratively re-delegate targeted queries, re-invoking synthesis until coverage is sufficient. Shipping gaps (B), a blind full restart (C), or merely raising token limits (D) don't close the specific coverage gaps.",
+        },
+        {
+          id: "cca-d1b-q8",
+          text: "Two subagents are assigned overlapping research scope and return largely duplicate findings. What coordinator practice minimizes this duplication?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Partition research scope across subagents (distinct subtopics or source types per agent)" },
+            { id: "b", text: "Let both cover everything and deduplicate the merged output afterward" },
+            { id: "c", text: "Reduce the number of subagents to one to avoid overlap" },
+            { id: "d", text: "Have subagents share memory so they see each other's results live" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Partitioning scope — assigning distinct subtopics or source types to each subagent — minimizes duplication at the source. Post-hoc dedup (B) wastes work, collapsing to one agent (C) loses parallel coverage, and subagents don't share live memory (D).",
+        },
+      ],
+    },
+    {
+      id: "cca-d2b-tool-mcp",
+      title: "Domain 2 · Tool Design & MCP Integration — Practice Set B",
+      topic: "Tool & MCP Design",
+      xpReward: 80,
+      questions: [
+        {
+          id: "cca-d2b-q1",
+          text: "Your agent frequently misroutes between analyze_content and analyze_document, which have near-identical descriptions. Beyond expanding descriptions, what refactor most directly removes the ambiguity?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Rename and re-scope the tools to eliminate functional overlap (e.g., analyze_content → extract_web_results with a web-specific description)" },
+            { id: "b", text: "Keep both names but route by a keyword in the system prompt" },
+            { id: "c", text: "Delete analyze_document and force everything through analyze_content" },
+            { id: "d", text: "Lower the temperature so the model picks more deterministically" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Renaming and re-scoping to eliminate overlap (e.g., extract_web_results with a web-specific description) removes the root cause of misrouting. Keyword routing (B) is fragile, deleting a needed capability (C) loses function, and temperature (D) doesn't fix ambiguous descriptions.",
+        },
+        {
+          id: "cca-d2b-q2",
+          text: "A generic analyze_document tool tries to do extraction, summarization, and claim-verification, and the agent uses it inconsistently. What's the recommended design move?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Split it into purpose-specific tools with defined I/O contracts (extract_data_points, summarize_content, verify_claim_against_source)" },
+            { id: "b", text: "Add a 'mode' string parameter to the single tool" },
+            { id: "c", text: "Document the three uses in the system prompt instead of the tool" },
+            { id: "d", text: "Force tool_choice to this tool on every call" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Splitting a generic tool into purpose-specific tools with clear input/output contracts improves selection reliability. A mode flag (B) keeps the overload, prompt documentation (C) doesn't change the tool surface, and forcing the tool (D) doesn't clarify which job it should do.",
+        },
+        {
+          id: "cca-d2b-q3",
+          text: "An MCP tool hits a policy violation (the requested action isn't allowed). How should the failure be represented so the agent communicates correctly and doesn't waste retries?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Return a business error with retriable: false and a customer-friendly explanation" },
+            { id: "b", text: "Return a transient error so the agent retries automatically" },
+            { id: "c", text: "Return isError without any category so the agent decides" },
+            { id: "d", text: "Return an empty success result" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Business-rule violations are non-retryable; returning retriable: false plus a customer-friendly explanation lets the agent communicate appropriately and avoid wasted retries. Marking it transient (B) causes pointless retries, an uncategorized error (C) gives the agent too little, and empty success (D) hides the failure.",
+        },
+        {
+          id: "cca-d2b-q4",
+          text: "Agents waste many exploratory tool calls discovering what issue summaries, doc hierarchies, and DB schemas exist. Which MCP feature best exposes these catalogs to reduce that exploration?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "MCP resources, which expose content catalogs the agent can see without exploratory tool calls" },
+            { id: "b", text: "More MCP tools, one per catalog item" },
+            { id: "c", text: "A bigger system prompt listing everything manually" },
+            { id: "d", text: "Forcing tool_choice: \"any\" to make the agent call tools faster" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "MCP resources expose content catalogs (issue summaries, documentation hierarchies, database schemas), giving agents visibility into available data without exploratory tool calls. Tools-per-item (B) explodes the tool set, manual prompt listings (C) go stale, and tool_choice (D) doesn't expose catalogs.",
+        },
+        {
+          id: "cca-d2b-q5",
+          text: "Your agent keeps preferring the built-in Grep over a more capable custom MCP code-search tool. What's the most effective fix?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Enhance the MCP tool's description to explain its capabilities and outputs in detail so the agent prefers it when appropriate" },
+            { id: "b", text: "Remove Grep from the agent's allowed tools entirely" },
+            { id: "c", text: "Rename the MCP tool to 'grep2'" },
+            { id: "d", text: "Force tool_choice to the MCP tool on every search" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Agents pick tools by description; enhancing the MCP tool's description to detail its capabilities/outputs makes the agent prefer it over built-ins like Grep when appropriate. Removing Grep (B) loses a useful tool, renaming (C) doesn't add information, and forcing it always (D) is too blunt.",
+        },
+        {
+          id: "cca-d2b-q6",
+          text: "You need standard Jira integration for your agents. Build a custom MCP server or use an existing community one?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use an existing community MCP server for the standard Jira integration; reserve custom servers for team-specific workflows" },
+            { id: "b", text: "Always build custom servers for full control" },
+            { id: "c", text: "Avoid MCP and call the Jira REST API directly from the system prompt" },
+            { id: "d", text: "Build a custom server and never use community servers for security" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "For standard integrations like Jira, prefer existing community MCP servers and reserve custom implementations for team-specific workflows. Always-custom (B, D) wastes effort, and you can't call REST APIs from a prompt (C).",
+        },
+        {
+          id: "cca-d2b-q7",
+          text: "You try to use Edit to change a line of code, but the anchor text appears multiple times and Edit can't find a unique match. What's the reliable fallback?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use Read to load the full file, then Write the modified contents" },
+            { id: "b", text: "Use Glob to locate the line and edit it" },
+            { id: "c", text: "Use Bash sed to force the edit regardless of uniqueness" },
+            { id: "d", text: "Use Grep to replace the matching text in place" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "When Edit fails due to non-unique text, Read + Write is the reliable fallback for file modification. Glob (B) finds files by name, Grep (D) searches content (it doesn't edit), and ad-hoc sed (C) is error-prone and not the recommended built-in flow.",
+        },
+        {
+          id: "cca-d2b-q8",
+          text: "An enrichment pipeline must always run extract_metadata before any enrichment tools. How do you guarantee metadata extraction happens first?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use forced tool selection (tool_choice: {\"type\": \"tool\", \"name\": \"extract_metadata\"}) to call it first, then process subsequent steps in follow-up turns" },
+            { id: "b", text: "Set tool_choice: \"auto\" and hope the model orders correctly" },
+            { id: "c", text: "List extract_metadata first in the tools array" },
+            { id: "d", text: "Mention the ordering in the system prompt only" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Forced tool selection guarantees a specific tool (extract_metadata) is called first; subsequent steps proceed in follow-up turns. \"auto\" (B) and prompt-only ordering (D) are probabilistic, and array ordering (C) doesn't force call order.",
+        },
+      ],
+    },
+    {
+      id: "cca-d3b-claude-code",
+      title: "Domain 3 · Claude Code Configuration & Workflows — Practice Set B",
+      topic: "Claude Code Workflows",
+      xpReward: 80,
+      questions: [
+        {
+          id: "cca-d3b-q1",
+          text: "A monorepo's root CLAUDE.md has grown huge, mixing standards for many packages. You want each package to pull in only the standards relevant to it. Which approach keeps CLAUDE.md modular?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use the @import syntax to reference external standards files, including only the relevant ones in each package's CLAUDE.md" },
+            { id: "b", text: "Duplicate the full root CLAUDE.md into every package" },
+            { id: "c", text: "Delete the root CLAUDE.md and rely on memory" },
+            { id: "d", text: "Move everything into a single SKILL.md" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "@import lets CLAUDE.md reference external files so each package includes only relevant standards, keeping configuration modular. Duplication (B) creates drift, deleting (C) loses standards, and one SKILL.md (D) is for on-demand workflows, not always-loaded standards.",
+        },
+        {
+          id: "cca-d3b-q2",
+          text: "Sessions behave inconsistently and you suspect the wrong memory files are loaded. Which command verifies which memory/config files are active?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "/memory" },
+            { id: "b", text: "/compact" },
+            { id: "c", text: "--resume" },
+            { id: "d", text: "/clear" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "/memory shows which memory files are loaded, helping diagnose inconsistent behavior across sessions. /compact reduces context, --resume continues a session, and /clear resets — none report loaded memory files.",
+        },
+        {
+          id: "cca-d3b-q3",
+          text: "A codebase-analysis skill produces very verbose output that pollutes the main conversation. Which SKILL.md frontmatter option runs it in isolation so only a summary returns?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "context: fork" },
+            { id: "b", text: "allowed-tools" },
+            { id: "c", text: "argument-hint" },
+            { id: "d", text: "model: opus" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "context: fork runs a skill in an isolated sub-agent context, preventing verbose output from polluting the main conversation. allowed-tools restricts tools, argument-hint prompts for parameters, and a model field doesn't isolate context.",
+        },
+        {
+          id: "cca-d3b-q4",
+          text: "You want a destructive-cleanup skill to only ever write files, never run shell commands. Which frontmatter field enforces that during skill execution?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "allowed-tools, restricting the skill to file-write operations" },
+            { id: "b", text: "context: fork" },
+            { id: "c", text: "argument-hint" },
+            { id: "d", text: "A note in the skill body asking Claude not to use Bash" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "allowed-tools in skill frontmatter restricts tool access during execution (e.g., limiting to file writes to prevent destructive shell actions). context: fork isolates context, argument-hint prompts for args, and a prose note (D) is not enforced.",
+        },
+        {
+          id: "cca-d3b-q5",
+          text: "When does a project benefit from a Skill versus putting the guidance in CLAUDE.md?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Skills for on-demand, task-specific workflows; CLAUDE.md for always-loaded universal standards" },
+            { id: "b", text: "Skills for universal standards; CLAUDE.md for one-off tasks" },
+            { id: "c", text: "They are interchangeable; use whichever is shorter" },
+            { id: "d", text: "Always use skills because CLAUDE.md is deprecated" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Skills are invoked on demand for task-specific workflows; CLAUDE.md holds always-loaded universal standards. The roles are not interchangeable (C), not reversed (B), and CLAUDE.md is not deprecated (D).",
+        },
+        {
+          id: "cca-d3b-q6",
+          text: "You have a single-file bug with a clear stack trace pointing at one function. Plan mode or direct execution?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Direct execution — the change is well-scoped and understood" },
+            { id: "b", text: "Plan mode — every change should be planned first" },
+            { id: "c", text: "Plan mode — single-file changes are deceptively complex" },
+            { id: "d", text: "Neither; ask a human to fix it" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Direct execution suits simple, well-scoped, well-understood changes like a single-file bug fix with a clear stack trace. Plan mode is for large-scale, multi-approach, architectural work — overkill here.",
+        },
+        {
+          id: "cca-d3b-q7",
+          text: "Before implementing a caching layer in an unfamiliar domain, you want Claude to surface considerations you might miss (invalidation strategy, failure modes). Which technique fits?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "The interview pattern — have Claude ask questions to surface considerations before implementing" },
+            { id: "b", text: "Immediately generate the full implementation and fix issues later" },
+            { id: "c", text: "Lower temperature for a more careful first draft" },
+            { id: "d", text: "Provide no context and let Claude infer the design" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "The interview pattern has Claude ask questions to surface design considerations (cache invalidation, failure modes) before implementing in an unfamiliar domain. Jumping to code (B), temperature (C), or withholding context (D) don't surface unknowns proactively.",
+        },
+        {
+          id: "cca-d3b-q8",
+          text: "Your CI re-runs a review after each new commit, but it keeps re-posting the same comments. What instruction reduces duplicate feedback?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Include prior review findings in context and instruct Claude to report only new or still-unaddressed issues" },
+            { id: "b", text: "Run the review with a fresh, larger model each time" },
+            { id: "c", text: "Disable reviews after the first commit" },
+            { id: "d", text: "Increase max_tokens so the model writes fewer comments" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Passing prior findings into context and instructing Claude to report only new or still-unaddressed issues avoids duplicate comments across re-runs. A bigger model (B), disabling reviews (C), or token limits (D) don't address duplication.",
+        },
+      ],
+    },
+    {
+      id: "cca-d4b-prompt-structured-output",
+      title: "Domain 4 · Prompt Engineering & Structured Output — Practice Set B",
+      topic: "Prompt & Structured Output",
+      xpReward: 80,
+      questions: [
+        {
+          id: "cca-d4b-q1",
+          text: "Your extraction schema must categorize documents, but new categories appear over time and some documents are ambiguous. How should you design the category field?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use an enum with an \"other\" + detail-string pattern (and an \"unclear\" value) so new and ambiguous cases are captured without forcing a wrong choice" },
+            { id: "b", text: "Use a fixed enum with only the categories known today" },
+            { id: "c", text: "Use a free-text string with no enum" },
+            { id: "d", text: "Require the model to always pick the closest existing category" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "An enum with \"other\" + detail and an \"unclear\" value handles extensible categories and ambiguity without forcing a wrong selection. A fixed enum (B, D) misclassifies novel/ambiguous cases, and free text (C) loses structure.",
+        },
+        {
+          id: "cca-d4b-q2",
+          text: "You enforce output with a strict JSON schema via tool use, yet invoices still come back where line items don't sum to the stated total. Why, and what helps detect it?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Strict schemas eliminate syntax errors but not semantic ones; extract calculated_total alongside stated_total and flag discrepancies" },
+            { id: "b", text: "The schema is malformed; rewrite it and the math will be correct" },
+            { id: "c", text: "Lower temperature to make arithmetic deterministic" },
+            { id: "d", text: "Switch off tool use and parse free text instead" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Tool-use schemas guarantee syntactic validity, not semantic correctness (e.g., sums). Extracting calculated_total alongside stated_total (and conflict_detected flags) surfaces discrepancies. A schema rewrite (B) or temperature (C) won't enforce arithmetic, and dropping tool use (D) reintroduces syntax errors.",
+        },
+        {
+          id: "cca-d4b-q3",
+          text: "An extraction repeatedly fails validation because a required field is simply absent from the source document. Will a retry-with-error-feedback loop fix it?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "No — retries help with format/structural errors, but not when the information is genuinely absent from the source; make the field nullable or route to human review" },
+            { id: "b", text: "Yes — retrying always eventually extracts the value" },
+            { id: "c", text: "Yes — if you raise the temperature on each retry" },
+            { id: "d", text: "Yes — add more required fields to pressure the model" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Retries are effective for format/structural errors but ineffective when the required information isn't present in the source. The right move is to allow null (optional field) or route to human review, not to keep retrying (B–D), which risks fabrication.",
+        },
+        {
+          id: "cca-d4b-q4",
+          text: "When an extraction does fail on a fixable format error, what is the most effective retry strategy?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Send a follow-up request including the original document, the failed extraction, and the specific validation errors for self-correction" },
+            { id: "b", text: "Resend the identical prompt unchanged" },
+            { id: "c", text: "Truncate the document to make it simpler" },
+            { id: "d", text: "Switch models and hope for a better result" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Retry-with-error-feedback — appending the document, the failed extraction, and the specific validation errors — guides the model toward correction. Resending unchanged (B), truncating (C), or model-swapping (D) don't communicate what to fix.",
+        },
+        {
+          id: "cca-d4b-q5",
+          text: "You must process 100 latency-tolerant documents overnight at lower cost, with the ability to identify and resubmit any that fail. Which approach fits, and how do you correlate results?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use the Message Batches API (50% cheaper, up to 24h) and correlate request/response pairs via custom_id, resubmitting only failed ids" },
+            { id: "b", text: "Use synchronous calls in a tight loop and rely on response order" },
+            { id: "c", text: "Use the batch API but expect multi-turn tool calling within each request" },
+            { id: "d", text: "Submit all 100 in one giant prompt" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Latency-tolerant overnight work fits the Batches API (50% savings, up to 24h, no SLA); custom_id correlates request/response pairs and identifies failures to resubmit. Note batch doesn't support multi-turn tool calling (C). Sync loops (B) and one mega-prompt (D) don't fit the goal.",
+        },
+        {
+          id: "cca-d4b-q6",
+          text: "You're about to batch-process 10,000 documents. What reduces costly iterative resubmission?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Refine the prompt on a small sample set first to maximize first-pass success before processing the full volume" },
+            { id: "b", text: "Submit all 10,000 immediately and fix problems as they appear" },
+            { id: "c", text: "Use the largest model regardless of cost" },
+            { id: "d", text: "Disable schema validation to avoid failures" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Refining the prompt on a sample before processing large volumes maximizes first-pass success and reduces resubmission costs. Blind full submission (B) multiplies failures, model size (C) doesn't fix prompt issues, and disabling validation (D) hides errors.",
+        },
+        {
+          id: "cca-d4b-q7",
+          text: "The same Claude session that generated a module is asked to review it and misses subtle bugs. What review architecture catches more issues?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Use a second, independent Claude instance without the generator's reasoning context to review the code" },
+            { id: "b", text: "Add 'please review carefully' to the same session" },
+            { id: "c", text: "Enable extended thinking in the same session" },
+            { id: "d", text: "Re-run the same session twice and diff the outputs" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "A model retains reasoning context from generation and is less likely to question its own decisions; an independent review instance (without that context) catches subtle issues better than self-review instructions or extended thinking in the same session.",
+        },
+        {
+          id: "cca-d4b-q8",
+          text: "One review category (style nitpicks) has a high false-positive rate that's eroding trust in the otherwise-accurate categories. What's a reasonable interim action?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Temporarily disable the high false-positive category to restore trust while you improve its prompt and criteria" },
+            { id: "b", text: "Keep it on; developers should ignore the bad comments" },
+            { id: "c", text: "Disable all review categories until every prompt is perfect" },
+            { id: "d", text: "Raise the model's temperature for that category" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "High false-positive categories undermine trust in accurate ones; temporarily disabling the offending category restores trust while you refine its criteria. Leaving it on (B) keeps eroding trust, disabling everything (C) is overkill, and temperature (D) doesn't improve precision.",
+        },
+      ],
+    },
+    {
+      id: "cca-d5b-context-reliability",
+      title: "Domain 5 · Context Management & Reliability — Practice Set B",
+      topic: "Context & Reliability",
+      xpReward: 80,
+      questions: [
+        {
+          id: "cca-d5b-q1",
+          text: "In a long support conversation, progressive summarization keeps blurring exact amounts, dates, and order numbers the customer stated. How do you preserve these critical facts?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Extract transactional facts into a persistent 'case facts' block included in each prompt, outside the summarized history" },
+            { id: "b", text: "Summarize more aggressively to save tokens" },
+            { id: "c", text: "Stop passing conversation history entirely" },
+            { id: "d", text: "Trust the model to remember the numbers" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "A persistent 'case facts' block (amounts, dates, order numbers, statuses) included in every prompt — outside summarized history — protects critical values from being blurred by progressive summarization. More summarization (B) worsens it, dropping history (C) breaks coherence, and relying on memory (D) is unreliable.",
+        },
+        {
+          id: "cca-d5b-q2",
+          text: "A get_customer lookup returns two customers matching the provided name. What should the agent do?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Ask the customer for an additional identifier to disambiguate, rather than selecting one heuristically" },
+            { id: "b", text: "Pick the most recently active account" },
+            { id: "c", text: "Pick the first match returned" },
+            { id: "d", text: "Escalate to a human immediately" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Multiple matches require clarification — request an additional identifier rather than heuristic selection (B, C), which risks acting on the wrong account. Immediate escalation (D) is unnecessary when a simple disambiguating question resolves it.",
+        },
+        {
+          id: "cca-d5b-q3",
+          text: "A customer asks for a competitor price match. Your policy only addresses adjustments on your own site and is silent on competitor matching. What's the correct behavior?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Escalate, because the policy is ambiguous/silent on this specific request" },
+            { id: "b", text: "Deny it outright since policy doesn't mention it" },
+            { id: "c", text: "Approve it to satisfy the customer" },
+            { id: "d", text: "Ask the customer to interpret the policy for you" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Policy gaps/ambiguity are valid escalation triggers — when policy is silent on the specific request (competitor matching), escalate rather than inventing a denial (B) or approval (C). Asking the customer to interpret policy (D) is inappropriate.",
+        },
+        {
+          id: "cca-d5b-q4",
+          text: "A synthesis report must make clear which conclusions are solid and which areas lacked sources. What should the synthesis output include?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Coverage annotations indicating which findings are well-supported versus which topic areas have gaps due to unavailable sources" },
+            { id: "b", text: "Only the well-supported findings, omitting any mention of gaps" },
+            { id: "c", text: "A single overall confidence percentage for the whole report" },
+            { id: "d", text: "Raw tool logs appended at the end" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Synthesis output should carry coverage annotations distinguishing well-supported findings from topic areas with gaps due to unavailable sources. Omitting gaps (B) misleads, a single aggregate score (C) hides where the weaknesses are, and raw logs (D) aren't actionable.",
+        },
+        {
+          id: "cca-d5b-q5",
+          text: "During a long, multi-agent exploration you want resilience to crashes so work can resume without re-exploring everything. What design supports this?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Have each agent export structured state to a known location; the coordinator loads a manifest on resume and injects it into agent prompts" },
+            { id: "b", text: "Keep all state only in the live conversation context" },
+            { id: "c", text: "Raise max_tokens so nothing is forgotten" },
+            { id: "d", text: "Restart from scratch after any crash" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Structured state exports plus a coordinator-loaded manifest enable crash recovery — agents resume from persisted state rather than re-exploring. Live-context-only (B) is lost on crash, token limits (C) don't persist state, and full restarts (D) waste work.",
+        },
+        {
+          id: "cca-d5b-q6",
+          text: "An extraction system reports 97% aggregate accuracy, and the team wants to reduce human review. What must you check before trusting that number?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Analyze accuracy by document type and field — aggregate metrics can mask poor performance on specific segments" },
+            { id: "b", text: "Nothing; 97% overall is high enough to automate" },
+            { id: "c", text: "Only the fields with the highest confidence scores" },
+            { id: "d", text: "Re-run extraction at a higher temperature for variety" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Aggregate accuracy (e.g., 97%) can hide poor performance on specific document types or fields; validate accuracy by segment before reducing human review. Trusting the aggregate (B), cherry-picking high-confidence fields (C), or changing temperature (D) don't reveal segment weaknesses.",
+        },
+        {
+          id: "cca-d5b-q7",
+          text: "Two credible sources report different statistics for the same metric. How should the synthesis agent handle the conflict?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Preserve both values with source attribution and annotate the conflict, rather than arbitrarily selecting one" },
+            { id: "b", text: "Average the two numbers into one figure" },
+            { id: "c", text: "Pick the larger number for impact" },
+            { id: "d", text: "Drop both since they disagree" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Conflicting statistics from credible sources should be annotated with source attribution and both values preserved, letting readers (or the coordinator) judge — not arbitrarily resolved by averaging (B), picking one (C), or discarding (D). Publication dates also help distinguish temporal differences from true contradictions.",
+        },
+        {
+          id: "cca-d5b-q8",
+          text: "A research subagent passes findings to synthesis, but source URLs and document names are lost in summarization, breaking citations. What fixes this provenance loss?",
+          type: "MCQ" as const,
+          options: [
+            { id: "a", text: "Require subagents to output structured claim-source mappings (source URL, document name, relevant excerpt) that downstream agents preserve through synthesis" },
+            { id: "b", text: "Ask the synthesis agent to guess plausible citations" },
+            { id: "c", text: "Summarize harder so the report is shorter" },
+            { id: "d", text: "Drop citations to simplify the output" },
+          ],
+          correctOptionId: "a",
+          explanation:
+            "Provenance is lost when findings are compressed without claim-source mappings. Requiring structured mappings (URL, document name, excerpt) that downstream agents preserve through synthesis maintains attribution. Guessing citations (B) fabricates, and (C)/(D) discard provenance entirely.",
+        },
+      ],
+    },
   ];
 
   for (const cs of challengeSets) {

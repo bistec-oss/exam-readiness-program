@@ -11,6 +11,17 @@ const DOMAIN_LEVELS = [
   { id: "cca-d5-context-reliability", title: "Domain 5 · Context Management & Reliability" },
 ];
 
+// Practice Set B — additional synthetic questions per domain (8 each)
+const DOMAIN_LEVELS_B = [
+  { id: "cca-d1b-agentic-orchestration", title: "Domain 1 · Agentic Architecture & Orchestration — Practice Set B" },
+  { id: "cca-d2b-tool-mcp", title: "Domain 2 · Tool Design & MCP Integration — Practice Set B" },
+  { id: "cca-d3b-claude-code", title: "Domain 3 · Claude Code Configuration & Workflows — Practice Set B" },
+  { id: "cca-d4b-prompt-structured-output", title: "Domain 4 · Prompt Engineering & Structured Output — Practice Set B" },
+  { id: "cca-d5b-context-reliability", title: "Domain 5 · Context Management & Reliability — Practice Set B" },
+];
+
+const ALL_NEW_LEVELS = [...DOMAIN_LEVELS, ...DOMAIN_LEVELS_B];
+
 async function loginAs(page: import("@playwright/test").Page, creds: { email: string; password: string }) {
   await page.goto("/login");
   await page.fill('input[name="email"]', creds.email);
@@ -24,11 +35,12 @@ test.describe("13 - Architect Foundations Levels (from exam guide PDF)", () => {
     await loginAs(page, CANDIDATE);
     await page.goto(`/exams/${EXAM_ID}`);
     for (const level of DOMAIN_LEVELS) {
-      await expect(page.locator("h3", { hasText: level.title })).toBeVisible();
+      // exact match: Set B titles contain the Set A title as a substring
+      await expect(page.getByText(level.title, { exact: true })).toBeVisible();
     }
   });
 
-  test("each domain level has exactly 6 questions", async ({ page }) => {
+  test("each Set A domain level has exactly 6 questions", async ({ page }) => {
     await loginAs(page, CANDIDATE);
     for (const level of DOMAIN_LEVELS) {
       const res = await page.request.get(`/api/challenges/${level.id}/questions`);
@@ -36,6 +48,32 @@ test.describe("13 - Architect Foundations Levels (from exam guide PDF)", () => {
       const questions = (await res.json()) as { id: string; text: string }[];
       expect(questions.length).toBe(6);
     }
+  });
+
+  test("all five Practice Set B levels appear and each has 8 questions", async ({ page }) => {
+    await loginAs(page, CANDIDATE);
+    await page.goto(`/exams/${EXAM_ID}`);
+    for (const level of DOMAIN_LEVELS_B) {
+      await expect(page.getByText(level.title, { exact: true })).toBeVisible();
+      const res = await page.request.get(`/api/challenges/${level.id}/questions`);
+      expect(res.status()).toBe(200);
+      const questions = (await res.json()) as { id: string }[];
+      expect(questions.length).toBe(8);
+    }
+  });
+
+  test("every Set B question id is unique across all new levels (no duplicates)", async ({ page }) => {
+    await loginAs(page, CANDIDATE);
+    const ids = new Set<string>();
+    for (const level of ALL_NEW_LEVELS) {
+      const questions = await (await page.request.get(`/api/challenges/${level.id}/questions`)).json() as { id: string }[];
+      for (const q of questions) {
+        expect(ids.has(q.id)).toBeFalsy();
+        ids.add(q.id);
+      }
+    }
+    // 5 Set A levels × 6 + 5 Set B levels × 8 = 70 distinct questions
+    expect(ids.size).toBe(70);
   });
 
   test("levels include the real exam-guide sample questions", async ({ page }) => {
@@ -56,7 +94,7 @@ test.describe("13 - Architect Foundations Levels (from exam guide PDF)", () => {
 
   test("every question in the new levels has a valid correct answer and explanation", async ({ page }) => {
     await loginAs(page, CANDIDATE);
-    for (const level of DOMAIN_LEVELS) {
+    for (const level of ALL_NEW_LEVELS) {
       const questions = await (await page.request.get(`/api/challenges/${level.id}/questions`)).json() as {
         options: { id: string; text: string }[];
         correctOptionId: string;
@@ -72,7 +110,7 @@ test.describe("13 - Architect Foundations Levels (from exam guide PDF)", () => {
   test("candidate can navigate into a domain level and reach the play screen", async ({ page }) => {
     await loginAs(page, CANDIDATE);
     await page.goto(`/exams/${EXAM_ID}`);
-    await page.locator("h3", { hasText: "Domain 1 · Agentic Architecture & Orchestration" }).click();
+    await page.getByText("Domain 1 · Agentic Architecture & Orchestration", { exact: true }).click();
     await expect(page).toHaveURL(/\/challenges\/.*\/play/);
   });
 });
