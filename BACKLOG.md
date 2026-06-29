@@ -21,7 +21,7 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 | 07 | [PWA Offline Support](.specclaw/changes/07-pwa-offline/proposal.md) | 🟠 P1 | ✅ Done | 03 |
 | 08 | [Docker + Caddy + Cloudflare Tunnel](.specclaw/changes/08-deployment/proposal.md) | 🟠 P1 | ✅ Done | 01 |
 | 09 | [System Deploy - podman + existing host caddy/cloudflared](.specclaw/changes/09-system-deploy-practice-site/proposal.md) | 🟠 P1 | ✅ Done | 01 |
-| 14 | [Landing Page — Browse Exam Catalog](.specclaw/changes/14-landing-page-browse-catalog/proposal.md) | 🟠 P1 | 🟡 In Progress | 01, 03 |
+| 14 | [Landing Page — Browse Exam Catalog](.specclaw/changes/14-landing-page-browse-catalog/proposal.md) | 🟠 P1 | ✅ Done | 01, 03 |
 
 ---
 

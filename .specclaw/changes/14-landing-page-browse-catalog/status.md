@@ -13,7 +13,7 @@
 | Design | ✅ Complete | Server Component shared, anon/logged-in discriminated union |
 | Tasks | ✅ Complete | 6 bite-sized tasks, 2-5 min each, TDD where Playwright exists |
 | Build | ✅ Complete | 6 commits on feat/14-landing-page-browse-catalog, npm build green |
-| Verify | 🟡 In Progress | e2e deferred to dev server (port 3010 env), spec compliant on all 4 components |
+| Verify | ✅ Complete | e2e/landing.spec.ts 3/3 pass; full suite 151/151 green |
 | PR | ⏳ Pending | |
 
 ## Task Progress
