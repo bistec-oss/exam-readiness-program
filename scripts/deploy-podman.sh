@@ -18,7 +18,7 @@ set -euo pipefail
 
 REPO_DIR="${REPO_DIR:-$HOME/srv/exam-readiness}"
 APP_IMAGE="${EXAMREADY_APP_IMAGE:-localhost/exam-ready-app:latest}"
-APP_PORT="${APP_PORT:-3010}"
+APP_PORT="${APP_PORT:-3015}"
 DB_NAME="examready"
 ENV_FILE="$REPO_DIR/exam-ready.env"
 

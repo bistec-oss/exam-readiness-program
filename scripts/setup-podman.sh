@@ -21,7 +21,7 @@ set -euo pipefail
 
 REPO_DIR="${REPO_DIR:-/home/openclaw/srv/exam-readiness}"
 DOMAIN="practice.tecbizsolutions.com"
-APP_PORT=3010
+APP_PORT=3015
 DB_NAME="examready"
 DB_USER="examready"
 ENV_FILE="$REPO_DIR/exam-ready.env"
@@ -86,21 +86,30 @@ else
   python3 - "$CADDYFILE" "$MARKER" <<'PY'
 import sys, pathlib
 path, marker = sys.argv[1], sys.argv[2]
-src = pathlib.Path(path).read_text()
-block = f"""
-{marker}
-@practice host practice.tecbizsolutions.com
-handle @practice {{
-    reverse_proxy 127.0.0.1:3010
-}}
-"""
-needle = "http://:8080 {"
-i = src.find(needle)
-if i < 0:
-    raise SystemExit("could not find 'http://:8080 {' in central Caddyfile")
-new = src[:i] + block.lstrip("\n") + "\n" + src[i:]
+src_text = pathlib.Path(path).read_text()
+# Block to insert (note: double-braces are escaped in the Python string below
+# so the Caddyfile gets single `{ ... }`).
+block = (
+    "\n\n" + marker + "\n"
+    "@practice host practice.tecbizsolutions.com\n"
+    "handle @practice {\n"
+    "    reverse_proxy 127.0.0.1:3015\n"
+    "}\n"
+)
+# Anchor on the LAST existing "@<name> host" line we find in any site block,
+# so we land alongside the other app matchers (NOT in the global scope, which
+# Caddy v2 forbids for request matchers).
+lines = src_text.splitlines(keepends=True)
+last_idx = -1
+for i, ln in enumerate(lines):
+    if ln.lstrip().startswith("@") and " host " in ln:
+        last_idx = i
+if last_idx < 0:
+    raise SystemExit("no existing '@<name> host' matcher found to anchor against")
+insert_at = last_idx + 1
+new = "".join(lines[:insert_at] + [block] + lines[insert_at:])
 pathlib.Path(path).write_text(new)
-print("inserted @practice block")
+print(f"inserted @practice block after line {insert_at}")
 PY
   ok "@practice host block inserted"
 fi

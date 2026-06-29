@@ -7,15 +7,15 @@ Wants=network-online.target
 Image=docker.io/library/postgres:16-alpine
 Environment=POSTGRES_DB=examready
 Environment=POSTGRES_USER=examready
-Volume=examready_pgdata.volume:/var/lib/postgresql/data
+Volume=exam-ready-db.volume:/var/lib/postgresql/data
 Network=exam-ready.network
 EnvironmentFile=%h/srv/exam-readiness/exam-ready.env
-PodmanArgs=--name exam-ready-db
-HealthCheck=CMD pg_isready -U examready -d examready
-HealthCheckInterval=10s
-HealthCheckTimeout=5s
+PodmanArgs=--name exam-ready-db --network-alias db
+HealthCmd=pg_isready -U examready -d examready
+HealthInterval=10s
+HealthTimeout=5s
 HealthStartPeriod=30s
-HealthCheckRetries=5
+HealthRetries=5
 
 [Service]
 Restart=always
