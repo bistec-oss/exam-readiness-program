@@ -63,7 +63,7 @@ test.describe("06 - Admin Panel", () => {
     await page.fill('input[name="durationMinutes"]', "60");
     await page.click('button[type="submit"]:has-text("Create Exam")');
     await expect(page).toHaveURL(/\/admin\/exams/);
-    await expect(page.getByText("Test Exam E2E")).toBeVisible({ timeout: 5000 });
+    await expect(page.getByText("Test Exam E2E").first()).toBeVisible({ timeout: 5000 });
   });
 
   test("admin can edit an exam", async ({ page }) => {

@@ -22,7 +22,7 @@ test.describe("03 - Exam Catalog & Challenge Flow", () => {
     await loginAsCandidate(page);
     await page.goto("/exams");
     await expect(page.getByText("Claude Architect Certification")).toBeVisible();
-    await expect(page.getByText(/challenge sets/)).toBeVisible();
+    await expect(page.getByText(/challenge sets/).first()).toBeVisible();
   });
 
   test("unauthenticated user redirected from /exams to /login", async ({ page }) => {

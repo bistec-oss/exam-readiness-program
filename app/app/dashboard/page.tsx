@@ -92,7 +92,7 @@ export default async function DashboardPage() {
               <p className="text-gray-400 text-sm mt-0.5">{session.role}</p>
             </div>
             <form action={logout}>
-              <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold rounded-xl text-xs transition-colors">
+              <button type="submit" className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold rounded-xl text-xs transition-colors">
                 Sign out
               </button>
             </form>

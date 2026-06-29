@@ -12,14 +12,14 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 
 | # | Proposal | Priority | Status | Depends On |
 |---|----------|----------|--------|------------|
-| 01 | [Next.js Scaffold + DB Schema](.specclaw/changes/01-nextjs-scaffold-db/proposal.md) | 🔴 P0 | 🟡 Draft | — |
-| 02 | [Auth & Role-Based Access](.specclaw/changes/02-auth-roles/proposal.md) | 🔴 P0 | 🟡 Draft | 01 |
+| 01 | [Next.js Scaffold + DB Schema](.specclaw/changes/01-nextjs-scaffold-db/proposal.md) | 🔴 P0 | ✅ Done | — |
+| 02 | [Auth & Role-Based Access](.specclaw/changes/02-auth-roles/proposal.md) | 🔴 P0 | ✅ Done | 01 |
 | 03 | [Exam Catalog & Flashcard Flow](.specclaw/changes/03-exam-challenge-flow/proposal.md) | 🔴 P0 | ✅ Done | 01, 02 |
 | 04 | [Timed Mock Exam Mode](.specclaw/changes/04-mock-exam/proposal.md) | 🔴 P0 | ✅ Done | 01, 02, 03 |
-| 05 | [Progress Dashboard & Gamification](.specclaw/changes/05-progress-gamification/proposal.md) | 🔴 P0 | 🟡 Draft | 03, 04 |
-| 06 | [Admin Panel](.specclaw/changes/06-admin-panel/proposal.md) | 🟠 P1 | 🟡 Draft | 01, 02 |
-| 07 | [PWA Offline Support](.specclaw/changes/07-pwa-offline/proposal.md) | 🟠 P1 | 🟡 Draft | 03 |
-| 08 | [Docker + Caddy + Cloudflare Tunnel](.specclaw/changes/08-deployment/proposal.md) | 🟠 P1 | 🟡 Draft | 01 |
+| 05 | [Progress Dashboard & Gamification](.specclaw/changes/05-progress-gamification/proposal.md) | 🔴 P0 | ✅ Done | 03, 04 |
+| 06 | [Admin Panel](.specclaw/changes/06-admin-panel/proposal.md) | 🟠 P1 | ✅ Done | 01, 02 |
+| 07 | [PWA Offline Support](.specclaw/changes/07-pwa-offline/proposal.md) | 🟠 P1 | ✅ Done | 03 |
+| 08 | [Docker + Caddy + Cloudflare Tunnel](.specclaw/changes/08-deployment/proposal.md) | 🟠 P1 | ✅ Done | 01 |
 
 ---
 
