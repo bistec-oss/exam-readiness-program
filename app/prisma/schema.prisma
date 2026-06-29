@@ -12,6 +12,11 @@ enum Role {
   CANDIDATE
 }
 
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+}
+
 enum QuestionType {
   MCQ
   TRUE_FALSE
@@ -23,6 +28,7 @@ model User {
   passwordHash  String
   name          String
   role          Role           @default(CANDIDATE)
+  status        UserStatus     @default(ACTIVE)
   xp            Int            @default(0)
   leaderboardOptIn Boolean     @default(false)
   weeklyEmailOptIn Boolean     @default(true)

@@ -14,7 +14,7 @@ export default async function AdminOverviewPage() {
     { label: "Exams", count: examCount, href: "/admin/exams", emoji: "📋" },
     { label: "Challenge Sets", count: challengeCount, href: "/admin/challenges", emoji: "🎯" },
     { label: "Questions", count: questionCount, href: "/admin/questions", emoji: "❓" },
-    { label: "Users", count: userCount, href: "/admin", emoji: "👥" },
+    { label: "Users", count: userCount, href: "/admin/users", emoji: "👥" },
     { label: "Cohorts", count: cohortCount, href: "/admin/cohorts", emoji: "👨‍👩‍👧‍👦" },
   ];
 

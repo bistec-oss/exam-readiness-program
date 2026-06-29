@@ -40,6 +40,10 @@ export async function login(state: AuthState, formData: FormData): Promise<AuthS
     return { message: "Invalid email or password." };
   }
 
+  if (user.status === "SUSPENDED") {
+    return { message: "Account suspended. Contact your administrator." };
+  }
+
   await createSession({ userId: user.id, email: user.email, role: user.role, name: user.name });
   redirect("/dashboard");
 }
