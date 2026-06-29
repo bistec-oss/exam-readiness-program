@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { createQuestion, deleteQuestion } from "@/app/actions/admin";
+import CsvImport from "@/components/CsvImport";
 import Link from "next/link";
 
 export default async function AdminQuestionsPage() {
@@ -55,6 +56,9 @@ export default async function AdminQuestionsPage() {
           </tbody>
         </table>
       </div>
+
+      {/* Bulk CSV import */}
+      <CsvImport />
 
       {/* Create form */}
       <div className="bg-white rounded-2xl border-2 border-violet-100 shadow p-6">

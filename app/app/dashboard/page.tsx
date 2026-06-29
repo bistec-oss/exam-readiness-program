@@ -91,11 +91,20 @@ export default async function DashboardPage() {
               <h1 className="text-2xl font-extrabold text-violet-700">Hey, {session.name}! 👋</h1>
               <p className="text-gray-400 text-sm mt-0.5">{session.role}</p>
             </div>
-            <form action={logout}>
-              <button type="submit" className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold rounded-xl text-xs transition-colors">
-                Sign out
-              </button>
-            </form>
+            <div className="flex items-center gap-2">
+              <a
+                href="/api/progress/report"
+                data-testid="download-report"
+                className="px-3 py-1.5 bg-violet-100 hover:bg-violet-200 text-violet-700 font-semibold rounded-xl text-xs transition-colors"
+              >
+                ⬇ PDF Report
+              </a>
+              <form action={logout}>
+                <button type="submit" className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-semibold rounded-xl text-xs transition-colors">
+                  Sign out
+                </button>
+              </form>
+            </div>
           </div>
 
           {/* XP bar */}

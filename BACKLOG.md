@@ -82,8 +82,8 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 
 | Feature | Notes |
 |---------|-------|
-| CSV bulk question import | Admin uploads CSV; server parses + upserts |
-| PDF score report export | Candidate downloads readiness summary |
+| ✅ CSV bulk question import | Admin uploads/pastes CSV; server parses + validates + bulk-creates. `/admin/questions` UI + `POST /api/admin/questions/import` |
+| ✅ PDF score report export | Candidate downloads readiness summary PDF via `GET /api/progress/report` (dependency-free generator) |
 | ✅ Team/cohort manager view | "8/10 team members ≥ 80% ready" dashboard |
 | ✅ Additional exam catalogs | AWS SAA, Azure AZ-900, Scrum PSM-I |
 | Leaderboard | Opt-in XP ranking within cohort |
