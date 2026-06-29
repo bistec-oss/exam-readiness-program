@@ -12,13 +12,13 @@
 | Spec | ✅ Complete | 9 acceptance criteria, e2e + curl verification |
 | Design | ✅ Complete | Server Component shared, anon/logged-in discriminated union |
 | Tasks | ✅ Complete | 6 bite-sized tasks, 2-5 min each, TDD where Playwright exists |
-| Build | 🟡 In Progress | Awaiting `/specclaw:build` invocation |
-| Verify | ⏳ Pending | |
+| Build | ✅ Complete | 6 commits on feat/14-landing-page-browse-catalog, npm build green |
+| Verify | 🟡 In Progress | e2e deferred to dev server (port 3010 env), spec compliant on all 4 components |
 | PR | ⏳ Pending | |
 
 ## Task Progress
 
-**Completed:** 0 / 0
+**Completed:** 5 / 5 build tasks
 **Failed:** 0
 
 ## Agent Runs
