@@ -26,6 +26,7 @@ const withPWA = withPWAInit({
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  serverExternalPackages: ["pdfkit"],
 };
 
 export default withPWA(nextConfig);
