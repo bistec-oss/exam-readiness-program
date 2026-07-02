@@ -7,7 +7,6 @@ function escapeText(s: string): string {
     .replace(/\\/g, "\\\\")
     .replace(/\(/g, "\\(")
     .replace(/\)/g, "\\)")
-    // eslint-disable-next-line no-control-regex
     .replace(/[^\x20-\x7E]/g, " ");
 }
 
