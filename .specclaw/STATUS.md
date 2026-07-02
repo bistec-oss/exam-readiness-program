@@ -1,32 +1,39 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-06-29 06:01 UTC
+**Last Updated:** 2026-07-02 15:30 UTC
 
 ## Active Changes
 
-
-- 🔨 **gamified-flashcard-exam-readiness** — 0/18 tasks (0%) | 0 failed
+_None._
 
 ## Pending Proposals
 
-
-- 📋 **01-nextjs-scaffold-db** — proposal ready, awaiting planning
-- 📋 **02-auth-roles** — proposal ready, awaiting planning
-- 📋 **03-exam-challenge-flow** — proposal ready, awaiting planning
-- 📋 **04-mock-exam** — proposal ready, awaiting planning
-- 📋 **05-progress-gamification** — proposal ready, awaiting planning
-- 📋 **06-admin-panel** — proposal ready, awaiting planning
-- 📋 **07-pwa-offline** — proposal ready, awaiting planning
-- 📋 **08-deployment** — proposal ready, awaiting planning
-- 📋 **09-system-deploy-practice-site** — proposal ready, awaiting planning
+_None._
 
 ## Recently Completed
 
-_None._
+- ✅ **01-nextjs-scaffold-db** — Next.js scaffold + Prisma schema + seed
+- ✅ **02-auth-roles** — JWT auth, admin/candidate roles, route guards
+- ✅ **03-exam-challenge-flow** — exam catalog + flashcard play + XP
+- ✅ **04-mock-exam** — timed mock exam, auto-submit, review
+- ✅ **05-progress-gamification** — readiness gauge, XP, badges, weak topics
+- ✅ **06-admin-panel** — CRUD exams/challenge sets/questions
+- ✅ **07-pwa-offline** — service worker, IndexedDB offline queue, sync
+- ✅ **08-deployment** — Docker Compose + Caddy + Cloudflare Tunnel
+- ✅ **09-system-deploy-practice-site** — podman quadlets + host caddy/cloudflared
+- ✅ **11-cohort-manager-view** — cohort readiness dashboard + opt-in leaderboard
+- ✅ **12-additional-exam-catalogs** — AWS SAA, Azure AZ-900, Scrum PSM-I + weekly email
+- ✅ **13-csv-import-pdf-report** — CSV bulk import + dependency-free score report
+- ✅ **14-landing-page-browse-catalog** — public landing catalog at /
+
+## Superseded
+
+- ⏭️ **gamified-flashcard-exam-readiness** — original umbrella proposal, replaced by focused slices 01–14
 
 ## Stats
 
-- **Total changes:** 1
-- **Active:** 1
-- **Completed:** 0
+- **Total changes:** 14
+- **Completed:** 13
+- **Superseded:** 1
+- **Active:** 0
