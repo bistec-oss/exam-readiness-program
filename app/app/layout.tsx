@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import OfflineIndicator from "@/components/OfflineIndicator";
@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Exam Ready! | Bistec Global",
   description: "Gamified exam readiness platform for professional certifications",
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
   themeColor: "#7c3aed",
 };
 
@@ -22,7 +25,6 @@ export default function RootLayout({
           src="https://cdn.tailwindcss.com"
           strategy="beforeInteractive"
         />
-        <meta name="theme-color" content="#7c3aed" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
