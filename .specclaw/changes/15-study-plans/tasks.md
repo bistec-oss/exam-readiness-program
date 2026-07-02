@@ -17,7 +17,7 @@ Additive feature: 3 Prisma models + enum, migration, seed, a shared completion-d
   - Estimate: medium
   - Notes: Add `StudyPlan`, `StudyPlanStep`, `StudyPlanEnrollment`, enum `StudyPlanStepType` + back-relations (Exam, ChallengeSet `SetNull`, User). Run `prisma migrate dev`. Seed one Claude Architect plan: ordered CHALLENGE_SET steps for its existing sets + final MOCK_SCORE step (threshold = exam.passingScore). Upsert-based (idempotent).
 
-- [ ] `T2` — Completion-derivation helper
+- [x] `T2` — Completion-derivation helper
   - Files: `lib/studyPlan.ts`
   - Estimate: small
   - Depends: T1
