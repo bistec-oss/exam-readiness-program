@@ -1,0 +1,3 @@
+# Rotating runtime session state — not source
+.session-id
+.session-id.rotated-*
