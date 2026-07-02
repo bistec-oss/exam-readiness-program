@@ -59,7 +59,7 @@ Additive feature: 3 Prisma models + enum, migration, seed, a shared completion-d
 
 ### Wave 4 — Verify
 
-- [ ] `T8` — E2E + full verify
+- [x] `T8` — E2E + full verify
   - Files: `e2e/study-plans.spec.ts`
   - Estimate: medium
   - Depends: T5, T7
