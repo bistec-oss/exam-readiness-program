@@ -22,6 +22,11 @@ enum QuestionType {
   TRUE_FALSE
 }
 
+enum StudyPlanStepType {
+  CHALLENGE_SET
+  MOCK_SCORE
+}
+
 model User {
   id            String         @id @default(cuid())
   email         String         @unique
@@ -38,6 +43,7 @@ model User {
   mockAttempts  MockAttempt[]
   cohortMembers CohortMember[]
   emailLogs     EmailLog[]
+  studyPlanEnrollments StudyPlanEnrollment[]
 }
 
 model EmailLog {
@@ -81,6 +87,7 @@ model Exam {
   challengeSets   ChallengeSet[]
   questions       Question[]
   mockAttempts    MockAttempt[]
+  studyPlans      StudyPlan[]
 }
 
 model ChallengeSet {
@@ -92,6 +99,7 @@ model ChallengeSet {
   exam      Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
   questions Question[]
   attempts  Attempt[]
+  studyPlanSteps StudyPlanStep[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 }
@@ -138,4 +146,40 @@ model MockAttempt {
   timeUsed    Int
   startedAt   DateTime
   completedAt DateTime @default(now())
+}
+
+model StudyPlan {
+  id          String                @id @default(cuid())
+  examId      String
+  exam        Exam                  @relation(fields: [examId], references: [id], onDelete: Cascade)
+  title       String
+  description String
+  steps       StudyPlanStep[]
+  enrollments StudyPlanEnrollment[]
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+}
+
+model StudyPlanStep {
+  id                 String            @id @default(cuid())
+  planId             String
+  plan               StudyPlan         @relation(fields: [planId], references: [id], onDelete: Cascade)
+  order              Int
+  title              String
+  type               StudyPlanStepType
+  challengeSetId     String?
+  challengeSet       ChallengeSet?     @relation(fields: [challengeSetId], references: [id], onDelete: SetNull)
+  mockScoreThreshold Int?
+  dayOffset          Int               @default(0)
+}
+
+model StudyPlanEnrollment {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  planId    String
+  plan      StudyPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  startedAt DateTime  @default(now())
+
+  @@unique([userId, planId])
 }

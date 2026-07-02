@@ -31,3 +31,11 @@ export const QuestionType = {
 } as const
 
 export type QuestionType = (typeof QuestionType)[keyof typeof QuestionType]
+
+
+export const StudyPlanStepType = {
+  CHALLENGE_SET: 'CHALLENGE_SET',
+  MOCK_SCORE: 'MOCK_SCORE'
+} as const
+
+export type StudyPlanStepType = (typeof StudyPlanStepType)[keyof typeof StudyPlanStepType]

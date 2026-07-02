@@ -62,3 +62,18 @@ export type Attempt = Prisma.AttemptModel
  * 
  */
 export type MockAttempt = Prisma.MockAttemptModel
+/**
+ * Model StudyPlan
+ * 
+ */
+export type StudyPlan = Prisma.StudyPlanModel
+/**
+ * Model StudyPlanStep
+ * 
+ */
+export type StudyPlanStep = Prisma.StudyPlanStepModel
+/**
+ * Model StudyPlanEnrollment
+ * 
+ */
+export type StudyPlanEnrollment = Prisma.StudyPlanEnrollmentModel

@@ -167,6 +167,11 @@ export default async function DashboardPage() {
             <h2 className="font-bold text-violet-700">Exam Catalog</h2>
             <p className="text-xs text-gray-500 mt-0.5">Challenge sets & mock exams</p>
           </Link>
+          <Link href="/study-plans" className="bg-white rounded-3xl border-4 border-sky-200 hover:border-sky-400 shadow-lg p-5 block transition-all">
+            <div className="text-3xl mb-1">🗺️</div>
+            <h2 className="font-bold text-sky-700">Study Plans</h2>
+            <p className="text-xs text-gray-500 mt-0.5">Guided week-by-week paths</p>
+          </Link>
           <Link href="/leaderboard" className="bg-white rounded-3xl border-4 border-yellow-200 hover:border-yellow-400 shadow-lg p-5 block transition-all">
             <div className="text-3xl mb-1">🏅</div>
             <h2 className="font-bold text-yellow-700">Leaderboard</h2>

@@ -1,39 +1,37 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-07-02 16:30 UTC
+**Last Updated:** 2026-07-02 18:48 UTC
 
 ## Active Changes
 
-_None._
+
+- 🔨 **09-system-deploy-practice-site** — 0/0 tasks (0%) | 0 failed
+- 🔨 **14-landing-page-browse-catalog** — 0/9 tasks (0%) | 0 failed
+- ✅ **15-study-plans** — 8/8 tasks (100%) | 0 failed
+- 🔨 **gamified-flashcard-exam-readiness** — 0/18 tasks (0%) | 0 failed
 
 ## Pending Proposals
 
-_None._
+
+- 📋 **01-nextjs-scaffold-db** — proposal ready, awaiting planning
+- 📋 **02-auth-roles** — proposal ready, awaiting planning
+- 📋 **03-exam-challenge-flow** — proposal ready, awaiting planning
+- 📋 **04-mock-exam** — proposal ready, awaiting planning
+- 📋 **05-progress-gamification** — proposal ready, awaiting planning
+- 📋 **06-admin-panel** — proposal ready, awaiting planning
+- 📋 **07-pwa-offline** — proposal ready, awaiting planning
+- 📋 **08-deployment** — proposal ready, awaiting planning
+- 📋 **11-cohort-manager-view** — proposal ready, awaiting planning
+- 📋 **12-additional-exam-catalogs** — proposal ready, awaiting planning
+- 📋 **13-csv-import-pdf-report** — proposal ready, awaiting planning
 
 ## Recently Completed
 
-- ✅ **01-nextjs-scaffold-db** — merged
-- ✅ **02-auth-roles** — merged
-- ✅ **03-exam-challenge-flow** — merged
-- ✅ **04-mock-exam** — merged
-- ✅ **05-progress-gamification** — merged
-- ✅ **06-admin-panel** — merged
-- ✅ **07-pwa-offline** — merged
-- ✅ **08-deployment** — merged
-- ✅ **09-system-deploy-practice-site** — merged
-- ✅ **11-cohort-manager-view** — merged
-- ✅ **12-additional-exam-catalogs** — merged (AWS SAA, Azure AZ-900, Scrum PSM-I seeds)
-- ✅ **13-csv-import-pdf-report** — merged (CSV bulk import + PDF score report)
-- ✅ **14-landing-page-browse-catalog** — merged (e2e verified)
-
-## Superseded
-
-- 🗄️ **gamified-flashcard-exam-readiness** — original umbrella proposal; delivered via slices 01–14 (Next.js). Its tasks.md targets a wrong stack (Express/Vite); kept for history only, do not build.
+_None._
 
 ## Stats
 
-- **Total changes:** 14
-- **Active:** 0
-- **Completed:** 13
-- **Superseded:** 1
+- **Total changes:** 4
+- **Active:** 4
+- **Completed:** 0
