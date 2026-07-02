@@ -1,32 +1,36 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-06-29 06:01 UTC
+**Last Updated:** 2026-07-02 11:30 UTC
 
 ## Active Changes
 
-
-- 🔨 **gamified-flashcard-exam-readiness** — 0/18 tasks (0%) | 0 failed
+_None._
 
 ## Pending Proposals
 
-
-- 📋 **01-nextjs-scaffold-db** — proposal ready, awaiting planning
-- 📋 **02-auth-roles** — proposal ready, awaiting planning
-- 📋 **03-exam-challenge-flow** — proposal ready, awaiting planning
-- 📋 **04-mock-exam** — proposal ready, awaiting planning
-- 📋 **05-progress-gamification** — proposal ready, awaiting planning
-- 📋 **06-admin-panel** — proposal ready, awaiting planning
-- 📋 **07-pwa-offline** — proposal ready, awaiting planning
-- 📋 **08-deployment** — proposal ready, awaiting planning
-- 📋 **09-system-deploy-practice-site** — proposal ready, awaiting planning
+_None._
 
 ## Recently Completed
 
-_None._
+- ✅ **01-nextjs-scaffold-db** — merged
+- ✅ **02-auth-roles** — merged
+- ✅ **03-exam-challenge-flow** — merged
+- ✅ **04-mock-exam** — merged
+- ✅ **05-progress-gamification** — merged
+- ✅ **06-admin-panel** — merged
+- ✅ **07-pwa-offline** — merged
+- ✅ **08-deployment** — merged
+- ✅ **09-system-deploy-practice-site** — merged
+- ✅ **14-landing-page-browse-catalog** — merged (e2e verified)
+
+## Superseded
+
+- 🗄️ **gamified-flashcard-exam-readiness** — original umbrella proposal; delivered via slices 01–14 (Next.js). Its tasks.md targets a wrong stack (Express/Vite); kept for history only, do not build.
 
 ## Stats
 
-- **Total changes:** 1
-- **Active:** 1
-- **Completed:** 0
+- **Total changes:** 11
+- **Active:** 0
+- **Completed:** 10
+- **Superseded:** 1
