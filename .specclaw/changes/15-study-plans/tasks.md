@@ -39,19 +39,19 @@ Additive feature: 3 Prisma models + enum, migration, seed, a shared completion-d
 
 ### Wave 3 — UI (depends on APIs)
 
-- [ ] `T5` — Candidate pages + timeline component
+- [x] `T5` — Candidate pages + timeline component
   - Files: `app/study-plans/page.tsx`, `app/study-plans/[id]/page.tsx`, `components/StudyPlanTimeline.tsx`
   - Estimate: medium
   - Depends: T3
   - Notes: List page (start/continue). Detail page redirects `/login` if no session, renders `StudyPlanTimeline` (client): weeks grouping, step complete/incomplete states, deep links, completion %, next-action highlight.
 
-- [ ] `T6` — Admin study-plans page
+- [x] `T6` — Admin study-plans page
   - Files: `app/admin/study-plans/page.tsx`
   - Estimate: medium
   - Depends: T4
   - Notes: Client CRUD UI matching existing admin pages — list plans, create/edit/delete plan, manage steps (add/edit/delete, order field).
 
-- [ ] `T7` — Nav links
+- [x] `T7` — Nav links
   - Files: `app/admin/layout.tsx`, `app/dashboard/page.tsx`
   - Estimate: small
   - Depends: T5, T6
