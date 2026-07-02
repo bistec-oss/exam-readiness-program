@@ -68,11 +68,11 @@ export function deriveProgress(
 
     if (step.type === "CHALLENGE_SET") {
       completed = step.challengeSetId ? passedSetIds.has(step.challengeSetId) : false;
-      link = step.challengeSetId ? `/challenges/${step.challengeSetId}` : null;
+      link = step.challengeSetId ? `/challenges/${step.challengeSetId}/play` : null;
     } else {
       const threshold = step.mockScoreThreshold ?? passingScore;
       completed = bestMockPct >= threshold;
-      link = `/mock-exam?examId=${examId}`;
+      link = `/mock-exam/${examId}`;
     }
 
     return {

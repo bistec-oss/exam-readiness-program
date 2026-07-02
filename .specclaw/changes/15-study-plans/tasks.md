@@ -25,13 +25,13 @@ Additive feature: 3 Prisma models + enum, migration, seed, a shared completion-d
 
 ### Wave 2 — APIs (depend on T1/T2)
 
-- [ ] `T3` — Candidate APIs
+- [x] `T3` — Candidate APIs
   - Files: `app/api/study-plans/route.ts`, `app/api/study-plans/[id]/enroll/route.ts`, `app/api/study-plans/[id]/progress/route.ts`
   - Estimate: medium
   - Depends: T1, T2
   - Notes: `getSession` guard (401 unauth). GET list w/ enrolled flags; POST enroll idempotent (findFirst-or-create on unique [userId,planId], return 200); GET progress uses `deriveProgress` after single fetch of user attempts + exam mocks. Build deep-link per step (`/challenges/[id]` or `/mock-exam?examId=`).
 
-- [ ] `T4` — Admin CRUD APIs
+- [x] `T4` — Admin CRUD APIs
   - Files: `app/api/admin/study-plans/route.ts`, `app/api/admin/study-plans/[id]/route.ts`, `app/api/admin/study-plans/[id]/steps/route.ts`, `app/api/admin/study-plans/steps/[stepId]/route.ts`
   - Estimate: medium
   - Depends: T1
