@@ -1,7 +1,7 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-07-02 11:30 UTC
+**Last Updated:** 2026-07-02 16:30 UTC
 
 ## Active Changes
 
@@ -22,6 +22,9 @@ _None._
 - ✅ **07-pwa-offline** — merged
 - ✅ **08-deployment** — merged
 - ✅ **09-system-deploy-practice-site** — merged
+- ✅ **11-cohort-manager-view** — merged
+- ✅ **12-additional-exam-catalogs** — merged (AWS SAA, Azure AZ-900, Scrum PSM-I seeds)
+- ✅ **13-csv-import-pdf-report** — merged (CSV bulk import + PDF score report)
 - ✅ **14-landing-page-browse-catalog** — merged (e2e verified)
 
 ## Superseded
@@ -30,7 +33,7 @@ _None._
 
 ## Stats
 
-- **Total changes:** 11
+- **Total changes:** 14
 - **Active:** 0
-- **Completed:** 10
+- **Completed:** 13
 - **Superseded:** 1
