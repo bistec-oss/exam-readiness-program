@@ -1,37 +1,46 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-07-02 18:48 UTC
+**Last Updated:** 2026-07-02 21:30 UTC
+
+> Reconciled against BACKLOG.md + git history. All feature slices 01–15 are
+> built, verified, and merged to `main`. The auto-generated task counts below
+> drifted (they read per-change `status.md` files that predate merge); this
+> reflects real state.
 
 ## Active Changes
 
-
-- 🔨 **09-system-deploy-practice-site** — 0/0 tasks (0%) | 0 failed
-- 🔨 **14-landing-page-browse-catalog** — 0/9 tasks (0%) | 0 failed
-- ✅ **15-study-plans** — 8/8 tasks (100%) | 0 failed
-- 🔨 **gamified-flashcard-exam-readiness** — 0/18 tasks (0%) | 0 failed
+_None._ All planned slices merged.
 
 ## Pending Proposals
 
+_None._ Backlog 01–15 all ✅ Done (see BACKLOG.md).
 
-- 📋 **01-nextjs-scaffold-db** — proposal ready, awaiting planning
-- 📋 **02-auth-roles** — proposal ready, awaiting planning
-- 📋 **03-exam-challenge-flow** — proposal ready, awaiting planning
-- 📋 **04-mock-exam** — proposal ready, awaiting planning
-- 📋 **05-progress-gamification** — proposal ready, awaiting planning
-- 📋 **06-admin-panel** — proposal ready, awaiting planning
-- 📋 **07-pwa-offline** — proposal ready, awaiting planning
-- 📋 **08-deployment** — proposal ready, awaiting planning
-- 📋 **11-cohort-manager-view** — proposal ready, awaiting planning
-- 📋 **12-additional-exam-catalogs** — proposal ready, awaiting planning
-- 📋 **13-csv-import-pdf-report** — proposal ready, awaiting planning
+## Superseded
+
+- 🗄️ **gamified-flashcard-exam-readiness** — original umbrella proposal. Delivered
+  via slices 01–15 (Next.js 14 + Prisma). Its `tasks.md` prescribes a conflicting
+  Express+Vite stack. Kept for history; do not build.
 
 ## Recently Completed
 
-_None._
+- ✅ **15-study-plans** — 8/8 tasks | PR #13 merged
+- ✅ **14-landing-page-browse-catalog** — PR #6 merged
+- ✅ **09-system-deploy-practice-site** — deployed live to practice.tecbizsolutions.com
+- ✅ **01–08, 11–13, 16–18** — see BACKLOG.md (auth, exam flow, mock exam,
+  gamification, admin, PWA, deployment, cohort view, catalogs, CSV import/PDF,
+  email notifications, CI/CD, user management)
+
+## Known Issues
+
+- ⚠️ **Prod container healthcheck false-negative** — `exam-ready-app` reports
+  `unhealthy` (streak 1493) though the app serves 200 on :3015. Next.js standalone
+  binds to `$HOSTNAME` (= container id), so the in-container healthcheck
+  `wget http://127.0.0.1:3000/login` hits loopback where nothing listens. Fix:
+  set `Environment=HOSTNAME=0.0.0.0` in `exam-ready-app.container` quadlet.
 
 ## Stats
 
-- **Total changes:** 4
-- **Active:** 4
-- **Completed:** 0
+- **Total slices shipped:** 15 (all merged)
+- **Active:** 0
+- **Superseded:** 1
