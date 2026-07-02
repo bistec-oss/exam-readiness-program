@@ -392,7 +392,10 @@ export const ModelName = {
   ChallengeSet: 'ChallengeSet',
   Question: 'Question',
   Attempt: 'Attempt',
-  MockAttempt: 'MockAttempt'
+  MockAttempt: 'MockAttempt',
+  StudyPlan: 'StudyPlan',
+  StudyPlanStep: 'StudyPlanStep',
+  StudyPlanEnrollment: 'StudyPlanEnrollment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "emailLog" | "cohort" | "cohortMember" | "exam" | "challengeSet" | "question" | "attempt" | "mockAttempt"
+    modelProps: "user" | "emailLog" | "cohort" | "cohortMember" | "exam" | "challengeSet" | "question" | "attempt" | "mockAttempt" | "studyPlan" | "studyPlanStep" | "studyPlanEnrollment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1078,6 +1081,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    StudyPlan: {
+      payload: Prisma.$StudyPlanPayload<ExtArgs>
+      fields: Prisma.StudyPlanFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StudyPlanFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StudyPlanFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>
+        }
+        findFirst: {
+          args: Prisma.StudyPlanFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StudyPlanFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>
+        }
+        findMany: {
+          args: Prisma.StudyPlanFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>[]
+        }
+        create: {
+          args: Prisma.StudyPlanCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>
+        }
+        createMany: {
+          args: Prisma.StudyPlanCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StudyPlanCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>[]
+        }
+        delete: {
+          args: Prisma.StudyPlanDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>
+        }
+        update: {
+          args: Prisma.StudyPlanUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>
+        }
+        deleteMany: {
+          args: Prisma.StudyPlanDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StudyPlanUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StudyPlanUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>[]
+        }
+        upsert: {
+          args: Prisma.StudyPlanUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanPayload>
+        }
+        aggregate: {
+          args: Prisma.StudyPlanAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStudyPlan>
+        }
+        groupBy: {
+          args: Prisma.StudyPlanGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StudyPlanGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StudyPlanCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StudyPlanCountAggregateOutputType> | number
+        }
+      }
+    }
+    StudyPlanStep: {
+      payload: Prisma.$StudyPlanStepPayload<ExtArgs>
+      fields: Prisma.StudyPlanStepFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StudyPlanStepFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StudyPlanStepFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>
+        }
+        findFirst: {
+          args: Prisma.StudyPlanStepFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StudyPlanStepFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>
+        }
+        findMany: {
+          args: Prisma.StudyPlanStepFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>[]
+        }
+        create: {
+          args: Prisma.StudyPlanStepCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>
+        }
+        createMany: {
+          args: Prisma.StudyPlanStepCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StudyPlanStepCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>[]
+        }
+        delete: {
+          args: Prisma.StudyPlanStepDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>
+        }
+        update: {
+          args: Prisma.StudyPlanStepUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>
+        }
+        deleteMany: {
+          args: Prisma.StudyPlanStepDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StudyPlanStepUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StudyPlanStepUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>[]
+        }
+        upsert: {
+          args: Prisma.StudyPlanStepUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanStepPayload>
+        }
+        aggregate: {
+          args: Prisma.StudyPlanStepAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStudyPlanStep>
+        }
+        groupBy: {
+          args: Prisma.StudyPlanStepGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StudyPlanStepGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StudyPlanStepCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StudyPlanStepCountAggregateOutputType> | number
+        }
+      }
+    }
+    StudyPlanEnrollment: {
+      payload: Prisma.$StudyPlanEnrollmentPayload<ExtArgs>
+      fields: Prisma.StudyPlanEnrollmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StudyPlanEnrollmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StudyPlanEnrollmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>
+        }
+        findFirst: {
+          args: Prisma.StudyPlanEnrollmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StudyPlanEnrollmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>
+        }
+        findMany: {
+          args: Prisma.StudyPlanEnrollmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>[]
+        }
+        create: {
+          args: Prisma.StudyPlanEnrollmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>
+        }
+        createMany: {
+          args: Prisma.StudyPlanEnrollmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StudyPlanEnrollmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>[]
+        }
+        delete: {
+          args: Prisma.StudyPlanEnrollmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>
+        }
+        update: {
+          args: Prisma.StudyPlanEnrollmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.StudyPlanEnrollmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StudyPlanEnrollmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StudyPlanEnrollmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.StudyPlanEnrollmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudyPlanEnrollmentPayload>
+        }
+        aggregate: {
+          args: Prisma.StudyPlanEnrollmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStudyPlanEnrollment>
+        }
+        groupBy: {
+          args: Prisma.StudyPlanEnrollmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StudyPlanEnrollmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StudyPlanEnrollmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StudyPlanEnrollmentCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1240,6 +1465,42 @@ export const MockAttemptScalarFieldEnum = {
 export type MockAttemptScalarFieldEnum = (typeof MockAttemptScalarFieldEnum)[keyof typeof MockAttemptScalarFieldEnum]
 
 
+export const StudyPlanScalarFieldEnum = {
+  id: 'id',
+  examId: 'examId',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StudyPlanScalarFieldEnum = (typeof StudyPlanScalarFieldEnum)[keyof typeof StudyPlanScalarFieldEnum]
+
+
+export const StudyPlanStepScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  title: 'title',
+  type: 'type',
+  challengeSetId: 'challengeSetId',
+  mockScoreThreshold: 'mockScoreThreshold',
+  dayOffset: 'dayOffset'
+} as const
+
+export type StudyPlanStepScalarFieldEnum = (typeof StudyPlanStepScalarFieldEnum)[keyof typeof StudyPlanStepScalarFieldEnum]
+
+
+export const StudyPlanEnrollmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  startedAt: 'startedAt'
+} as const
+
+export type StudyPlanEnrollmentScalarFieldEnum = (typeof StudyPlanEnrollmentScalarFieldEnum)[keyof typeof StudyPlanEnrollmentScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1392,6 +1653,20 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'StudyPlanStepType'
+ */
+export type EnumStudyPlanStepTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudyPlanStepType'>
+    
+
+
+/**
+ * Reference to a field of type 'StudyPlanStepType[]'
+ */
+export type ListEnumStudyPlanStepTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StudyPlanStepType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1523,6 +1798,9 @@ export type GlobalOmitConfig = {
   question?: Prisma.QuestionOmit
   attempt?: Prisma.AttemptOmit
   mockAttempt?: Prisma.MockAttemptOmit
+  studyPlan?: Prisma.StudyPlanOmit
+  studyPlanStep?: Prisma.StudyPlanStepOmit
+  studyPlanEnrollment?: Prisma.StudyPlanEnrollmentOmit
 }
 
 /* Types for Logging */

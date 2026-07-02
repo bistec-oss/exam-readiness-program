@@ -239,6 +239,7 @@ export type ExamWhereInput = {
   challengeSets?: Prisma.ChallengeSetListRelationFilter
   questions?: Prisma.QuestionListRelationFilter
   mockAttempts?: Prisma.MockAttemptListRelationFilter
+  studyPlans?: Prisma.StudyPlanListRelationFilter
 }
 
 export type ExamOrderByWithRelationInput = {
@@ -252,6 +253,7 @@ export type ExamOrderByWithRelationInput = {
   challengeSets?: Prisma.ChallengeSetOrderByRelationAggregateInput
   questions?: Prisma.QuestionOrderByRelationAggregateInput
   mockAttempts?: Prisma.MockAttemptOrderByRelationAggregateInput
+  studyPlans?: Prisma.StudyPlanOrderByRelationAggregateInput
 }
 
 export type ExamWhereUniqueInput = Prisma.AtLeast<{
@@ -268,6 +270,7 @@ export type ExamWhereUniqueInput = Prisma.AtLeast<{
   challengeSets?: Prisma.ChallengeSetListRelationFilter
   questions?: Prisma.QuestionListRelationFilter
   mockAttempts?: Prisma.MockAttemptListRelationFilter
+  studyPlans?: Prisma.StudyPlanListRelationFilter
 }, "id">
 
 export type ExamOrderByWithAggregationInput = {
@@ -309,6 +312,7 @@ export type ExamCreateInput = {
   challengeSets?: Prisma.ChallengeSetCreateNestedManyWithoutExamInput
   questions?: Prisma.QuestionCreateNestedManyWithoutExamInput
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanCreateNestedManyWithoutExamInput
 }
 
 export type ExamUncheckedCreateInput = {
@@ -322,6 +326,7 @@ export type ExamUncheckedCreateInput = {
   challengeSets?: Prisma.ChallengeSetUncheckedCreateNestedManyWithoutExamInput
   questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutExamInput
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanUncheckedCreateNestedManyWithoutExamInput
 }
 
 export type ExamUpdateInput = {
@@ -335,6 +340,7 @@ export type ExamUpdateInput = {
   challengeSets?: Prisma.ChallengeSetUpdateManyWithoutExamNestedInput
   questions?: Prisma.QuestionUpdateManyWithoutExamNestedInput
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUpdateManyWithoutExamNestedInput
 }
 
 export type ExamUncheckedUpdateInput = {
@@ -348,6 +354,7 @@ export type ExamUncheckedUpdateInput = {
   challengeSets?: Prisma.ChallengeSetUncheckedUpdateManyWithoutExamNestedInput
   questions?: Prisma.QuestionUncheckedUpdateManyWithoutExamNestedInput
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUncheckedUpdateManyWithoutExamNestedInput
 }
 
 export type ExamCreateManyInput = {
@@ -467,6 +474,20 @@ export type ExamUpdateOneRequiredWithoutMockAttemptsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ExamUpdateToOneWithWhereWithoutMockAttemptsInput, Prisma.ExamUpdateWithoutMockAttemptsInput>, Prisma.ExamUncheckedUpdateWithoutMockAttemptsInput>
 }
 
+export type ExamCreateNestedOneWithoutStudyPlansInput = {
+  create?: Prisma.XOR<Prisma.ExamCreateWithoutStudyPlansInput, Prisma.ExamUncheckedCreateWithoutStudyPlansInput>
+  connectOrCreate?: Prisma.ExamCreateOrConnectWithoutStudyPlansInput
+  connect?: Prisma.ExamWhereUniqueInput
+}
+
+export type ExamUpdateOneRequiredWithoutStudyPlansNestedInput = {
+  create?: Prisma.XOR<Prisma.ExamCreateWithoutStudyPlansInput, Prisma.ExamUncheckedCreateWithoutStudyPlansInput>
+  connectOrCreate?: Prisma.ExamCreateOrConnectWithoutStudyPlansInput
+  upsert?: Prisma.ExamUpsertWithoutStudyPlansInput
+  connect?: Prisma.ExamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ExamUpdateToOneWithWhereWithoutStudyPlansInput, Prisma.ExamUpdateWithoutStudyPlansInput>, Prisma.ExamUncheckedUpdateWithoutStudyPlansInput>
+}
+
 export type ExamCreateWithoutChallengeSetsInput = {
   id?: string
   name: string
@@ -477,6 +498,7 @@ export type ExamCreateWithoutChallengeSetsInput = {
   updatedAt?: Date | string
   questions?: Prisma.QuestionCreateNestedManyWithoutExamInput
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanCreateNestedManyWithoutExamInput
 }
 
 export type ExamUncheckedCreateWithoutChallengeSetsInput = {
@@ -489,6 +511,7 @@ export type ExamUncheckedCreateWithoutChallengeSetsInput = {
   updatedAt?: Date | string
   questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutExamInput
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanUncheckedCreateNestedManyWithoutExamInput
 }
 
 export type ExamCreateOrConnectWithoutChallengeSetsInput = {
@@ -517,6 +540,7 @@ export type ExamUpdateWithoutChallengeSetsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questions?: Prisma.QuestionUpdateManyWithoutExamNestedInput
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUpdateManyWithoutExamNestedInput
 }
 
 export type ExamUncheckedUpdateWithoutChallengeSetsInput = {
@@ -529,6 +553,7 @@ export type ExamUncheckedUpdateWithoutChallengeSetsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questions?: Prisma.QuestionUncheckedUpdateManyWithoutExamNestedInput
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUncheckedUpdateManyWithoutExamNestedInput
 }
 
 export type ExamCreateWithoutQuestionsInput = {
@@ -541,6 +566,7 @@ export type ExamCreateWithoutQuestionsInput = {
   updatedAt?: Date | string
   challengeSets?: Prisma.ChallengeSetCreateNestedManyWithoutExamInput
   mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanCreateNestedManyWithoutExamInput
 }
 
 export type ExamUncheckedCreateWithoutQuestionsInput = {
@@ -553,6 +579,7 @@ export type ExamUncheckedCreateWithoutQuestionsInput = {
   updatedAt?: Date | string
   challengeSets?: Prisma.ChallengeSetUncheckedCreateNestedManyWithoutExamInput
   mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanUncheckedCreateNestedManyWithoutExamInput
 }
 
 export type ExamCreateOrConnectWithoutQuestionsInput = {
@@ -581,6 +608,7 @@ export type ExamUpdateWithoutQuestionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challengeSets?: Prisma.ChallengeSetUpdateManyWithoutExamNestedInput
   mockAttempts?: Prisma.MockAttemptUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUpdateManyWithoutExamNestedInput
 }
 
 export type ExamUncheckedUpdateWithoutQuestionsInput = {
@@ -593,6 +621,7 @@ export type ExamUncheckedUpdateWithoutQuestionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challengeSets?: Prisma.ChallengeSetUncheckedUpdateManyWithoutExamNestedInput
   mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUncheckedUpdateManyWithoutExamNestedInput
 }
 
 export type ExamCreateWithoutMockAttemptsInput = {
@@ -605,6 +634,7 @@ export type ExamCreateWithoutMockAttemptsInput = {
   updatedAt?: Date | string
   challengeSets?: Prisma.ChallengeSetCreateNestedManyWithoutExamInput
   questions?: Prisma.QuestionCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanCreateNestedManyWithoutExamInput
 }
 
 export type ExamUncheckedCreateWithoutMockAttemptsInput = {
@@ -617,6 +647,7 @@ export type ExamUncheckedCreateWithoutMockAttemptsInput = {
   updatedAt?: Date | string
   challengeSets?: Prisma.ChallengeSetUncheckedCreateNestedManyWithoutExamInput
   questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutExamInput
+  studyPlans?: Prisma.StudyPlanUncheckedCreateNestedManyWithoutExamInput
 }
 
 export type ExamCreateOrConnectWithoutMockAttemptsInput = {
@@ -645,6 +676,7 @@ export type ExamUpdateWithoutMockAttemptsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challengeSets?: Prisma.ChallengeSetUpdateManyWithoutExamNestedInput
   questions?: Prisma.QuestionUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUpdateManyWithoutExamNestedInput
 }
 
 export type ExamUncheckedUpdateWithoutMockAttemptsInput = {
@@ -657,6 +689,75 @@ export type ExamUncheckedUpdateWithoutMockAttemptsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challengeSets?: Prisma.ChallengeSetUncheckedUpdateManyWithoutExamNestedInput
   questions?: Prisma.QuestionUncheckedUpdateManyWithoutExamNestedInput
+  studyPlans?: Prisma.StudyPlanUncheckedUpdateManyWithoutExamNestedInput
+}
+
+export type ExamCreateWithoutStudyPlansInput = {
+  id?: string
+  name: string
+  description: string
+  passingScore: number
+  durationMinutes?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  challengeSets?: Prisma.ChallengeSetCreateNestedManyWithoutExamInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutExamInput
+  mockAttempts?: Prisma.MockAttemptCreateNestedManyWithoutExamInput
+}
+
+export type ExamUncheckedCreateWithoutStudyPlansInput = {
+  id?: string
+  name: string
+  description: string
+  passingScore: number
+  durationMinutes?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  challengeSets?: Prisma.ChallengeSetUncheckedCreateNestedManyWithoutExamInput
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutExamInput
+  mockAttempts?: Prisma.MockAttemptUncheckedCreateNestedManyWithoutExamInput
+}
+
+export type ExamCreateOrConnectWithoutStudyPlansInput = {
+  where: Prisma.ExamWhereUniqueInput
+  create: Prisma.XOR<Prisma.ExamCreateWithoutStudyPlansInput, Prisma.ExamUncheckedCreateWithoutStudyPlansInput>
+}
+
+export type ExamUpsertWithoutStudyPlansInput = {
+  update: Prisma.XOR<Prisma.ExamUpdateWithoutStudyPlansInput, Prisma.ExamUncheckedUpdateWithoutStudyPlansInput>
+  create: Prisma.XOR<Prisma.ExamCreateWithoutStudyPlansInput, Prisma.ExamUncheckedCreateWithoutStudyPlansInput>
+  where?: Prisma.ExamWhereInput
+}
+
+export type ExamUpdateToOneWithWhereWithoutStudyPlansInput = {
+  where?: Prisma.ExamWhereInput
+  data: Prisma.XOR<Prisma.ExamUpdateWithoutStudyPlansInput, Prisma.ExamUncheckedUpdateWithoutStudyPlansInput>
+}
+
+export type ExamUpdateWithoutStudyPlansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  passingScore?: Prisma.IntFieldUpdateOperationsInput | number
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  challengeSets?: Prisma.ChallengeSetUpdateManyWithoutExamNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutExamNestedInput
+  mockAttempts?: Prisma.MockAttemptUpdateManyWithoutExamNestedInput
+}
+
+export type ExamUncheckedUpdateWithoutStudyPlansInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  passingScore?: Prisma.IntFieldUpdateOperationsInput | number
+  durationMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  challengeSets?: Prisma.ChallengeSetUncheckedUpdateManyWithoutExamNestedInput
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutExamNestedInput
+  mockAttempts?: Prisma.MockAttemptUncheckedUpdateManyWithoutExamNestedInput
 }
 
 
@@ -668,12 +769,14 @@ export type ExamCountOutputType = {
   challengeSets: number
   questions: number
   mockAttempts: number
+  studyPlans: number
 }
 
 export type ExamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   challengeSets?: boolean | ExamCountOutputTypeCountChallengeSetsArgs
   questions?: boolean | ExamCountOutputTypeCountQuestionsArgs
   mockAttempts?: boolean | ExamCountOutputTypeCountMockAttemptsArgs
+  studyPlans?: boolean | ExamCountOutputTypeCountStudyPlansArgs
 }
 
 /**
@@ -707,6 +810,13 @@ export type ExamCountOutputTypeCountMockAttemptsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.MockAttemptWhereInput
 }
 
+/**
+ * ExamCountOutputType without action
+ */
+export type ExamCountOutputTypeCountStudyPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StudyPlanWhereInput
+}
+
 
 export type ExamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -719,6 +829,7 @@ export type ExamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   challengeSets?: boolean | Prisma.Exam$challengeSetsArgs<ExtArgs>
   questions?: boolean | Prisma.Exam$questionsArgs<ExtArgs>
   mockAttempts?: boolean | Prisma.Exam$mockAttemptsArgs<ExtArgs>
+  studyPlans?: boolean | Prisma.Exam$studyPlansArgs<ExtArgs>
   _count?: boolean | Prisma.ExamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["exam"]>
 
@@ -757,6 +868,7 @@ export type ExamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   challengeSets?: boolean | Prisma.Exam$challengeSetsArgs<ExtArgs>
   questions?: boolean | Prisma.Exam$questionsArgs<ExtArgs>
   mockAttempts?: boolean | Prisma.Exam$mockAttemptsArgs<ExtArgs>
+  studyPlans?: boolean | Prisma.Exam$studyPlansArgs<ExtArgs>
   _count?: boolean | Prisma.ExamCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ExamIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -768,6 +880,7 @@ export type $ExamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     challengeSets: Prisma.$ChallengeSetPayload<ExtArgs>[]
     questions: Prisma.$QuestionPayload<ExtArgs>[]
     mockAttempts: Prisma.$MockAttemptPayload<ExtArgs>[]
+    studyPlans: Prisma.$StudyPlanPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1174,6 +1287,7 @@ export interface Prisma__ExamClient<T, Null = never, ExtArgs extends runtime.Typ
   challengeSets<T extends Prisma.Exam$challengeSetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exam$challengeSetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChallengeSetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   questions<T extends Prisma.Exam$questionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exam$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mockAttempts<T extends Prisma.Exam$mockAttemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exam$mockAttemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MockAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  studyPlans<T extends Prisma.Exam$studyPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Exam$studyPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudyPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1672,6 +1786,30 @@ export type Exam$mockAttemptsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.MockAttemptScalarFieldEnum | Prisma.MockAttemptScalarFieldEnum[]
+}
+
+/**
+ * Exam.studyPlans
+ */
+export type Exam$studyPlansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StudyPlan
+   */
+  select?: Prisma.StudyPlanSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StudyPlan
+   */
+  omit?: Prisma.StudyPlanOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StudyPlanInclude<ExtArgs> | null
+  where?: Prisma.StudyPlanWhereInput
+  orderBy?: Prisma.StudyPlanOrderByWithRelationInput | Prisma.StudyPlanOrderByWithRelationInput[]
+  cursor?: Prisma.StudyPlanWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StudyPlanScalarFieldEnum | Prisma.StudyPlanScalarFieldEnum[]
 }
 
 /**

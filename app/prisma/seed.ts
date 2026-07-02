@@ -2377,6 +2377,48 @@ async function main() {
     }
   }
 
+  // Study Plan for the Claude Architect exam (slice 15)
+  const studyPlan = await prisma.studyPlan.upsert({
+    where: { id: "sp-claude-architect" },
+    update: {},
+    create: {
+      id: "sp-claude-architect",
+      examId: exam.id,
+      title: "Claude Architect — 4-Week Readiness Path",
+      description:
+        "A guided, week-by-week path through every Claude Architect challenge set, finishing with a full mock exam at the passing score. Complete each step to build readiness.",
+    },
+  });
+
+  const studyPlanSteps: {
+    id: string;
+    order: number;
+    title: string;
+    type: "CHALLENGE_SET" | "MOCK_SCORE";
+    challengeSetId?: string;
+    mockScoreThreshold?: number;
+    dayOffset: number;
+  }[] = [
+    { id: "sps-1", order: 1, title: "Customer Support Resolution Agent", type: "CHALLENGE_SET", challengeSetId: "cs-customer-support-agent", dayOffset: 0 },
+    { id: "sps-2", order: 2, title: "Code Generation with Claude Code", type: "CHALLENGE_SET", challengeSetId: "cs-claude-code-dev", dayOffset: 2 },
+    { id: "sps-3", order: 3, title: "Multi-Agent Research System", type: "CHALLENGE_SET", challengeSetId: "cs-multi-agent-research", dayOffset: 7 },
+    { id: "sps-4", order: 4, title: "Claude Code for Continuous Integration", type: "CHALLENGE_SET", challengeSetId: "cs-claude-code-cicd", dayOffset: 9 },
+    { id: "sps-5", order: 5, title: "Safety & Responsible AI", type: "CHALLENGE_SET", challengeSetId: "cs-safety-principles", dayOffset: 14 },
+    { id: "sps-6", order: 6, title: "Claude Model Capabilities", type: "CHALLENGE_SET", challengeSetId: "cs-model-capabilities", dayOffset: 16 },
+    { id: "sps-7", order: 7, title: "Architect Patterns & System Design", type: "CHALLENGE_SET", challengeSetId: "cs-architect-patterns", dayOffset: 18 },
+    { id: "sps-8", order: 8, title: `Pass a full mock exam (>= ${exam.passingScore}%)`, type: "MOCK_SCORE", mockScoreThreshold: exam.passingScore, dayOffset: 21 },
+  ];
+
+  for (const step of studyPlanSteps) {
+    await prisma.studyPlanStep.upsert({
+      where: { id: step.id },
+      update: {},
+      create: { ...step, planId: studyPlan.id },
+    });
+  }
+
+  console.log(`  Created study plan: ${studyPlan.title} (${studyPlanSteps.length} steps)`);
+
   console.log("Seed complete.");
   console.log(
     "  Admin: admin@bistecglobal.com / admin123!"

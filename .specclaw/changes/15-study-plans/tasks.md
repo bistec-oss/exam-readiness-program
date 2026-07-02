@@ -12,7 +12,7 @@ Additive feature: 3 Prisma models + enum, migration, seed, a shared completion-d
 
 ### Wave 1 — Data layer
 
-- [ ] `T1` — Schema + migration + seed
+- [x] `T1` — Schema + migration + seed
   - Files: `prisma/schema.prisma`, `prisma/migrations/*`, `prisma/seed.ts`
   - Estimate: medium
   - Notes: Add `StudyPlan`, `StudyPlanStep`, `StudyPlanEnrollment`, enum `StudyPlanStepType` + back-relations (Exam, ChallengeSet `SetNull`, User). Run `prisma migrate dev`. Seed one Claude Architect plan: ordered CHALLENGE_SET steps for its existing sets + final MOCK_SCORE step (threshold = exam.passingScore). Upsert-based (idempotent).

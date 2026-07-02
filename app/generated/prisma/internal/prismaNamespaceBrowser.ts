@@ -59,7 +59,10 @@ export const ModelName = {
   ChallengeSet: 'ChallengeSet',
   Question: 'Question',
   Attempt: 'Attempt',
-  MockAttempt: 'MockAttempt'
+  MockAttempt: 'MockAttempt',
+  StudyPlan: 'StudyPlan',
+  StudyPlanStep: 'StudyPlanStep',
+  StudyPlanEnrollment: 'StudyPlanEnrollment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -199,6 +202,42 @@ export const MockAttemptScalarFieldEnum = {
 } as const
 
 export type MockAttemptScalarFieldEnum = (typeof MockAttemptScalarFieldEnum)[keyof typeof MockAttemptScalarFieldEnum]
+
+
+export const StudyPlanScalarFieldEnum = {
+  id: 'id',
+  examId: 'examId',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StudyPlanScalarFieldEnum = (typeof StudyPlanScalarFieldEnum)[keyof typeof StudyPlanScalarFieldEnum]
+
+
+export const StudyPlanStepScalarFieldEnum = {
+  id: 'id',
+  planId: 'planId',
+  order: 'order',
+  title: 'title',
+  type: 'type',
+  challengeSetId: 'challengeSetId',
+  mockScoreThreshold: 'mockScoreThreshold',
+  dayOffset: 'dayOffset'
+} as const
+
+export type StudyPlanStepScalarFieldEnum = (typeof StudyPlanStepScalarFieldEnum)[keyof typeof StudyPlanStepScalarFieldEnum]
+
+
+export const StudyPlanEnrollmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  startedAt: 'startedAt'
+} as const
+
+export type StudyPlanEnrollmentScalarFieldEnum = (typeof StudyPlanEnrollmentScalarFieldEnum)[keyof typeof StudyPlanEnrollmentScalarFieldEnum]
 
 
 export const SortOrder = {
