@@ -98,6 +98,7 @@ Proposals are tracked in `.specclaw/changes/`. Each proposal maps to a focused i
 | ✅ Email notifications | Weekly readiness summary email. Admin `POST /api/notifications/weekly` generates per-user summaries (persisted to `EmailLog`), candidate inbox at `/settings` + `GET /api/notifications`, opt-out via `PATCH /api/me/preferences` |
 | ✅ CI/CD pipeline | GitHub Actions (`.github/workflows/ci-cd.yml`): lint+build+e2e → build & push image to Docker Hub → SSH deploy to self-hosted host. Gated jobs, deploy on main push only |
 | ✅ User management (admin) | `/admin/users` page + `/api/admin/users` (list/invite) + `PATCH /api/admin/users/[id]` (role-change, suspend/reactivate). Invite returns temp password; suspended users blocked at login; self-lockout guard |
+| ✅ Study plans (15) | Per-exam learning paths: `StudyPlan`/`StudyPlanStep`/`StudyPlanEnrollment`, auto-derived step completion from existing attempts, `/study-plans` + `/study-plans/[id]` timeline, admin `/admin/study-plans` CRUD. PR #13 |
 
 ---
 
