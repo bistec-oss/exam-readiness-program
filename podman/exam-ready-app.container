@@ -8,6 +8,10 @@ Image=localhost/exam-ready-app:latest
 PublishPort=127.0.0.1:3015:3000
 Network=exam-ready.network
 EnvironmentFile=%h/srv/exam-readiness/exam-ready.env
+# Next.js standalone server binds to $HOSTNAME; in a container that resolves to
+# the container id, so the in-container healthcheck on 127.0.0.1 finds nothing
+# listening and reports unhealthy. Force bind to all interfaces.
+Environment=HOSTNAME=0.0.0.0
 PodmanArgs=--name exam-ready-app
 HealthCmd=wget -qO- http://127.0.0.1:3000/login || exit 1
 HealthInterval=30s
