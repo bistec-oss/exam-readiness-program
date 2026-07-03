@@ -1,7 +1,7 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-07-02 21:30 UTC
+**Last Updated:** 2026-07-03 01:25 UTC
 
 > Reconciled against BACKLOG.md + git history. All feature slices 01–15 are
 > built, verified, and merged to `main`. The auto-generated task counts below
@@ -33,11 +33,13 @@ _None._ Backlog 01–15 all ✅ Done (see BACKLOG.md).
 
 ## Known Issues
 
-- ⚠️ **Prod container healthcheck false-negative** — `exam-ready-app` reports
-  `unhealthy` (streak 1493) though the app serves 200 on :3015. Next.js standalone
-  binds to `$HOSTNAME` (= container id), so the in-container healthcheck
-  `wget http://127.0.0.1:3000/login` hits loopback where nothing listens. Fix:
-  set `Environment=HOSTNAME=0.0.0.0` in `exam-ready-app.container` quadlet.
+_None._
+
+- ✅ **Prod container healthcheck false-negative** — RESOLVED by PR #15.
+  `Environment=HOSTNAME=0.0.0.0` set in `exam-ready-app.container` quadlet, so
+  Next.js standalone now binds to all interfaces and the in-container healthcheck
+  reaches it. Prod verified serving `200` at
+  https://practice.tecbizsolutions.com/login (2026-07-03).
 
 ## Stats
 
