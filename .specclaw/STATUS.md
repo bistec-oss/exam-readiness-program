@@ -1,48 +1,40 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-07-03 01:25 UTC
+**Last Updated:** 2026-08-26 19:46 UTC
 
-> Reconciled against BACKLOG.md + git history. All feature slices 01–15 are
-> built, verified, and merged to `main`. The auto-generated task counts below
-> drifted (they read per-change `status.md` files that predate merge); this
-> reflects real state.
+_1 unnumbered change · run `/specclaw:renumber` to order them_
 
 ## Active Changes
 
-_None._ All planned slices merged.
+
+- 🔨 **09-system-deploy-practice-site** — 0/0 tasks (0%) | 0 failed | PR #1 merged
+- 🔨 **14-landing-page-browse-catalog** — 0/0 tasks (0%) | 0 failed
+- ✅ **15-study-plans** — 8/8 tasks (100%) | 0 failed | PR #13 merged
+- 🔍 **016-claude-architect-question-set-v2** — verify PASS | 3/3 tasks (100%) | 0 failed
+- 🔨 **gamified-flashcard-exam-readiness** — 0/18 tasks (0%) | 0 failed
 
 ## Pending Proposals
 
-_None._ Backlog 01–15 all ✅ Done (see BACKLOG.md).
 
-## Superseded
-
-- 🗄️ **gamified-flashcard-exam-readiness** — original umbrella proposal. Delivered
-  via slices 01–15 (Next.js 14 + Prisma). Its `tasks.md` prescribes a conflicting
-  Express+Vite stack. Kept for history; do not build.
+- 📋 **01-nextjs-scaffold-db** — proposal ready, awaiting planning
+- 📋 **02-auth-roles** — proposal ready, awaiting planning
+- 📋 **03-exam-challenge-flow** — proposal ready, awaiting planning
+- 📋 **04-mock-exam** — proposal ready, awaiting planning
+- 📋 **05-progress-gamification** — proposal ready, awaiting planning
+- 📋 **06-admin-panel** — proposal ready, awaiting planning
+- 📋 **07-pwa-offline** — proposal ready, awaiting planning
+- 📋 **08-deployment** — proposal ready, awaiting planning
+- 📋 **11-cohort-manager-view** — proposal ready, awaiting planning
+- 📋 **12-additional-exam-catalogs** — proposal ready, awaiting planning
+- 📋 **13-csv-import-pdf-report** — proposal ready, awaiting planning
 
 ## Recently Completed
 
-- ✅ **15-study-plans** — 8/8 tasks | PR #13 merged
-- ✅ **14-landing-page-browse-catalog** — PR #6 merged
-- ✅ **09-system-deploy-practice-site** — deployed live to practice.tecbizsolutions.com
-- ✅ **01–08, 11–13, 16–18** — see BACKLOG.md (auth, exam flow, mock exam,
-  gamification, admin, PWA, deployment, cohort view, catalogs, CSV import/PDF,
-  email notifications, CI/CD, user management)
-
-## Known Issues
-
 _None._
-
-- ✅ **Prod container healthcheck false-negative** — RESOLVED by PR #15.
-  `Environment=HOSTNAME=0.0.0.0` set in `exam-ready-app.container` quadlet, so
-  Next.js standalone now binds to all interfaces and the in-container healthcheck
-  reaches it. Prod verified serving `200` at
-  https://practice.tecbizsolutions.com/login (2026-07-03).
 
 ## Stats
 
-- **Total slices shipped:** 15 (all merged)
-- **Active:** 0
-- **Superseded:** 1
+- **Total changes:** 5
+- **Active:** 5
+- **Completed:** 0

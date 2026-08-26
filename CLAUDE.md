@@ -19,6 +19,13 @@ You are the development agent for the Bistec Global Exam Readiness Training Prog
 - Offline question caching for low-connectivity environments
 - Easy CSV import for bulk question upload
 
+## Question Authoring Rules (MANDATORY)
+
+- **Never let option length leak the answer.** The correct option must NOT be systematically the longest (or shortest) option in the set. Across a question set, correct-answer length rank vs. distractors must be mixed — roughly even distribution across shortest/middle/longest position.
+- Keep all options within similar length/detail range (avoid one option being one clause and another being three sentences), OR if lengths must vary for realism, vary which position (A/B/C/D) holds the longest option randomly across questions.
+- Vary the correct option's letter position (A/B/C/D) roughly evenly across a question set — don't cluster correct answers on one letter.
+- Avoid other tells: hedge words ("might", "could") only on distractors, absolute qualifiers ("always"/"never") only on wrong answers, or the correct option being the only one with a technical justification embedded in the option text itself (justification belongs in `explanation`, not the option).
+
 ## Development Process — Specclaw Cycle (MANDATORY)
 
 All implementation work MUST follow the specclaw lifecycle. Never build directly from a proposal without completing each phase in order.

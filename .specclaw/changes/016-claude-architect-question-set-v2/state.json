@@ -1,0 +1,9 @@
+{
+  "change": "016-claude-architect-question-set-v2",
+  "phase": "verify",
+  "branch": "specclaw/016-claude-architect-question-set-v2",
+  "phases": {
+    "build": {"status":"done","at":"2026-08-26T17:58:17Z","tasks":{"done":3,"total":3,"failed":0}},
+    "verify": {"status":"passed","at":"2026-08-26T19:46:20Z","verdict":"PASS"}
+  }
+}
