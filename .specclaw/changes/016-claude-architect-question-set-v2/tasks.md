@@ -12,7 +12,7 @@
 
 ### Wave 1 — Author question content into seed.ts
 
-- [ ] `T1` — Add 6 scenario-based challenge sets (30 questions) to seed.ts
+- [x] `T1` — Add 6 scenario-based challenge sets (30 questions) to seed.ts
   - Files: `app/prisma/seed.ts`
   - Estimate: large
   - Kind: impl
@@ -21,14 +21,14 @@
 
 ### Wave 2 — Author domain content, then audit
 
-- [ ] `T2` — Add 5 domain-based challenge sets (30 questions) to seed.ts
+- [x] `T2` — Add 5 domain-based challenge sets (30 questions) to seed.ts
   - Files: `app/prisma/seed.ts`
   - Estimate: large
   - Kind: impl
   - Depends: `T1`
   - Notes: Source: `.specclaw/changes/016-claude-architect-question-set-v2/source/01-Domains/*.md` (5 files) + `00-MOC/Anti-Patterns Cheatsheet.md` for distractor-trap inspiration. One `ChallengeSet` per domain note, id pattern `cs-v2-domain-<n>-<slug>`, 6 questions each (ids `q-v2-d<n>-1`..`6`), `topic` = domain title, `xpReward: 80`. Same question shape and upsert pattern as T1. Depends on T1 only to serialize edits to the same file section (append after T1's block, before the closing `studyPlanSteps` code) — not a logical dependency. Before finalizing, skim existing `seed.ts` question `text` fields (the pre-v2 ~80 questions) to rule out near-duplicates per spec FR5. Track the same letter/length tallies as T1, but combined across all 60 questions now (T1 + T2) so the final distribution satisfies spec AC4 (no letter >~40% i.e. >24/60 correct, correct-option-longest in no more than ~18/60).
 
-- [ ] `T3` — Balance audit + duplicate check, recorded for verify
+- [x] `T3` — Balance audit + duplicate check, recorded for verify
   - Files: `.specclaw/changes/016-claude-architect-question-set-v2/balance-audit.md` (new)
   - Estimate: small
   - Kind: docs
