@@ -259,8 +259,8 @@ async function main() {
   const scenarioChallengeSetsV2 = [
     {
       id: "cs-v2-scenario-1-customer-support-agent",
-      title: "Customer Support Resolution Agent",
-      topic: "Customer Support Resolution Agent",
+      title: "Customer Support Agent — Reliability & Idempotency",
+      topic: "Customer Support Agent — Reliability & Idempotency",
       xpReward: 80,
       questions: [
         {
@@ -269,7 +269,7 @@ async function main() {
           text: "A customer's message says: 'My last order arrived damaged, and while you're at it can you also update my shipping address for future orders?' The agent processes the refund request but silently drops the address-change request, leaving the customer to notice later that nothing changed. What's the best fix?",
           type: "MCQ" as const,
           options: [
-            { id: "a", text: "Have the agent explicitly enumerate each distinct request in the message and confirm resolution (or a next step) for every one before ending the turn." },
+            { id: "a", text: "Have the agent explicitly enumerate each distinct request in the message and confirm resolution (or a follow-up step) for every one before ending the turn." },
             { id: "b", text: "Add a rule that the agent may only act on the first request in any multi-part message, and ask the customer to resend every other request in a separate follow-up." },
             { id: "c", text: "Increase the agent's max_tokens so it has enough room to respond to every request." },
             { id: "d", text: "Have the agent always send a single combined confirmation message regardless of how many requests were embedded in it." },
@@ -337,8 +337,8 @@ async function main() {
     },
     {
       id: "cs-v2-scenario-2-code-generation",
-      title: "Code Generation with Claude Code",
-      topic: "Code Generation with Claude Code",
+      title: "Claude Code Session & Context Management",
+      topic: "Claude Code Session & Context Management",
       xpReward: 80,
       questions: [
         {
@@ -415,8 +415,8 @@ async function main() {
     },
     {
       id: "cs-v2-scenario-3-multi-agent-research",
-      title: "Multi-Agent Research System",
-      topic: "Multi-Agent Research System",
+      title: "Multi-Agent Coordinator Reliability",
+      topic: "Multi-Agent Coordinator Reliability",
       xpReward: 80,
       questions: [
         {
@@ -687,7 +687,7 @@ async function main() {
           text: "Downstream systems already consume the extraction pipeline's output against a fixed schema. The team wants to start capturing a new 'tax_jurisdiction' field on invoices without breaking any existing consumer that doesn't expect it. What's the right schema change?",
           type: "MCQ" as const,
           options: [
-            { id: "a", text: "Replace the schema entirely with a new version and require all consumers to migrate before the next release." },
+            { id: "a", text: "Replace the schema entirely with a new version and require all consumers to migrate before the upcoming release." },
             { id: "b", text: "Add the field as required, so every extraction must populate it going forward." },
             { id: "c", text: "Rename an existing unused field to repurpose it for tax jurisdiction data." },
             { id: "d", text: "Add the field as optional/nullable so existing consumers are unaffected and new ones can opt in." },
@@ -839,7 +839,7 @@ async function main() {
           options: [
             { id: "a", text: "Merge the three issues back into one investigation so nothing is lost between them." },
             { id: "b", text: "Drop the two lower-priority issues and only resolve the billing dispute this turn." },
-            { id: "c", text: "Investigate all three sequentially exactly as before, but summarize each investigation's findings more aggressively before moving to the next one to save time." },
+            { id: "c", text: "Investigate all three sequentially exactly as before, but summarize each investigation's findings more aggressively before moving on to save time." },
             { id: "d", text: "Investigate the three decomposed items in parallel, sharing relevant context across them, then synthesize a single unified response." },
           ],
           correctOptionId: "d",

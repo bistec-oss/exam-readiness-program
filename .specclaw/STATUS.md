@@ -1,7 +1,7 @@
 # 🦞 SpecClaw Dashboard
 
 **Project:** exam-readiness-program
-**Last Updated:** 2026-08-26 17:59 UTC
+**Last Updated:** 2026-08-26 19:31 UTC
 
 _1 unnumbered change · run `/specclaw:renumber` to order them_
 
@@ -11,7 +11,7 @@ _1 unnumbered change · run `/specclaw:renumber` to order them_
 - 🔨 **09-system-deploy-practice-site** — 0/0 tasks (0%) | 0 failed | PR #1 merged
 - 🔨 **14-landing-page-browse-catalog** — 0/0 tasks (0%) | 0 failed
 - ✅ **15-study-plans** — 8/8 tasks (100%) | 0 failed | PR #13 merged
-- 🔨 **016-claude-architect-question-set-v2** — build done | 3/3 tasks (100%) | 0 failed
+- 🔍 **016-claude-architect-question-set-v2** — verify PARTIAL | 3/3 tasks (100%) | 0 failed
 - 🔨 **gamified-flashcard-exam-readiness** — 0/18 tasks (0%) | 0 failed
 
 ## Pending Proposals
