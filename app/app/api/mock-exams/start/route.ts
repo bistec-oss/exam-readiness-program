@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     select: { id: true, text: true, preamble: true, type: true, options: true },
   });
 
-  const shuffled = shuffle(questions);
+  const shuffled = shuffle(questions).slice(0, 60);
   const startedAt = new Date().toISOString();
 
   return NextResponse.json({
