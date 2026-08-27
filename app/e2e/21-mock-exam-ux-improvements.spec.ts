@@ -72,7 +72,7 @@ test.describe("21 - Mock Exam UX Improvements", () => {
     await expect(page.getByText(/Q 1 \//)).toBeVisible({ timeout: 5000 });
 
     // Mark question 1 for review - toggle button text flips.
-    const markButton = page.getByRole("button", { name: /for review/i });
+    const markButton = page.getByLabel("mark-for-review-toggle");
     await expect(markButton).toHaveText("☆ Mark for review");
     await markButton.click();
     await expect(markButton).toHaveText("★ Marked for review");
@@ -116,7 +116,7 @@ test.describe("21 - Mock Exam UX Improvements", () => {
     // Mark question 2 for review.
     await page.click('button:has-text("Next")');
     await expect(page.getByText(/Q 2 \//)).toBeVisible();
-    await page.getByRole("button", { name: /for review/i }).click();
+    await page.getByLabel("mark-for-review-toggle").click();
 
     const minimapCell1 = page.getByRole("button", { name: "1", exact: true });
     const minimapCell2 = page.getByRole("button", { name: "2", exact: true });
@@ -169,7 +169,7 @@ test.describe("21 - Mock Exam UX Improvements", () => {
 
       // Mark a couple of questions for review along the way.
       if (i === 0 || i === 2) {
-        await page.getByRole("button", { name: /for review/i }).click();
+        await page.getByLabel("mark-for-review-toggle").click();
       }
 
       if (i < total - 1) {

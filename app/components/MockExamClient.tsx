@@ -277,6 +277,7 @@ export function MockExamClient({
 
           <button
             onClick={() => toggleMarkedForReview(question.id)}
+            aria-label="mark-for-review-toggle"
             className={`mb-3 py-3 px-4 font-semibold rounded-xl transition-colors border-4 ${
               isMarkedForReview
                 ? "border-amber-400 bg-amber-100 text-amber-700"
