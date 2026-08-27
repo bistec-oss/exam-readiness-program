@@ -144,7 +144,7 @@ export function FlashCardPlayer({
   const isCorrect = selectedOption === question.correctOptionId;
 
   return (
-    <div className="min-h-screen flex flex-col p-4 max-w-2xl mx-auto w-full">
+    <div className="min-h-screen flex flex-col p-4 max-w-6xl mx-auto w-full">
       <div className="mb-6 pt-4">
         <div className="flex justify-between text-sm font-semibold text-violet-600 mb-2">
           <span>{challengeSet.title}</span>
