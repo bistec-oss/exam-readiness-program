@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { ExamMinimap } from "./ExamMinimap";
 
 type Option = { id: string; text: string };
 type Question = {
@@ -30,6 +31,8 @@ export function MockExamClient({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [secondsLeft, setSecondsLeft] = useState(durationMinutes * 60);
+  const [questionSeconds, setQuestionSeconds] = useState(0);
+  const [markedForReview, setMarkedForReview] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -72,6 +75,42 @@ export function MockExamClient({
     return () => clearInterval(timer);
   }, [phase, answers, startedAt, submitExam]);
 
+  // Reset the per-question timer whenever the active question changes.
+  useEffect(() => {
+    setQuestionSeconds(0);
+  }, [currentIndex]);
+
+  // Tick the per-question timer once per second while the exam is running.
+  useEffect(() => {
+    if (phase !== "running") return;
+
+    const timer = setInterval(() => {
+      setQuestionSeconds((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [phase]);
+
+  const goToQuestion = useCallback(
+    (index: number) => {
+      const clamped = Math.max(0, Math.min(index, questions.length - 1));
+      setCurrentIndex(clamped);
+    },
+    [questions.length]
+  );
+
+  const toggleMarkedForReview = (questionId: string) => {
+    setMarkedForReview((prev) => {
+      const next = new Set(prev);
+      if (next.has(questionId)) {
+        next.delete(questionId);
+      } else {
+        next.add(questionId);
+      }
+      return next;
+    });
+  };
+
   const handleStart = async () => {
     setPhase("loading");
     setError(null);
@@ -108,6 +147,7 @@ export function MockExamClient({
   };
 
   const timerWarning = secondsLeft < 600;
+  const questionTimerWarning = questionSeconds >= 120;
 
   if (phase === "idle") {
     return (
@@ -169,17 +209,25 @@ export function MockExamClient({
   const question = questions[currentIndex];
   const options = question.options as Option[];
   const answered = Object.keys(answers).length;
+  const isMarkedForReview = markedForReview.has(question.id);
 
   return (
     <div className="min-h-screen flex flex-col p-4">
       {/* Header */}
-      <div className="max-w-3xl mx-auto w-full mb-4">
+      <div className="max-w-3xl md:max-w-6xl mx-auto w-full mb-4">
         <div className="flex items-center justify-between bg-white rounded-2xl border-2 border-violet-200 shadow px-4 py-3">
           <span className="text-sm font-semibold text-violet-700">
             Q {currentIndex + 1} / {questions.length}
           </span>
           <span className="text-sm font-semibold text-gray-500">
             Answered: {answered}/{questions.length}
+          </span>
+          <span
+            className={`text-sm font-extrabold tabular-nums ${
+              questionTimerWarning ? "text-red-600 animate-pulse" : "text-violet-700"
+            }`}
+          >
+            ⏳ {formatTime(questionSeconds)}
           </span>
           <span
             className={`text-lg font-extrabold tabular-nums ${
@@ -191,66 +239,90 @@ export function MockExamClient({
         </div>
       </div>
 
-      {/* Question */}
-      <div className="max-w-3xl mx-auto w-full flex-1 flex flex-col">
-        <div className="bg-white rounded-3xl border-4 border-violet-300 shadow-xl p-6 mb-4">
-          {question.preamble && (
-            <p className="text-sm text-gray-500 bg-gray-50 rounded-xl p-3 mb-4 font-mono whitespace-pre-wrap">
-              {question.preamble}
-            </p>
-          )}
-          <p className="text-lg font-bold text-gray-800">{question.text}</p>
-        </div>
+      <div className="max-w-3xl md:max-w-6xl mx-auto w-full flex-1 md:flex md:gap-6">
+        {/* Question */}
+        <div className="md:max-w-3xl md:flex-1 flex-1 flex flex-col">
+          <div className="bg-white rounded-3xl border-4 border-violet-300 shadow-xl p-6 mb-4">
+            {question.preamble && (
+              <p className="text-sm text-gray-500 bg-gray-50 rounded-xl p-3 mb-4 font-mono whitespace-pre-wrap">
+                {question.preamble}
+              </p>
+            )}
+            <p className="text-lg font-bold text-gray-800">{question.text}</p>
+          </div>
 
-        <div className="grid gap-3 mb-6">
-          {options.map((option) => {
-            const selected = answers[question.id] === option.id;
-            return (
-              <button
-                key={option.id}
-                onClick={() => handleAnswer(question.id, option.id)}
-                className={`w-full text-left p-4 rounded-2xl font-semibold transition-all border-4 ${
-                  selected
-                    ? "border-violet-500 bg-violet-50 text-violet-800"
-                    : "border-gray-200 bg-white text-gray-700 hover:border-violet-300"
-                }`}
-              >
-                <span className="inline-flex w-7 h-7 rounded-full bg-violet-100 text-violet-700 text-xs font-bold items-center justify-center mr-3 flex-shrink-0">
-                  {option.id.toUpperCase()}
-                </span>
-                {option.text}
-              </button>
-            );
-          })}
-        </div>
+          <div className="grid gap-3 mb-6">
+            {options.map((option) => {
+              const selected = answers[question.id] === option.id;
+              return (
+                <button
+                  key={option.id}
+                  onClick={() => handleAnswer(question.id, option.id)}
+                  className={`w-full text-left p-4 rounded-2xl font-semibold transition-all border-4 ${
+                    selected
+                      ? "border-violet-500 bg-violet-50 text-violet-800"
+                      : "border-gray-200 bg-white text-gray-700 hover:border-violet-300"
+                  }`}
+                >
+                  <span className="inline-flex w-7 h-7 rounded-full bg-violet-100 text-violet-700 text-xs font-bold items-center justify-center mr-3 flex-shrink-0">
+                    {option.id.toUpperCase()}
+                  </span>
+                  {option.text}
+                </button>
+              );
+            })}
+          </div>
 
-        {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
+          {error && <p className="text-red-600 text-sm mb-3">{error}</p>}
 
-        {/* Navigation */}
-        <div className="flex gap-3">
           <button
-            onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
-            disabled={currentIndex === 0}
-            className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 text-gray-700 font-semibold rounded-xl transition-colors"
+            onClick={() => toggleMarkedForReview(question.id)}
+            className={`mb-3 py-3 px-4 font-semibold rounded-xl transition-colors border-4 ${
+              isMarkedForReview
+                ? "border-amber-400 bg-amber-100 text-amber-700"
+                : "border-gray-200 bg-white text-gray-700 hover:border-amber-300"
+            }`}
           >
-            ← Previous
+            {isMarkedForReview ? "★ Marked for review" : "☆ Mark for review"}
           </button>
-          {currentIndex < questions.length - 1 ? (
+
+          {/* Navigation */}
+          <div className="flex gap-3">
             <button
-              onClick={() => setCurrentIndex((i) => i + 1)}
-              className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl transition-colors"
+              onClick={() => goToQuestion(currentIndex - 1)}
+              disabled={currentIndex === 0}
+              className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 text-gray-700 font-semibold rounded-xl transition-colors"
             >
-              Next →
+              ← Previous
             </button>
-          ) : (
-            <button
-              onClick={() => submitExam(answers, startedAt)}
-              disabled={isSubmitting}
-              className="flex-1 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl transition-colors"
-            >
-              Submit Exam
-            </button>
-          )}
+            {currentIndex < questions.length - 1 ? (
+              <button
+                onClick={() => goToQuestion(currentIndex + 1)}
+                className="flex-1 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-xl transition-colors"
+              >
+                Next →
+              </button>
+            ) : (
+              <button
+                onClick={() => submitExam(answers, startedAt)}
+                disabled={isSubmitting}
+                className="flex-1 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl transition-colors"
+              >
+                Submit Exam
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Minimap */}
+        <div className="md:w-64 md:flex-shrink-0">
+          <ExamMinimap
+            questions={questions}
+            currentIndex={currentIndex}
+            answers={answers}
+            markedForReview={markedForReview}
+            onJump={goToQuestion}
+          />
         </div>
       </div>
     </div>
