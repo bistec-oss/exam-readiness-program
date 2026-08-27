@@ -39,7 +39,7 @@ test.describe("04 - Timed Mock Exam Mode", () => {
     await page.click('button:has-text("Start Exam")');
 
     // Timer should appear
-    await expect(page.getByText(/\d{2}:\d{2}/)).toBeVisible({ timeout: 5000 });
+    await expect(page.getByText(/⏱ \d{2}:\d{2}/)).toBeVisible({ timeout: 5000 });
     // Questions should load
     await expect(page.getByText(/Q 1 \//)).toBeVisible();
   });
