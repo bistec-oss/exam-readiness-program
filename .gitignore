@@ -1,3 +1,9 @@
 # Rotating runtime session state — not source
 .session-id
 .session-id.rotated-*
+
+# Prod deploy runtime files (created by setup-podman.sh / backup-examready-db.sh on the server)
+# Not gitignoring these let `git stash -u` in deploy-podman.sh sweep them up mid-deploy,
+# which yanked exam-ready.env out from under the running container and crash-looped it.
+exam-ready.env
+backups/
