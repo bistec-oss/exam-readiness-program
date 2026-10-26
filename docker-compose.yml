@@ -43,7 +43,7 @@ services:
       - caddy_config:/config
 
   cloudflared:
-    image: cloudflare/cloudflared:latest
+    image: cloudflare/cloudflared:2026.10.4
     restart: unless-stopped
     depends_on:
       - caddy
